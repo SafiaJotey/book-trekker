@@ -47,7 +47,7 @@ export default function Login() {
             </div>
             <div className="flex justify-center">
               <small>
-                New To This Website?{' '}
+                New To The Website?{' '}
                 <span className=" underline decoration-solid">
                   <Link className="text-blue-500 font-bold " to="/signup">
                     Create an account
