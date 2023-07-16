@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
+import logo from '../assets/images/Book_trekker_logo.png';
 
 export default function Navbar() {
   return (
-    <nav className="w-full h-16 fixed top backdrop-blur-lg z-10 ">
-      <div className="h-full w-full bg-[#003461]">
+    <nav className="w-full h-30 fixed top  z-10  ">
+      <div className="h-full w-full bg-[#003461] p-1 container">
         <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
-          <div>
+          <div className="w-20 ">
             <Link className="text-white" to="/home">
               {' '}
-              Book Trekker
+              <img src={logo} />
             </Link>
           </div>
           <div>
