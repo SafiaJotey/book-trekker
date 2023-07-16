@@ -1,9 +1,11 @@
 import App from '@/App';
 import AllBooks from '@/pages/AllBooks';
 import Home from '@/pages/Home';
+import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import SingleBook from '@/pages/SingleBook';
 import { createBrowserRouter } from 'react-router-dom';
+import Signup from '../pages/Signup';
 
 const routes = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const routes = createBrowserRouter([
         element: <SingleBook />,
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/signup',
+    element: <Signup />,
   },
 
   {

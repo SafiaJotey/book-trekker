@@ -4,8 +4,11 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { FiInstagram } from 'react-icons/fi';
 import { TiTick } from 'react-icons/ti';
+import { useLocation } from 'react-router-dom';
 import Card from '../components/ui/Card';
 export default function AllBooks() {
+  const location = useLocation();
+  console.log(location);
   return (
     <div className=" mb-[50px]">
       <AdditionalPageCover title="Authors Books" />
