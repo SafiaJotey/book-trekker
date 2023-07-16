@@ -1,5 +1,6 @@
 import { IFormLoginInput } from '@/types/globalTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { BiSolidHome } from 'react-icons/bi';
 import { IoMdLogIn } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import auth from '../assets/images/auth.jpg';
@@ -13,6 +14,11 @@ export default function Login() {
           <img className="h-full w-full" src={auth} />
         </div>
         <div className="w-6/12 px-12 flex flex-col items-center">
+          <div className=" w-full flex justify-end">
+            <Link to="/">
+              <BiSolidHome classname="bg-main text-5xl my-2"></BiSolidHome>
+            </Link>
+          </div>
           <h3 className="text-2xl text-main font-bold my-8">
             Login To Explore more
           </h3>

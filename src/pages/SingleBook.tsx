@@ -1,5 +1,6 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
+// import { BsFillHeartFill } from 'react-icons/bs';
 import { BiSolidEditAlt } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
 import { TiTick } from 'react-icons/ti';
@@ -20,22 +21,26 @@ export default function SingleBook() {
               <h5 className="text-5xl font-semibold my-2">
                 The Glitterign Stars Book
               </h5>
-              <div className="flex text-3xl ">
-                <span>
-                  <AiFillStar className="text-review "></AiFillStar>
-                </span>
-                <span>
-                  <AiFillStar className="text-review"></AiFillStar>
-                </span>
-                <span>
-                  <AiFillStar className="text-review"></AiFillStar>
-                </span>
-                <span>
-                  <AiFillStar className="text-review"></AiFillStar>
-                </span>
-                <span>
-                  <AiFillStar className="text-review"></AiFillStar>
-                </span>
+              <div className="flex justify-between">
+                {' '}
+                <div className="flex text-3xl ">
+                  <span>
+                    <AiFillStar className="text-review"></AiFillStar>
+                  </span>
+                  <span>
+                    <AiFillStar className="text-review"></AiFillStar>
+                  </span>
+                  <span>
+                    <AiFillStar className="text-review"></AiFillStar>
+                  </span>
+                  <span>
+                    <AiFillStar className="text-review"></AiFillStar>
+                  </span>
+                  <span>
+                    <AiFillStar className="text-review"></AiFillStar>
+                  </span>
+                </div>
+                <AiOutlineHeart size={25}></AiOutlineHeart>
               </div>
             </div>
             <p className="p-2">

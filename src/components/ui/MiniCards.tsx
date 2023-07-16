@@ -1,4 +1,5 @@
-import { AiFillStar } from 'react-icons/ai';
+import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
+// import { BsFillHeartFill } from 'react-icons/bs';
 import book6 from '../../assets/images/book-mockup6.png';
 export default function MiniCards() {
   return (
@@ -9,22 +10,26 @@ export default function MiniCards() {
       <div className="w-7/12 px-1">
         <p>personality, science</p>
         <h5 className="text-lg font-bold">The Glitterign Stars Book</h5>
-        <div className="flex ">
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
+        <div className="flex justify-between">
+          {' '}
+          <div className="flex ">
+            <span>
+              <AiFillStar className="text-review"></AiFillStar>
+            </span>
+            <span>
+              <AiFillStar className="text-review"></AiFillStar>
+            </span>
+            <span>
+              <AiFillStar className="text-review"></AiFillStar>
+            </span>
+            <span>
+              <AiFillStar className="text-review"></AiFillStar>
+            </span>
+            <span>
+              <AiFillStar className="text-review"></AiFillStar>
+            </span>
+          </div>
+          <AiOutlineHeart></AiOutlineHeart>
         </div>
       </div>
     </div>

@@ -150,7 +150,6 @@ export default function AllBooks() {
             </div>
           </div>
         </div>
-        A
       </div>
     </div>
   );
