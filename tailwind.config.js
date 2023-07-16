@@ -11,7 +11,15 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage: {
+        'hero-pattern':
+          "url('https://s29814.pcdn.co/wp-content/uploads/2022/12/shutterstock_1847661151.jpg.optimal.jpg')",
+      },
       colors: {
+        main: '#003461',
+        subsidiary: '#ff8000',
+        overlay: 'rgb(0,52,97,.8)',
+        review: '#ffc108',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

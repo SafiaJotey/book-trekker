@@ -22,7 +22,7 @@ export default function Navbar() {
               </li>
               <li className=" mx-3">
                 <a>
-                  <Link className="text-white" to="/">
+                  <Link className="text-white" to="/allBooks">
                     All Books
                   </Link>
                 </a>

@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <div>
-      <div className="container bg-[#151b30] p-5">
+      <div className="mx-auto p-[50px] bg-[#151b30]">
         <div className=" text-white flex p-5">
           <div className="w-4/12 p-5">
             <h3>BOOK TREKKER</h3>
