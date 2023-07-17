@@ -1,7 +1,23 @@
+import { auth } from '@/lib/firebase';
+import { setUser } from '@/redux/feature/user/userSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/Book_trekker_logo.png';
 
 export default function Navbar() {
+  const { user } = useAppSelector((state) => state.user);
+  console.log(user);
+
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    console.log('Logout');
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      dispatch(setUser(null));
+    });
+  };
   return (
     <nav className="w-full h-30 fixed top  z-10  ">
       <div className="h-full w-full bg-[#003461] p-1 container">
@@ -28,20 +44,29 @@ export default function Navbar() {
                   </Link>
                 </a>
               </li>
-              <li className=" mx-3">
-                <a>
-                  <Link className="text-white" to="/">
-                    Login
-                  </Link>
-                </a>
-              </li>
-              <li className=" mx-3">
-                <a>
-                  <Link className="text-white" to="/">
-                    Sign Up
-                  </Link>
-                </a>
-              </li>
+              {!user.email && (
+                <li className=" mx-3">
+                  <a>
+                    <Link className="text-white" to="/login">
+                      Login
+                    </Link>
+                  </a>
+                </li>
+              )}
+              {!user.email && (
+                <li className=" mx-3">
+                  <a>
+                    <Link className="text-white" to="/">
+                      Sign Up
+                    </Link>
+                  </a>
+                </li>
+              )}
+              {user.email && (
+                <li className=" mx-3 cursor-pointer " onClick={handleLogout}>
+                  <a className="text-white">Logout</a>
+                </li>
+              )}
             </ul>
           </div>
         </div>

@@ -1,0 +1,347 @@
+{
+    "books": [
+      {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "genre": "Fiction",
+        "publication_date": "July 11, 1960",
+        "image": "https://example.com/to-kill-a-mockingbird.jpg",
+        "reviews": [
+          {
+            "reviewer": "JohnDoe",
+            "rating": 5,
+            "comment": "A timeless classic!"
+          },
+          {
+            "reviewer": "JaneSmith",
+            "rating": 4,
+            "comment": "A must-read for everyone."
+          }
+        ]
+      },
+      {
+        "title": "1984",
+        "author": "George Orwell",
+        "genre": "Fiction",
+        "publication_date": "June 8, 1949",
+        "image": "https://example.com/1984.jpg",
+        "reviews": [
+          {
+            "reviewer": "SarahJohnson",
+            "rating": 5,
+            "comment": "A chilling dystopian masterpiece."
+          },
+          {
+            "reviewer": "DavidBrown",
+            "rating": 3,
+            "comment": "Thought-provoking but depressing."
+          }
+        ]
+      },
+      {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Fiction",
+        "publication_date": "April 10, 1925",
+        "image": "https://example.com/the-great-gatsby.jpg",
+        "reviews": [
+          {
+            "reviewer": "EmilyTaylor",
+            "rating": 4,
+            "comment": "Beautifully written with memorable characters."
+          },
+          {
+            "reviewer": "MichaelClark",
+            "rating": 2,
+            "comment": "Overrated and pretentious."
+          }
+        ]
+      },
+      {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "genre": "Fiction",
+        "publication_date": "January 28, 1813",
+        "image": "https://example.com/pride-and-prejudice.jpg",
+        "reviews": [
+          {
+            "reviewer": "JenniferAdams",
+            "rating": 5,
+            "comment": "A delightful love story!"
+          },
+          {
+            "reviewer": "RobertSmith",
+            "rating": 4,
+            "comment": "Jane Austen's best work."
+          }
+        ]
+      },
+      {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "publication_date": "September 21, 1937",
+        "image": "https://example.com/the-hobbit.jpg",
+        "reviews": [
+          {
+            "reviewer": "DanielWhite",
+            "rating": 5,
+            "comment": "An enchanting adventure!"
+          },
+          {
+            "reviewer": "AmyJohnson",
+            "rating": 4,
+            "comment": "A must-read for fantasy fans."
+          }
+        ]
+      },
+      {
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "author": "J.K. Rowling",
+        "genre": "Fantasy",
+        "publication_date": "June 26, 1997",
+        "image": "https://example.com/harry-potter.jpg",
+        "reviews": [
+          {
+            "reviewer": "EmilyWalker",
+            "rating": 5,
+            "comment": "The start of an incredible series!"
+          },
+          {
+            "reviewer": "MarkJohnson",
+            "rating": 4,
+            "comment": "A magical world full of wonder."
+          }
+        ]
+      },
+      {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "genre": "Fiction",
+        "publication_date": "July 11, 1960",
+        "image": "https://example.com/to-kill-a-mockingbird.jpg",
+        "reviews": [
+          {
+            "reviewer": "JohnDoe",
+            "rating": 5,
+            "comment": "A timeless classic!"
+          },
+          {
+            "reviewer": "JaneSmith",
+            "rating": 4,
+            "comment": "A must-read for everyone."
+          }
+        ]
+      },
+      {
+        "title": "1984",
+        "author": "George Orwell",
+        "genre": "Fiction",
+        "publication_date": "June 8, 1949",
+        "image": "https://example.com/1984.jpg",
+        "reviews": [
+          {
+            "reviewer": "SarahJohnson",
+            "rating": 5,
+            "comment": "A chilling dystopian masterpiece."
+          },
+          {
+            "reviewer": "DavidBrown",
+            "rating": 3,
+            "comment": "Thought-provoking but depressing."
+          }
+        ]
+      },
+      {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Fiction",
+        "publication_date": "April 10, 1925",
+        "image": "https://example.com/the-great-gatsby.jpg",
+        "reviews": [
+          {
+            "reviewer": "EmilyTaylor",
+            "rating": 4,
+            "comment": "Beautifully written with memorable characters."
+          },
+          {
+            "reviewer": "MichaelClark",
+            "rating": 2,
+            "comment": "Overrated and pretentious."
+          }
+        ]
+      },
+      {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "genre": "Fiction",
+        "publication_date": "January 28, 1813",
+        "image": "https://example.com/pride-and-prejudice.jpg",
+        "reviews": [
+          {
+            "reviewer": "JenniferAdams",
+            "rating": 5,
+            "comment": "A delightful love story!"
+          },
+          {
+            "reviewer": "RobertSmith",
+            "rating": 4,
+            "comment": "Jane Austen's best work."
+          }
+        ]
+      },
+      {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "publication_date": "September 21, 1937",
+        "image": "https://example.com/the-hobbit.jpg",
+        "reviews": [
+          {
+            "reviewer": "DanielWhite",
+            "rating": 5,
+            "comment": "An enchanting adventure!"
+          },
+          {
+            "reviewer": "AmyJohnson",
+            "rating": 4,
+            "comment": "A must-read for fantasy fans."
+          }
+        ]
+      },
+      {
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "author": "J.K. Rowling",
+        "genre": "Fantasy",
+        "publication_date": "June 26, 1997",
+        "image": "https://example.com/harry-potter.jpg",
+        "reviews": [
+          {
+            "reviewer": "EmilyWalker",
+            "rating": 5,
+            "comment": "The start of an incredible series!"
+          },
+          {
+            "reviewer": "MarkJohnson",
+            "rating": 4,
+            "comment": "A magical world full of wonder."
+          }
+        ]
+      },
+      {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "genre": "Fiction",
+        "publication_date": "July 11, 1960",
+        "image": "https://example.com/to-kill-a-mockingbird.jpg",
+        "reviews": [
+          {
+            "reviewer": "JohnDoe",
+            "rating": 5,
+            "comment": "A timeless classic!"
+          },
+          {
+            "reviewer": "JaneSmith",
+            "rating": 4,
+            "comment": "A must-read for everyone."
+          }
+        ]
+      },
+      {
+        "title": "1984",
+        "author": "George Orwell",
+        "genre": "Fiction",
+        "publication_date": "June 8, 1949",
+        "image": "https://example.com/1984.jpg",
+        "reviews": [
+          {
+            "reviewer": "SarahJohnson",
+            "rating": 5,
+            "comment": "A chilling dystopian masterpiece."
+          },
+          {
+            "reviewer": "DavidBrown",
+            "rating": 3,
+            "comment": "Thought-provoking but depressing."
+          }
+        ]
+      },
+      {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Fiction",
+        "publication_date": "April 10, 1925",
+        "image": "https://example.com/the-great-gatsby.jpg",
+        "reviews": [
+          {
+            "reviewer": "EmilyTaylor",
+            "rating": 4,
+            "comment": "Beautifully written with memorable characters."
+          },
+          {
+            "reviewer": "MichaelClark",
+            "rating": 2,
+            "comment": "Overrated and pretentious."
+          }
+        ]
+      },
+      {
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "genre": "Fiction",
+        "publication_date": "January 28, 1813",
+        "image": "https://example.com/pride-and-prejudice.jpg",
+        "reviews": [
+          {
+            "reviewer": "JenniferAdams",
+            "rating": 5,
+            "comment": "A delightful love story!"
+          },
+          {
+            "reviewer": "RobertSmith",
+            "rating": 4,
+            "comment": "Jane Austen's best work."
+          }
+        ]
+      },
+      {
+        "title": "The Hobbit",
+        "author": "J.R.R. Tolkien",
+        "genre": "Fantasy",
+        "publication_date": "September 21, 1937",
+        "image": "https://example.com/the-hobbit.jpg",
+        "reviews": [
+          {
+            "reviewer": "DanielWhite",
+            "rating": 5,
+            "comment": "An enchanting adventure!"
+          },
+          {
+            "reviewer": "AmyJohnson",
+            "rating": 4,
+            "comment": "A must-read for fantasy fans."
+          }
+        ]
+      },
+      {
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "author": "J.K. Rowling",
+        "genre": "Fantasy",
+        "publication_date": "June 26, 1997",
+        "image": "https://example.com/harry-potter.jpg",
+        "reviews": [
+          {
+            "reviewer": "EmilyWalker",
+            "rating": 5,
+            "comment": "The start of an incredible series!"
+          },
+          {
+            "reviewer": "MarkJohnson",
+            "rating": 4,
+            "comment": "A magical world full of wonder."
+          }
+        ]
+      }
+    ]
+  }
+  

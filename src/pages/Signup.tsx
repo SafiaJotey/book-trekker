@@ -1,12 +1,19 @@
+import { createUser } from '@/redux/feature/user/userSlice';
+import { useAppDispatch } from '@/redux/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { Toaster, toast } from 'react-hot-toast';
 import { BiSolidHome, BiSolidUser } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import auth from '../assets/images/auth.jpg';
 import { IFormSignupInput } from '../types/globalTypes';
 
 export default function Signup() {
+  const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<IFormSignupInput>();
-  const onSubmit: SubmitHandler<IFormSignupInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormSignupInput> = (data) => {
+    dispatch(createUser({ email: data.email, password: data.password }));
+    toast.success('Successfully Signed Up.');
+  };
   return (
     <div className="container px-[250px]   h-screen  flex  justify-center items-center">
       <div className="shadow-md w-full flex  justify-center items-center rounded-lg  ">
@@ -86,6 +93,7 @@ export default function Signup() {
           </form>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 }

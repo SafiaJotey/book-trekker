@@ -1,12 +1,35 @@
+import { loginUser } from '@/redux/feature/user/userSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IFormLoginInput } from '@/types/globalTypes';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { BiSolidHome } from 'react-icons/bi';
 import { IoMdLogIn } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../assets/images/auth.jpg';
 export default function Login() {
   const { register, handleSubmit } = useForm<IFormLoginInput>();
-  const onSubmit: SubmitHandler<IFormLoginInput> = (data) => console.log(data);
+
+  const { user, isLoading, isError, error } = useAppSelector(
+    (state) => state.user
+  );
+  const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+
+  const onSubmit = (data: IFormLoginInput) => {
+    dispatch(loginUser({ email: data.email, password: data.password }));
+  };
+
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate('/');
+      setTimeout(() => {
+        toast.success('Successfully Logged in.');
+      }, 1000);
+    }
+  }, [user.email, isLoading]);
   return (
     <div className="container px-[250px]   h-screen  flex  justify-center items-center">
       <div className="shadow-md w-full flex  justify-center items-center rounded-lg  ">
