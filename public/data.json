@@ -1,96 +1,402 @@
-[
-  {
-    "_id": 1,
-    "name": "Haylou GST",
-    "image": "https://live.staticflickr.com/65535/52953899202_478089ea5f_h.jpg",
-    "price": 31.99,
-    "features": [
-      "1.69'' HD display",
-      "Support 12 workout modes",
-      "Support all-day heart rate and blood oxygen monitoring",
-      "Support intelligent sleep monitoring",
-      "IP68 dustproof and waterproof",
-      "20 days of battery life"
-    ],
-    "status": true,
-    "rating": 4
-  },
-  {
-    "_id": 2,
-    "name": "Haylou GS",
-    "image": "https://live.staticflickr.com/65535/52954632614_2db2bed3a7_h.jpg",
-    "price": 32.38,
-    "features": [
-      "38g compact body, more comfortable to wear",
-      "Support 12 workout modes",
-      "Support SpO₂ tracking and heart rate monitoring",
-      "Support smart sleep monitoring",
-      "IP68 dustproof and waterproof",
-      "20-day battery life"
-    ],
-    "status": false,
-    "rating": 3
-  },
-  {
-    "_id": 3,
-    "name": "Haylou Solar Plus RT3",
-    "image": "https://live.staticflickr.com/65535/52953899127_38e776f3f7_h.jpg",
-    "price": 48.79,
-    "features": [
-      "Bluetooth 5.2, worry-free communication made easy",
-      "Precise and clear experience with 1.43\" Amoled display",
-      "5d looking level-up, exquisite metal bezel",
-      "Always-on display, conf_ident time control",
-      "Versatile watch faces, support customize watch face"
-    ],
-    "status": true,
-    "rating": 5
-  },
-  {
-    "_id": 4,
-    "name": "Haylou RT2",
-    "image": "https://live.staticflickr.com/65535/52954494936_efd69e2df9_h.jpg",
-    "price": 38.99,
-    "features": [
-      "360*360 high resolution display",
-      "Support 12 workout modes",
-      "Support all-day heart rate and blood oxygen monitoring",
-      "Support intelligent sleep monitoring",
-      "20 days of battery life"
-    ],
-    "status": true,
-    "rating": 2
-  },
-  {
-    "_id": 5,
-    "name": "Haylou RS4 Plus",
-    "image": "https://live.staticflickr.com/65535/52953899137_072c5c4ffc_h.jpg",
-    "price": 54.84,
-    "features": [
-      "1.78'' AMOLED HD display",
-      "60HZ refresh rate, smooth and delicate picture quality",
-      "Support 105 workout modes",
-      "Support multi-UI main menu mode",
-      "Support all-day heart rate and blood oxygen monitoring",
-      "Support Alipay offline payment"
-    ],
-    "status": false,
-    "rating": 4
-  },
-  {
-    "_id": 6,
-    "name": "Haylou RS3",
-    "image": "https://live.staticflickr.com/65535/52953899132_fead48e579_h.jpg",
-    "price": 63.07,
-    "features": [
-      "1.2'' AMOLED HD display",
-      "Support 14 workout modes",
-      "Support all-day heart rate and blood oxygen monitoring",
-      "SONY GPS, accurate positioning of movement trajectory",
-      "5ATM waterproof",
-      "21 days of battery life"
-    ],
-    "status": true,
-    "rating": 5
-  }
-]
+ [
+    {
+      "id": 1,
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Fiction",
+      "publication_date": "July 11, 1960",
+      "image": "https://i.ibb.co/BZtGTsp/20.png",
+      "reviews": [
+        {
+          "reviewer": "JohnDoe",
+          "rating": 5,
+          "comment": "A timeless classic!"
+        },
+        {
+          "reviewer": "JaneSmith",
+          "rating": 4,
+          "comment": "A must-read for everyone."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Fiction",
+      "publication_date": "June 8, 1949",
+      "image": "https://i.ibb.co/5KqXSNG/19.png",
+      "reviews": [
+        {
+          "reviewer": "SarahJohnson",
+          "rating": 5,
+          "comment": "A chilling dystopian masterpiece."
+        },
+        {
+          "reviewer": "DavidBrown",
+          "rating": 3,
+          "comment": "Thought-provoking but depressing."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Fiction",
+      "publication_date": "April 10, 1925",
+      "image": "https://i.ibb.co/r5PtFbV/18.png",
+      "reviews": [
+        {
+          "reviewer": "EmilyTaylor",
+          "rating": 4,
+          "comment": "Beautifully written with memorable characters."
+        },
+        {
+          "reviewer": "MichaelClark",
+          "rating": 2,
+          "comment": "Overrated and pretentious."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Fiction",
+      "publication_date": "January 28, 1813",
+      "image": "https://i.ibb.co/NZXTbD5/7.png",
+      "reviews": [
+        {
+          "reviewer": "JenniferAdams",
+          "rating": 5,
+          "comment": "A delightful love story!"
+        },
+        {
+          "reviewer": "RobertSmith",
+          "rating": 4,
+          "comment": "Jane Austen's best work."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "publication_date": "September 21, 1937",
+      "image": "https://i.ibb.co/mFk0vm5/16.png",
+      "reviews": [
+        {
+          "reviewer": "DanielWhite",
+          "rating": 5,
+          "comment": "An enchanting adventure!"
+        },
+        {
+          "reviewer": "AmyJohnson",
+          "rating": 4,
+          "comment": "A must-read for fantasy fans."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "genre": "Fiction",
+      "publication_date": "July 16, 1951",
+      "image": "https://i.ibb.co/pZQQdMV/15.png",
+      "reviews": [
+        {
+          "reviewer": "EmmaWilson",
+          "rating": 5,
+          "comment": "A classic coming-of-age novel."
+        },
+        {
+          "reviewer": "JamesThompson",
+          "rating": 3,
+          "comment": "A bit overrated in my opinion."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Moby-Dick",
+      "author": "Herman Melville",
+      "genre": "Fiction",
+      "publication_date": "October 18, 1851",
+      "image": "https://i.ibb.co/YLPx1Dj/14.png",
+      "reviews": [
+        {
+          "reviewer": "OliviaMartin",
+          "rating": 4,
+          "comment": "An epic tale of obsession and adventure."
+        },
+        {
+          "reviewer": "LiamDavis",
+          "rating": 5,
+          "comment": "Melville's masterpiece."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Jane Eyre",
+      "author": "Charlotte Bronte",
+      "genre": "Fiction",
+      "publication_date": "October 16, 1847",
+      "image": "https://i.ibb.co/d40Vmjr/13.png",
+      "reviews": [
+        {
+          "reviewer": "SophiaJohnson",
+          "rating": 5,
+          "comment": "A captivating and empowering story."
+        },
+        {
+          "reviewer": "NoahAnderson",
+          "rating": 4,
+          "comment": "Bronte's writing is exceptional."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "The Lord of the Rings",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "publication_date": "July 29, 1954",
+      "image": "https://i.ibb.co/hCMFM0D/12.png",
+      "reviews": [
+        {
+          "reviewer": "AvaWilson",
+          "rating": 5,
+          "comment": "An epic fantasy that will transport you."
+        },
+        {
+          "reviewer": "JacobThompson",
+          "rating": 5,
+          "comment": "Tolkien's magnum opus!"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Fiction",
+      "publication_date": "July 11, 1960",
+      "image": "https://i.ibb.co/jvWrWf5/1.png",
+      "reviews": [
+        {
+          "reviewer": "JohnDoe",
+          "rating": 5,
+          "comment": "A timeless classic!"
+        },
+        {
+          "reviewer": "JaneSmith",
+          "rating": 4,
+          "comment": "A must-read for everyone."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Fiction",
+      "publication_date": "June 8, 1949",
+      "image": "https://i.ibb.co/PzKGHB5/11.png",
+      "reviews": [
+        {
+          "reviewer": "SarahJohnson",
+          "rating": 5,
+          "comment": "A chilling dystopian masterpiece."
+        },
+        {
+          "reviewer": "DavidBrown",
+          "rating": 3,
+          "comment": "Thought-provoking but depressing."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Fiction",
+      "publication_date": "April 10, 1925",
+      "image": "https://i.ibb.co/SV45bvw/2.png",
+      "reviews": [
+        {
+          "reviewer": "EmilyTaylor",
+          "rating": 4,
+          "comment": "Beautifully written with memorable characters."
+        },
+        {
+          "reviewer": "MichaelClark",
+          "rating": 2,
+          "comment": "Overrated and pretentious."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "genre": "Fiction",
+      "publication_date": "January 28, 1813",
+      "image": "https://i.ibb.co/HFrRTDk/3.png",
+      "reviews": [
+        {
+          "reviewer": "JenniferAdams",
+          "rating": 5,
+          "comment": "A delightful love story!"
+        },
+        {
+          "reviewer": "RobertSmith",
+          "rating": 4,
+          "comment": "Jane Austen's best work."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "publication_date": "September 21, 1937",
+      "image": "https://i.ibb.co/pjHYnh8/4.png",
+      "reviews": [
+        {
+          "reviewer": "DanielWhite",
+          "rating": 5,
+          "comment": "An enchanting adventure!"
+        },
+        {
+          "reviewer": "AmyJohnson",
+          "rating": 4,
+          "comment": "A must-read for fantasy fans."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "publication_date": "June 26, 1997",
+      "image": "https://i.ibb.co/mFk0vm5/16.png",
+      "reviews": [
+        {
+          "reviewer": "EmilyWalker",
+          "rating": 5,
+          "comment": "The start of an incredible series!"
+        },
+        {
+          "reviewer": "MarkJohnson",
+          "rating": 4,
+          "comment": "A magical world full of wonder."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "The Chronicles of Narnia",
+      "author": "C.S. Lewis",
+      "genre": "Fantasy",
+      "publication_date": "October 16, 1950",
+      "image": "https://i.ibb.co/7pNDSPP/5.png",
+      "reviews": [
+        {
+          "reviewer": "SophiaBrown",
+          "rating": 5,
+          "comment": "A captivating and imaginative series."
+        },
+        {
+          "reviewer": "BenjaminThomas",
+          "rating": 4,
+          "comment": "Lewis's world-building is exceptional."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "genre": "Fiction",
+      "publication_date": "1988",
+      "image": "https://i.ibb.co/pnJ52Hn/8.png",
+      "reviews": [
+        {
+          "reviewer": "OliviaWhite",
+          "rating": 5,
+          "comment": "A thought-provoking and inspiring tale."
+        },
+        {
+          "reviewer": "NoahGarcia",
+          "rating": 4,
+          "comment": "Coelho's writing is mesmerizing."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Frankenstein",
+      "author": "Mary Shelley",
+      "genre": "Fiction",
+      "publication_date": "January 1, 1818",
+      "image": "https://i.ibb.co/gTqXvd0/9.png",
+      "reviews": [
+        {
+          "reviewer": "AvaMiller",
+          "rating": 4,
+          "comment": "A haunting tale of creation and responsibility."
+        },
+        {
+          "reviewer": "JacobWilson",
+          "rating": 5,
+          "comment": "Shelley's masterpiece of gothic literature."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "The Little Prince",
+      "author": "Antoine de Saint-Exupéry",
+      "genre": "Fiction",
+      "publication_date": "April 6, 1943",
+      "image": "https://i.ibb.co/7YKDJsP/10.png",
+      "reviews": [
+        {
+          "reviewer": "SophiaSmith",
+          "rating": 5,
+          "comment": "A timeless and poignant tale."
+        },
+        {
+          "reviewer": "BenjaminClark",
+          "rating": 4,
+          "comment": "A beautiful exploration of life's mysteries."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "The Picture of Dorian Gray",
+      "author": "Oscar Wilde",
+      "genre": "Fiction",
+      "publication_date": "June 20, 1890",
+      "image": "https://i.ibb.co/NZXTbD5/7.png",
+      "reviews": [
+        {
+          "reviewer": "OliverAnderson",
+          "rating": 4,
+          "comment": "A captivating and morally complex novel."
+        },
+        {
+          "reviewer": "EmilyJones",
+          "rating": 5,
+          "comment": "Wilde's wit shines throughout the story."
+        }
+      ]
+    }
+  ]
