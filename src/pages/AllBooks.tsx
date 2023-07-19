@@ -2,23 +2,42 @@ import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 import { YearDropdown } from '@/components/ui/DropDown';
 import MiniCards from '@/components/ui/MiniCards';
 import { useGetBooksQuery } from '@/redux/feature/books/bookApi';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IBook } from '@/types/globalTypes';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { FiInstagram } from 'react-icons/fi';
 import { TiTick } from 'react-icons/ti';
 import Card from '../components/ui/Card';
+import { updateSearchTerm } from '@/redux/feature/books/books.slice';
 export default function AllBooks() {
   const { data, isLoading, isError } = useGetBooksQuery(undefined);
+  const searchTerm = useAppSelector((state) => state.book.searchTerm);
+  let filteredData;
+
+  const dispatch = useAppDispatch();
+  if (searchTerm !== '') {
+    filteredData = data?.data?.filter(
+      (item: IBook) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.genre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }else{
+    filteredData=data?.data
+  }
 
   return (
     <div className=" mb-[50px]">
-      <AdditionalPageCover title="Authors Books" />
+      <AdditionalPageCover
+        title="Books were safer than other people anyway."
+        author="Neil Gaiman, The Ocean at the End of the Lane"
+      />
 
       <div className="w-full flex justify-between items-start container  px-[100px]">
         {/* cards */}
         <div className="flex justify-start flex-wrap items-center w-3/4">
-          {data?.data?.map((book: IBook) => (
+          {filteredData?.map((book: IBook) => (
             <Card key={book._id} book={book}></Card>
           ))}
         </div>
@@ -32,6 +51,8 @@ export default function AllBooks() {
                 className="p-3 w-10/12 border-none"
                 placeholder="Search..."
                 type="text"
+                value={searchTerm}
+                onChange={(e) => dispatch(updateSearchTerm(e.target.value))}
               />
               <BiSearchAlt2 className="w-2/12 text-2xl"></BiSearchAlt2>
             </div>

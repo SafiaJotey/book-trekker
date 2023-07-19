@@ -1,45 +1,34 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
-import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 // import { BsFillHeartFill } from 'react-icons/bs';
+import Review from '@/components/Review';
+import { useSingleBookQuery } from '@/redux/feature/books/bookApi';
 import { BiSolidEditAlt } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
 import { TiTick } from 'react-icons/ti';
-import book6 from '../assets/images/book-mockup6.png';
+import { useParams } from 'react-router-dom';
 export default function SingleBook() {
+  const { id } = useParams();
+  const { data: book } = useSingleBookQuery(id);
+
   return (
     <div className=" mb-[50px]">
-      <AdditionalPageCover title="Single Book" />
+      <AdditionalPageCover title="Books are a uniquely portable magic"  author='Stephen King, On Writing: A Memoir of the Craft'/>
 
       <div className="container my-[100px] px-[100px]">
         <div className="w-full border rounded-md flex p-2 ">
-          <img src={book6} className="w-1/3" />
+          <img src={book?.data?.image} className="w-1/3" />
 
           <div className="w-2/3 p-5 ">
             <div className="border-b-2 pb-3">
               {' '}
-              <p className="text-xl ">personality, science</p>
+              <p className="text-xl ">{book?.data?.author}</p>
               <h5 className="text-5xl font-semibold my-2">
-                The Glitterign Stars Book
+                {book?.data?.title}
               </h5>
               <div className="flex justify-between">
                 {' '}
-                <div className="flex text-3xl ">
-                  <span>
-                    <AiFillStar className="text-review"></AiFillStar>
-                  </span>
-                  <span>
-                    <AiFillStar className="text-review"></AiFillStar>
-                  </span>
-                  <span>
-                    <AiFillStar className="text-review"></AiFillStar>
-                  </span>
-                  <span>
-                    <AiFillStar className="text-review"></AiFillStar>
-                  </span>
-                  <span>
-                    <AiFillStar className="text-review"></AiFillStar>
-                  </span>
-                </div>
+                <Review key={book?.data?._id} book={book?.data} />
                 <AiOutlineHeart size={25}></AiOutlineHeart>
               </div>
             </div>
@@ -56,21 +45,21 @@ export default function SingleBook() {
               <TiTick className="text-xl"></TiTick>
               <p className="text-lg font-semibold px-3 my-1">
                 {' '}
-                publication year: 2020
+                Author Name:&nbsp; &nbsp; {book?.data?.author}
               </p>
             </div>
             <div className="flex justify-start items-center ">
               <TiTick className="text-xl"></TiTick>
               <p className="text-lg font-semibold px-3 my-1">
                 {' '}
-                publication year: 2020
+                publication Data:&nbsp; &nbsp; {book?.data?.genre}
               </p>
             </div>
             <div className="flex justify-start items-center ">
               <TiTick className="text-xl"></TiTick>
               <p className="text-lg font-semibold px-3 my-1">
                 {' '}
-                publication year: 2020
+                publication Data:&nbsp; &nbsp; {book?.data?.publication_date}
               </p>
             </div>
             <div className="flex justify-start mt-5">
