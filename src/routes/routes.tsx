@@ -1,4 +1,5 @@
 import App from '@/App';
+import AddBook from '@/pages/AddBook';
 import AllBooks from '@/pages/AllBooks';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
       {
         path: '/singleBook',
         element: <SingleBook />,
+      },
+      {
+        path: '/addBook',
+        element: <AddBook />,
       },
     ],
   },

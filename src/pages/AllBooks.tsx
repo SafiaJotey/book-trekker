@@ -1,14 +1,16 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
+import { YearDropdown } from '@/components/ui/DropDown';
 import MiniCards from '@/components/ui/MiniCards';
+import { useGetBooksQuery } from '@/redux/feature/books/bookApi';
+import { IBook } from '@/types/globalTypes';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { FiInstagram } from 'react-icons/fi';
 import { TiTick } from 'react-icons/ti';
-import { useLocation } from 'react-router-dom';
 import Card from '../components/ui/Card';
 export default function AllBooks() {
-  const location = useLocation();
-  console.log(location);
+  const { data, isLoading, isError } = useGetBooksQuery(undefined);
+
   return (
     <div className=" mb-[50px]">
       <AdditionalPageCover title="Authors Books" />
@@ -16,33 +18,9 @@ export default function AllBooks() {
       <div className="w-full flex justify-between items-start container  px-[100px]">
         {/* cards */}
         <div className="flex justify-start flex-wrap items-center w-3/4">
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
-          <div className="w-1/3 p-2">
-            <Card></Card>
-          </div>
+          {data?.data?.map((book: IBook) => (
+            <Card key={book._id} book={book}></Card>
+          ))}
         </div>
         {/* search and filters */}
         <div className="w-1/4 pl-3">
@@ -71,18 +49,20 @@ export default function AllBooks() {
                   <p className="text-xl font-semibold px-3 "> Genre</p>
                 </div>
                 <div className="flex  flex-wrap items-center">
-                  <div className="border border-main px-3 m-1 rounded-sm flex justify-center items-center">
-                    genre
-                  </div>
-                  <div className="border  border-main px-3  m-1 rounded-sm flex  items-center">
-                    genre
-                  </div>{' '}
-                  <div className="border  border-main px-3 m-1 rounded-sm flex items-center">
-                    genre
-                  </div>{' '}
-                  <div className="border  border-main px-3 m-1 rounded-sm flex items-center">
-                    genre
-                  </div>
+                  <select name="genre" className="border w-full py-1">
+                    <option value="">Select a genre</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Classic Literature">
+                      Classic Literature
+                    </option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Coming-of-age">Coming-of-age</option>
+                    <option value="Epic">Epic</option>
+                    <option value="Gothic Literature">Gothic Literature</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Romance genre">Romance genre</option>
+                  </select>
                 </div>
               </div>
 
@@ -95,18 +75,14 @@ export default function AllBooks() {
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center">
-                  <div className="border border-main px-3 m-1 rounded-sm flex  items-center">
-                    2018
-                  </div>
-                  <div className="border  border-main px-3  m-1 rounded-sm flex justify-center items-center">
-                    2018
-                  </div>{' '}
-                  <div className="border  border-main px-3 m-1 rounded-sm flex  items-center">
-                    2018
-                  </div>{' '}
-                  <div className="border  border-main px-3 m-1 rounded-sm flex items-center">
-                    2018
-                  </div>
+                  <select name="year" className="border w-full py-1">
+                    <option value="">select a year</option>
+                    {YearDropdown().map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>

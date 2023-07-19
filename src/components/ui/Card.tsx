@@ -1,32 +1,18 @@
-import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 // import { BsFillHeartFill } from 'react-icons/bs';
-import book6 from '../../assets/images/book-mockup6.png';
+import { IBook } from '@/types/globalTypes';
+import Review from '../Review';
 
-export default function Card() {
+export default function Card({ book }: { book: IBook }) {
   return (
-    <div className="pr-3 my-3">
-      <img src={book6} />
-      <p>personality, science</p>
-      <h5 className="text-xl font-semibold">The Glitterign Stars Book</h5>
+    <div className="pr-3 my-3 w-1/3 p-2">
+      <img src={book.image} />
+
+      <h5 className="text-xl font-semibold">{book.title}</h5>
+      <p>{book.author}</p>
       <div className="flex justify-between">
         {' '}
-        <div className="flex ">
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-          <span>
-            <AiFillStar className="text-review"></AiFillStar>
-          </span>
-        </div>
+        <Review key={book._id} book={book} />
         <AiOutlineHeart></AiOutlineHeart>
       </div>
     </div>
