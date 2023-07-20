@@ -13,7 +13,7 @@ export default function AdditionalPageCover({
         <div className="w-7/12">
           {' '}
           <h3 className="text-xl  text-white font-semibold ">{title}</h3>
-          <i className="  text-white font-semibold ">- {author}</i>
+          <i className="  text-white font-semibold "> {author}</i>
         </div>
         <div className="w-5/12">
           <img src={allBooksCover_image} alt="" />

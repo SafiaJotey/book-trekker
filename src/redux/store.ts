@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { api } from './api/apiSlice';
 import bookReducer from './feature/books/books.slice';
 import userReducer from './feature/user/userSlice';
-import wishListReducer from './feature/wishList/wishlisttSlice';
+import wishListReducer from './feature/wishList.ts/wishlisttSlice';
 
 const store = configureStore({
   reducer: {

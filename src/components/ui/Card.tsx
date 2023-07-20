@@ -1,4 +1,4 @@
-import { addToWishListOrRemove } from '@/redux/feature/wishList/wishlisttSlice';
+import { addToWishListOrRemove } from '@/redux/feature/wishList.ts/wishlisttSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { IBook } from '@/types/globalTypes';
 import { useState } from 'react';

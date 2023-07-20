@@ -6,6 +6,7 @@ import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import SingleBook from '@/pages/SingleBook';
 import WishList from '@/pages/Wishlist';
+import Reading from '@/pages/ReadingList';
 import { createBrowserRouter } from 'react-router-dom';
 import Signup from '../pages/Signup';
 
@@ -33,6 +34,10 @@ const routes = createBrowserRouter([
       {
         path: '/wishlist',
         element: <WishList />,
+      },
+      {
+        path: '/readingList',
+        element: <Reading/>,
       },
     ],
   },
