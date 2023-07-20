@@ -1,7 +1,11 @@
+import { useRecentBookQuery } from '@/redux/feature/books/bookApi';
+import { IBook } from '@/types/globalTypes';
 import { Link } from 'react-router-dom';
 import Card from '../components/ui/Card';
 
 export default function RecentlyAdded() {
+  const { data } = useRecentBookQuery(undefined);
+  console.log(data);
   return (
     <div className="container mx-auto p-[100px]">
       <div className="flex justify-between items-center">
@@ -20,19 +24,10 @@ export default function RecentlyAdded() {
           Find More in Shop
         </Link>
       </div>
-      <div className="w-full flex justify-between my-[50px]">
-        <div className="w-3/12  ">
-          <Card></Card>
-        </div>
-        <div className="w-3/12  ">
-          <Card></Card>
-        </div>
-        <div className="w-3/12  ">
-          <Card></Card>
-        </div>
-        <div className="w-3/12  ">
-          <Card></Card>
-        </div>
+      <div className="flex justify-start flex-wrap items-center w-full">
+        {data?.data?.map((book: IBook) => (
+          <Card key={book._id} book={book}></Card>
+        ))}
       </div>
     </div>
   );

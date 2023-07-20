@@ -5,9 +5,13 @@ const productApi = api.injectEndpoints({
     getBooks: builder.query({
       query: () => '/books',
     }),
+    recentBook: builder.query({
+      query: () => `/books/recent`,
+    }),
     singleBook: builder.query({
       query: (id) => `/books/${id}`,
     }),
+
     postComment: builder.mutation({
       query: ({ id, data }) => ({
         url: `/comment/${id}`,
@@ -26,6 +30,7 @@ const productApi = api.injectEndpoints({
 export const {
   useGetCommentQuery,
   useGetBooksQuery,
+  useRecentBookQuery,
   usePostCommentMutation,
   useSingleBookQuery,
 } = productApi;

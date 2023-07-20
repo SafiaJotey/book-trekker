@@ -1,7 +1,10 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 import { YearDropdown } from '@/components/ui/DropDown';
 import MiniCards from '@/components/ui/MiniCards';
-import { useGetBooksQuery } from '@/redux/feature/books/bookApi';
+import {
+  useGetBooksQuery,
+  useRecentBookQuery,
+} from '@/redux/feature/books/bookApi';
 import {
   updateGenreSelectedValue,
   updatePublishYearSelectedValue,
@@ -17,6 +20,7 @@ import { TiTick } from 'react-icons/ti';
 import Card from '../components/ui/Card';
 export default function AllBooks() {
   const { data, isLoading, isError } = useGetBooksQuery(undefined);
+  const { data: recentBook } = useRecentBookQuery(undefined);
 
   const selectedGenreValue = useAppSelector((state) => state.book.genre);
   const selectedPublishYearValue = useAppSelector(
@@ -29,6 +33,7 @@ export default function AllBooks() {
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(updateSearchTerm(e.target.value));
   };
+  console.log(selectedGenreValue);
   if (
     selectedGenreValue === '' &&
     selectedPublishYearValue === '' &&
@@ -112,6 +117,17 @@ export default function AllBooks() {
       .filter((item: IBook) =>
         item.publication_date.includes(selectedPublishYearValue)
       );
+  }
+  if (
+    selectedGenreValue !== '' &&
+    selectedPublishYearValue === '' &&
+    searchTerm === ''
+  ) {
+    console.log('8tth');
+    filteredData = data?.data?.filter(
+      (item: IBook) =>
+        item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
+    );
   }
   if (
     selectedGenreValue === '' &&
@@ -236,10 +252,10 @@ export default function AllBooks() {
                 </h3>
               </div>
               {/* mini cards */}
-              <div>
-                <MiniCards></MiniCards>
-                <MiniCards></MiniCards>
-                <MiniCards></MiniCards>
+              <div className="flex flex-col justify-start flex-wrap items-center w-full">
+                {recentBook?.data?.slice(0, 3).map((book: IBook) => (
+                  <MiniCards key={book._id} book={book}></MiniCards>
+                ))}
               </div>
               {/* social */}
               <div>

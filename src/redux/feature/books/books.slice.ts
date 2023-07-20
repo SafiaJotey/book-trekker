@@ -1,3 +1,4 @@
+import { IBook } from '@/types/globalTypes';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -5,11 +6,13 @@ interface IBookFilter {
   searchTerm: string;
   genre: string;
   publishYear: string;
+ 
 }
 const initialState: IBookFilter = {
   searchTerm: '',
   genre: '',
   publishYear: '',
+ 
 };
 const bookSlice = createSlice({
   name: 'book',
@@ -24,6 +27,11 @@ const bookSlice = createSlice({
     updatePublishYearSelectedValue: (state, action: PayloadAction<string>) => {
       state.publishYear = action.payload;
     },
+    
+
+    
+  
+    
   },
 });
 export const {

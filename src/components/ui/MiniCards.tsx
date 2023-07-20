@@ -1,37 +1,27 @@
-import { AiFillStar, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 // import { BsFillHeartFill } from 'react-icons/bs';
-import book6 from '../../assets/images/book-mockup6.png';
-export default function MiniCards() {
+import { IBook } from '@/types/globalTypes';
+import { Link } from 'react-router-dom';
+import Review from '../Review';
+export default function MiniCards({ book }: { book: IBook }) {
   return (
-    <div className="flex justify-center border p-2 ">
-      <div className="w-5/12">
-        <img src={book6} />
-      </div>
-      <div className="w-7/12 px-1">
-        <p>personality, science</p>
-        <h5 className="text-lg font-bold">The Glitterign Stars Book</h5>
-        <div className="flex justify-between">
-          {' '}
-          <div className="flex ">
-            <span>
-              <AiFillStar className="text-review"></AiFillStar>
-            </span>
-            <span>
-              <AiFillStar className="text-review"></AiFillStar>
-            </span>
-            <span>
-              <AiFillStar className="text-review"></AiFillStar>
-            </span>
-            <span>
-              <AiFillStar className="text-review"></AiFillStar>
-            </span>
-            <span>
-              <AiFillStar className="text-review"></AiFillStar>
-            </span>
+    <div>
+      <Link to={`/books/${book?._id}`}>
+        <div className="flex justify-center items-center border p-2 ">
+          <div className="w-4/12">
+            <img src={book.image} />
           </div>
-          <AiOutlineHeart></AiOutlineHeart>
+          <div className="w-8/12 px-2">
+            <h5 className="text-md font-bold">{book.title}</h5>
+            <i>{book?.author}</i>
+            <div className="flex justify-between">
+              {' '}
+              <Review key={book?._id} book={book} />
+              <AiOutlineHeart></AiOutlineHeart>
+            </div>
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }
