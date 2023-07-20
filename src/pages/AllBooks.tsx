@@ -2,29 +2,134 @@ import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 import { YearDropdown } from '@/components/ui/DropDown';
 import MiniCards from '@/components/ui/MiniCards';
 import { useGetBooksQuery } from '@/redux/feature/books/bookApi';
+import {
+  updateGenreSelectedValue,
+  updatePublishYearSelectedValue,
+  updateSearchTerm,
+} from '@/redux/feature/books/books.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IBook } from '@/types/globalTypes';
+import { ChangeEvent } from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { FiInstagram } from 'react-icons/fi';
 import { TiTick } from 'react-icons/ti';
 import Card from '../components/ui/Card';
-import { updateSearchTerm } from '@/redux/feature/books/books.slice';
 export default function AllBooks() {
   const { data, isLoading, isError } = useGetBooksQuery(undefined);
+
+  const selectedGenreValue = useAppSelector((state) => state.book.genre);
+  const selectedPublishYearValue = useAppSelector(
+    (state) => state.book.publishYear
+  );
   const searchTerm = useAppSelector((state) => state.book.searchTerm);
   let filteredData;
 
   const dispatch = useAppDispatch();
-  if (searchTerm !== '') {
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateSearchTerm(e.target.value));
+  };
+  if (
+    selectedGenreValue === '' &&
+    selectedPublishYearValue === '' &&
+    searchTerm !== ''
+  ) {
+    console.log('1st');
     filteredData = data?.data?.filter(
       (item: IBook) =>
         item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.genre.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }else{
-    filteredData=data?.data
+  }
+  if (
+    selectedGenreValue !== '' &&
+    selectedPublishYearValue !== '' &&
+    searchTerm !== ''
+  ) {
+    console.log('2nd');
+    filteredData = data?.data
+      ?.filter(
+        (item: IBook) =>
+          item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
+      )
+      .filter((item: IBook) =>
+        item.publication_date.includes(selectedPublishYearValue)
+      )
+      .filter(
+        (item: IBook) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.genre.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  }
+  if (
+    selectedGenreValue !== '' &&
+    selectedPublishYearValue === '' &&
+    searchTerm !== ''
+  ) {
+    console.log('3rd');
+    filteredData = data?.data
+      ?.filter(
+        (item: IBook) =>
+          item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
+      )
+      .filter(
+        (item: IBook) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.genre.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  }
+  if (
+    selectedGenreValue === '' &&
+    selectedPublishYearValue !== '' &&
+    searchTerm !== ''
+  ) {
+    console.log('4th');
+    filteredData = data?.data
+      ?.filter((item: IBook) =>
+        item.publication_date.includes(selectedPublishYearValue)
+      )
+      .filter(
+        (item: IBook) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.genre.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  }
+  if (
+    selectedGenreValue !== '' &&
+    selectedPublishYearValue !== '' &&
+    searchTerm === ''
+  ) {
+    console.log('5th');
+    filteredData = data?.data
+      ?.filter(
+        (item: IBook) =>
+          item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
+      )
+      .filter((item: IBook) =>
+        item.publication_date.includes(selectedPublishYearValue)
+      );
+  }
+  if (
+    selectedGenreValue === '' &&
+    selectedPublishYearValue !== '' &&
+    searchTerm === ''
+  ) {
+    console.log('6th');
+    filteredData = data?.data?.filter((item: IBook) =>
+      item.publication_date.includes(selectedPublishYearValue)
+    );
+  }
+  if (
+    selectedGenreValue === '' &&
+    searchTerm === '' &&
+    selectedPublishYearValue === ''
+  ) {
+    console.log('7th');
+    filteredData = data?.data;
   }
 
   return (
@@ -52,7 +157,7 @@ export default function AllBooks() {
                 placeholder="Search..."
                 type="text"
                 value={searchTerm}
-                onChange={(e) => dispatch(updateSearchTerm(e.target.value))}
+                onChange={(e) => handleSearch(e)}
               />
               <BiSearchAlt2 className="w-2/12 text-2xl"></BiSearchAlt2>
             </div>
@@ -70,9 +175,17 @@ export default function AllBooks() {
                   <p className="text-xl font-semibold px-3 "> Genre</p>
                 </div>
                 <div className="flex  flex-wrap items-center">
-                  <select name="genre" className="border w-full py-1">
+                  <select
+                    name="genre"
+                    className="border w-full py-1"
+                    value={selectedGenreValue}
+                    onChange={(e) =>
+                      dispatch(updateGenreSelectedValue(e.target.value))
+                    }
+                  >
                     <option value="">Select a genre</option>
                     <option value="Fantasy">Fantasy</option>
+                    <option value="Fiction">Fiction</option>
                     <option value="Dystopian">Dystopian</option>
                     <option value="Classic Literature">
                       Classic Literature
@@ -96,7 +209,14 @@ export default function AllBooks() {
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center">
-                  <select name="year" className="border w-full py-1">
+                  <select
+                    name="year"
+                    className="border w-full py-1"
+                    value={selectedPublishYearValue}
+                    onChange={(e) =>
+                      dispatch(updatePublishYearSelectedValue(e.target.value))
+                    }
+                  >
                     <option value="">select a year</option>
                     {YearDropdown().map((year) => (
                       <option key={year} value={year}>
