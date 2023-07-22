@@ -20,6 +20,7 @@ module.exports = {
         subsidiary: '#ff8000',
         overlay: 'rgb(0,52,97,.8)',
         review: '#ffc108',
+
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

@@ -157,7 +157,7 @@ export default function AllBooks() {
 
       <div className="w-full flex justify-between items-start container  px-[100px]">
         {/* cards */}
-        <div className="flex justify-start flex-wrap items-center w-3/4">
+        <div className="flex justify-center flex-wrap items-center w-3/4">
           {filteredData?.map((book: IBook) => (
             <Card key={book._id} book={book}></Card>
           ))}

@@ -3,6 +3,7 @@
 @tailwind utilities;
 body {
   font-family: 'DM Sans', sans-serif;
+  background-color: #f9f9f9;
 }
 @layer base {
   :root {

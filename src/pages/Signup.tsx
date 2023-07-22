@@ -1,3 +1,4 @@
+import { useCreateNewUserMutation } from '@/redux/feature/user/userApi';
 import { createUser } from '@/redux/feature/user/userSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -8,10 +9,20 @@ import auth from '../assets/images/auth.jpg';
 import { IFormSignupInput } from '../types/globalTypes';
 
 export default function Signup() {
+  const [createNewUser] = useCreateNewUserMutation();
+
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm<IFormSignupInput>();
   const onSubmit: SubmitHandler<IFormSignupInput> = (data) => {
     dispatch(createUser({ email: data.email, password: data.password }));
+    const options = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    };
+
+    createNewUser(options);
     toast.success('Successfully Signed Up.');
   };
   return (

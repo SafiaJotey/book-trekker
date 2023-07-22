@@ -1,10 +1,20 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 import TableCart from '@/components/ui/TableCart';
-import { useRecentBookQuery } from '@/redux/feature/books/bookApi';
+import { useGetWishlistQuery } from '@/redux/feature/books/bookApi';
+import { useGetUserQuery } from '@/redux/feature/user/userApi';
+
+import { useAppSelector } from '@/redux/hooks';
 import { IBook } from '@/types/globalTypes';
 
 export default function WishList() {
-  const { data } = useRecentBookQuery(undefined);
+  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { data } = useGetUserQuery(user?.email);
+
+  const { data: wishlist } = useGetWishlistQuery(data?.data?._id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
+
   return (
     <div>
       <AdditionalPageCover
@@ -28,8 +38,8 @@ export default function WishList() {
 
             <h5 className="font-bold w-2/12 text-center">Action</h5>
           </div>
-          {data?.data.map((book: IBook) => (
-            <TableCart key={book._id} book={book}></TableCart>
+          {wishlist?.data?.map((bookList: IBook) => (
+            <TableCart key={bookList._id} book={bookList?.book}></TableCart>
           ))}
         </div>{' '}
       </div>

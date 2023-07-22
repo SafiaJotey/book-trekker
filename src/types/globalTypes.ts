@@ -17,6 +17,7 @@ export interface IProps {
 }
 
 export interface IBook {
+  book: IBook;
   _id: string;
   title: string;
   author: string;
@@ -29,8 +30,39 @@ export interface IBook {
     comment: string;
   }[];
 }
+export interface ISingleBook {
+  book: IBook;
+  _id: string;
+  title: string;
+  author: string;
+  genre: string;
+  publication_date: string;
+  image: string;
+  reviews?: {
+    reviewer: string;
+    rating: number;
+    comment: string;
+  }[];
+}
+export interface IUser {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
 export interface IReview {
   reviewer?: string;
   rating?: number;
   comment?: string;
+}
+export interface IWishlist {
+  _id: string;
+  book?: ISingleBook;
+  user?: IUser;
+}
+export interface IReadinglist {
+  _id: string;
+  book?: ISingleBook;
+  user?: IUser;
 }
