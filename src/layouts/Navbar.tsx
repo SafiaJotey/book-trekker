@@ -2,6 +2,9 @@ import { auth } from '@/lib/firebase';
 import { setUser } from '@/redux/feature/user/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { signOut } from 'firebase/auth';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { BiBookReader } from 'react-icons/bi';
+import { TbUserHeart } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/Book_trekker_logo.png';
 
@@ -44,6 +47,23 @@ export default function Navbar() {
                   </Link>
                 </a>
               </li>
+              <li className=" mx-3">
+                <a>
+                  <Link className="text-white font-bold text-xl" to="/wishlist">
+                    <TbUserHeart></TbUserHeart>
+                  </Link>
+                </a>
+              </li>
+              <li className=" mx-3">
+                <a>
+                  <Link
+                    className="text-white font-bold text-xl"
+                    to="/readinglist"
+                  >
+                    <BiBookReader></BiBookReader>
+                  </Link>
+                </a>
+              </li>
               {!user.email && (
                 <li className=" mx-3">
                   <a>
@@ -56,7 +76,7 @@ export default function Navbar() {
               {!user.email && (
                 <li className=" mx-3">
                   <a>
-                    <Link className="text-white" to="/">
+                    <Link className="text-white" to="/signup">
                       Sign Up
                     </Link>
                   </a>
@@ -64,7 +84,9 @@ export default function Navbar() {
               )}
               {user.email && (
                 <li className=" mx-3 cursor-pointer " onClick={handleLogout}>
-                  <a className="text-white">Logout</a>
+                  <a className="text-white font-bold text-xl">
+                    <AiOutlineLogout></AiOutlineLogout>
+                  </a>
                 </li>
               )}
             </ul>

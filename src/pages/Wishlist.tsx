@@ -7,7 +7,7 @@ import { useAppSelector } from '@/redux/hooks';
 import { IBook } from '@/types/globalTypes';
 
 export default function WishList() {
-  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
 
   const { data: wishlist } = useGetWishlistQuery(data?.data?._id, {

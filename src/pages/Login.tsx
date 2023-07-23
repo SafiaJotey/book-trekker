@@ -6,17 +6,17 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { BiSolidHome } from 'react-icons/bi';
 import { IoMdLogIn } from 'react-icons/io';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../assets/images/auth.jpg';
 export default function Login() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.path || '/';
+
   const { register, handleSubmit } = useForm<IFormLoginInput>();
 
-  const { user, isLoading, isError, error } = useAppSelector(
-    (state) => state.user
-  );
+  const { user, isLoading } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-
-  const navigate = useNavigate();
 
   const onSubmit = (data: IFormLoginInput) => {
     dispatch(loginUser({ email: data.email, password: data.password }));
@@ -24,12 +24,12 @@ export default function Login() {
 
   useEffect(() => {
     if (user.email && !isLoading) {
-      navigate('/');
+      navigate(from);
       setTimeout(() => {
         toast.success('Successfully Logged in.');
       }, 1000);
     }
-  }, [user.email, isLoading]);
+  }, [user.email, isLoading, navigate, from]);
   return (
     <div className="container px-[250px]   h-screen  flex  justify-center items-center">
       <div className="shadow-md w-full flex  justify-center items-center rounded-lg  ">

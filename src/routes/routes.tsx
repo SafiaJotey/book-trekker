@@ -1,14 +1,16 @@
 import App from '@/App';
 import AddBook from '@/pages/AddBook';
 import AllBooks from '@/pages/AllBooks';
+import EditBook from '@/pages/EditBook';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
+import Reading from '@/pages/ReadingList';
 import SingleBook from '@/pages/SingleBook';
 import WishList from '@/pages/Wishlist';
-import Reading from '@/pages/ReadingList';
 import { createBrowserRouter } from 'react-router-dom';
 import Signup from '../pages/Signup';
+import PrivateRoute from './PrivateRoute';
 
 const routes = createBrowserRouter([
   {
@@ -25,19 +27,44 @@ const routes = createBrowserRouter([
       },
       {
         path: '/books/:id',
-        element: <SingleBook />,
+        element: (
+          <PrivateRoute>
+            <SingleBook />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/addBook',
-        element: <AddBook />,
+        element: (
+          <PrivateRoute>
+            <AddBook />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/books/edit/:id',
+        element: (
+          <PrivateRoute>
+            <EditBook />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/wishlist',
-        element: <WishList />,
+        element: (
+          <PrivateRoute>
+            <WishList />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/readingList',
-        element: <Reading/>,
+        element: (
+          <PrivateRoute>
+            {' '}
+            <Reading />
+          </PrivateRoute>
+        ),
       },
     ],
   },

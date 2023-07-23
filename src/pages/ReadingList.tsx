@@ -6,7 +6,7 @@ import { useAppSelector } from '@/redux/hooks';
 import { IBook } from '@/types/globalTypes';
 
 export default function ReadingList() {
-  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { user} = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
 
   const { data: readingList } = useGetReadinglistQuery(data?.data?._id, {

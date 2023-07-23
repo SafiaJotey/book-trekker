@@ -14,11 +14,12 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { BsEyeFill, BsFillHeartFill } from 'react-icons/bs';
 import { MdBookmarkAdded } from 'react-icons/md';
+import { TiTickOutline } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import Review from '../Review';
 
 export default function Card({ book }: { book: IBook }) {
-  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { user} = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
   const { data: wishlist } = useGetWishlistQuery(data?.data?._id, {
     refetchOnMountOrArgChange: true,
@@ -36,12 +37,16 @@ export default function Card({ book }: { book: IBook }) {
   const [addToReadingList] = useAddToReadingListMutation();
 
   const handleAddreadingList = () => {
-    const options = { userId: data?.data?._id, bookId: book?._id };
+    if (user.email) {
+      const options = { userId: data?.data?._id, bookId: book?._id };
 
-    addToReadingList(options);
-    handleRemoveFromWishList();
+      addToReadingList(options);
+      handleRemoveFromWishList();
 
-    toast.success('Added To Readinglist.');
+      toast.success('Added To Readinglist.');
+    } else {
+      toast.error('Please Login First');
+    }
   };
   const handleRemoveFromAddreadingList = () => {
     readinglist?.data?.forEach((list: IReadinglist) => {
@@ -52,12 +57,16 @@ export default function Card({ book }: { book: IBook }) {
     });
   };
   const handleAddWishList = () => {
-    const options = { userId: data?.data?._id, bookId: book?._id };
-    console.log(options);
+    if (user.email) {
+      const options = { userId: data?.data?._id, bookId: book?._id };
+      console.log(options);
 
-    addToWishlist(options);
-    handleRemoveFromAddreadingList();
-    toast.success('Added To Wishlist.');
+      addToWishlist(options);
+      handleRemoveFromAddreadingList();
+      toast.success('Added To Wishlist.');
+    } else {
+      toast.error('Please Login First');
+    }
   };
   const handleRemoveFromWishList = () => {
     wishlist?.data?.forEach((list: IWishlist) => {
@@ -72,9 +81,9 @@ export default function Card({ book }: { book: IBook }) {
   return (
     <div className="px-3 my-3  w-1/3 bg-white ">
       <div className="shadow-md rounded-md p-2">
-        <div className="h-{200px} ">
+        <div className="h-[400px]">
           {' '}
-          <img src={book?.image} />
+          <img src={book?.image} className="h-[400px]" />
         </div>
 
         <div className="h-36 ">
@@ -90,14 +99,14 @@ export default function Card({ book }: { book: IBook }) {
 
             <div className="flex justify-end items-center text-base ">
               <Link to={`/books/${book?._id}`}>
-                <BsEyeFill className="text-main text-xl " />
+                <BsEyeFill className="text-main text-xl mx-1 " />
               </Link>
               {wishlist?.data?.find(
                 (list: IWishlist) => list?.book?._id === book?._id
               ) && (
                 <BsFillHeartFill
                   onClick={handleRemoveFromWishList}
-                  className="text-lg mx-2 text-red-600"
+                  className="text-lg mx-1 text-red-600"
                 ></BsFillHeartFill>
               )}
               {!wishlist?.data?.find(
@@ -105,7 +114,7 @@ export default function Card({ book }: { book: IBook }) {
               ) && (
                 <AiOutlineHeart
                   onClick={handleAddWishList}
-                  className="text-xl mx-2 text-main"
+                  className="text-xl mx-1 text-main"
                 ></AiOutlineHeart>
               )}
               {readinglist?.data?.find(
@@ -113,7 +122,7 @@ export default function Card({ book }: { book: IBook }) {
               ) && (
                 <MdBookmarkAdded
                   onClick={handleRemoveFromAddreadingList}
-                  className="text-lg mx-2 text-green-600"
+                  className="text-lg mx-1 text-green-600"
                 ></MdBookmarkAdded>
               )}
               {!readinglist?.data?.find(
@@ -121,9 +130,10 @@ export default function Card({ book }: { book: IBook }) {
               ) && (
                 <BiBookAdd
                   onClick={handleAddreadingList}
-                  className="text-xl mx-2 text-main"
+                  className="text-xl mx-1 text-main"
                 ></BiBookAdd>
               )}
+              <TiTickOutline className="text-xl mx-1 text-main"></TiTickOutline>
             </div>
           </div>
         </div>

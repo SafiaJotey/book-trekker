@@ -14,10 +14,9 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { BsFillHeartFill } from 'react-icons/bs';
 import { MdBookmarkAdded } from 'react-icons/md';
+import { TiTickOutline } from 'react-icons/ti';
 export default function TableCart({ book }: { book: IBook }) {
-  const [addToWishlist] = useAddToWishlistMutation();
-
-  const { user, isLoading } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
   const { data: wishlist } = useGetWishlistQuery(data?.data?._id, {
     refetchOnMountOrArgChange: true,
@@ -28,9 +27,12 @@ export default function TableCart({ book }: { book: IBook }) {
     pollingInterval: 30000,
   });
   const [removeFromWishlist] = useRemoveFromWishlistMutation();
+
+  const [addToWishlist] = useAddToWishlistMutation();
   const [removeFromReadingList] = useRemoveFromReadingListMutation();
 
   const [addToReadingList] = useAddToReadingListMutation();
+
   const handleAddreadingList = () => {
     const options = { userId: data?.data?._id, bookId: book?._id };
 
@@ -80,7 +82,7 @@ export default function TableCart({ book }: { book: IBook }) {
         ) && (
           <BsFillHeartFill
             onClick={handleRemoveFromWishList}
-            className="text-lg mx-2 text-red-600"
+            className="text-lg mx-1 text-red-600"
           ></BsFillHeartFill>
         )}
         {!wishlist?.data?.find(
@@ -88,7 +90,7 @@ export default function TableCart({ book }: { book: IBook }) {
         ) && (
           <AiOutlineHeart
             onClick={handleAddWishList}
-            className="text-xl mx-2"
+            className="text-xl mx-1"
           ></AiOutlineHeart>
         )}
         {readinglist?.data?.find(
@@ -96,7 +98,7 @@ export default function TableCart({ book }: { book: IBook }) {
         ) && (
           <MdBookmarkAdded
             onClick={handleRemoveFromAddreadingList}
-            className="text-lg mx-2 text-green-600"
+            className="text-lg mx-1 text-green-600"
           ></MdBookmarkAdded>
         )}
         {!readinglist?.data?.find(
@@ -104,9 +106,10 @@ export default function TableCart({ book }: { book: IBook }) {
         ) && (
           <BiBookAdd
             onClick={handleAddreadingList}
-            className="text-xl mx-2 text-main"
+            className="text-xl mx-1 text-main"
           ></BiBookAdd>
         )}
+        <TiTickOutline className="text-xl mx-1 text-main"></TiTickOutline>
       </div>
     </div>
   );

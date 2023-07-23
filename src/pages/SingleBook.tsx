@@ -2,18 +2,47 @@ import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 import { AiOutlineHeart } from 'react-icons/ai';
 // import { BsFillHeartFill } from 'react-icons/bs';
 import Review from '@/components/Review';
-import { useSingleBookQuery } from '@/redux/feature/books/bookApi';
+import {
+  useDeleteBookMutation,
+  useSingleBookQuery,
+} from '@/redux/feature/books/bookApi';
+import { useGetUserQuery } from '@/redux/feature/user/userApi';
+import { useAppSelector } from '@/redux/hooks';
+import { toast } from 'react-hot-toast';
 import { BiSolidEditAlt } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
 import { TiTick } from 'react-icons/ti';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 export default function SingleBook() {
   const { id } = useParams();
   const { data: book } = useSingleBookQuery(id);
+  const { user } = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
 
+  const { data: currentUser } = useGetUserQuery(user?.email);
+  const [deleteBook] = useDeleteBookMutation();
+  const handleEditRoute = () => {
+    if (currentUser?.data?._id === book?.data?.user) {
+      navigate(`/books/edit/${id}`);
+    } else {
+      toast.error(' Forbidden! You can only edit book that have added');
+    }
+  };
+  const handleDelete = () => {
+    if (currentUser?.data?._id === book?.data?.user) {
+      deleteBook(id);
+      toast.error('Book Deleted');
+      navigate('/allBooks');
+    } else {
+      toast.error(' Forbidden! You can only Delete book that have added');
+    }
+  };
   return (
     <div className=" mb-[50px]">
-      <AdditionalPageCover title="Books are a uniquely portable magic"  author='Stephen King, On Writing: A Memoir of the Craft'/>
+      <AdditionalPageCover
+        title="Books are a uniquely portable magic"
+        author="Stephen King, On Writing: A Memoir of the Craft"
+      />
 
       <div className="container my-[100px] px-[100px]">
         <div className="w-full border rounded-md flex p-2 ">
@@ -52,24 +81,30 @@ export default function SingleBook() {
               <TiTick className="text-xl"></TiTick>
               <p className="text-lg font-semibold px-3 my-1">
                 {' '}
-                publication Data:&nbsp; &nbsp; {book?.data?.genre}
+                Genre:&nbsp; &nbsp; {book?.data?.genre}
               </p>
             </div>
             <div className="flex justify-start items-center ">
               <TiTick className="text-xl"></TiTick>
               <p className="text-lg font-semibold px-3 my-1">
                 {' '}
-                publication Data:&nbsp; &nbsp; {book?.data?.publication_date}
+                Publication Data:&nbsp; &nbsp; {book?.data?.publication_date}
               </p>
             </div>
             <div className="flex justify-start mt-5">
               <button className="bg-main text-white border border-main w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
                 <BiSolidEditAlt className="text-lg font-bold"></BiSolidEditAlt>
-                <span className="mx-2"> Edit</span>{' '}
+                <span className="mx-2" onClick={handleEditRoute}>
+                  {' '}
+                  Edit
+                </span>{' '}
               </button>
               <button className="bg-red-600 text-white border border-red-600 w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
                 <MdDelete className="text-lg font-bold"></MdDelete>
-                <span className="mx-2"> Delete</span>{' '}
+                <span className="mx-2" onClick={handleDelete}>
+                  {' '}
+                  Delete
+                </span>{' '}
               </button>
             </div>
           </div>

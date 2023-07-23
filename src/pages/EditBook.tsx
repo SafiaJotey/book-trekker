@@ -1,22 +1,47 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
-import { useAddBookMutation } from '@/redux/feature/books/bookApi';
+import {
+  useSingleBookQuery,
+  useUpdateBookMutation,
+} from '@/redux/feature/books/bookApi';
 import { useGetUserQuery } from '@/redux/feature/user/userApi';
 import { useAppSelector } from '@/redux/hooks';
 import { IAddBookInput } from '@/types/globalTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import book from '../assets/images/addBook.png';
-export default function AddBook() {
-  const { register, handleSubmit, reset } = useForm<IAddBookInput>();
-  const [addBook] = useAddBookMutation();
+import { useParams } from 'react-router-dom';
+import editbookImage from '../assets/images/addBook.png';
+export default function EditBook() {
+  const { id } = useParams();
+  const { data: book } = useSingleBookQuery(id);
   const { user } = useAppSelector((state) => state.user);
+
   const { data: currentUser } = useGetUserQuery(user?.email);
-  const onSubmit: SubmitHandler<IAddBookInput> = (data) => {
-    data.user = currentUser.data?._id;
-    console.log(data);
-    addBook(data);
-    toast.success(' Book Added ');
-    reset();
+  const [updateBook] = useUpdateBookMutation();
+  const { register, handleSubmit } = useForm<IAddBookInput>({
+    defaultValues: {
+      title: book?.data?.title,
+      author: book?.data?.author,
+      genre: book?.data?.genre,
+      publication_date: book?.data?.publication_date,
+      image: book?.data?.image,
+    },
+  });
+
+  const onSubmit: SubmitHandler<Partial<IAddBookInput>> = (data) => {
+    if (currentUser?.data?._id === book?.data?.user) {
+      data.user = currentUser.data?._id;
+
+      const options = {
+        data: data,
+        id: book?.data?._id,
+      };
+
+      updateBook(options);
+      toast.success(' Book updated ');
+      
+    } else {
+      toast.error(' Forbidden! You can only edit book that have added');
+    }
   };
   return (
     <div className=" ">
@@ -29,7 +54,7 @@ export default function AddBook() {
           <div className="my-[20px]">
             {' '}
             <h6 className="text-lg font-semibold  ">By The Authors</h6>
-            <h3 className="text-4xl font-bold ">Add A New Book</h3>
+            <h3 className="text-4xl font-bold ">Edit The Book</h3>
           </div>{' '}
           <div className="flex justify-between items-center">
             <div className="bg-white w-1/2 p-[20px] rounded-md">
@@ -50,7 +75,6 @@ export default function AddBook() {
                   {...register('title', {
                     required: true,
                     maxLength: 100,
-                    pattern: /^[A-Za-z]+$/i,
                   })}
                 />
                 <br />
@@ -61,7 +85,6 @@ export default function AddBook() {
                   {...register('author', {
                     required: true,
                     maxLength: 100,
-                    pattern: /^[A-Za-z]+$/i,
                   })}
                 />
                 <br />
@@ -72,7 +95,6 @@ export default function AddBook() {
                   {...register('genre', {
                     required: true,
                     maxLength: 100,
-                    pattern: /^[A-Za-z]+$/i,
                   })}
                 />
                 <br />
@@ -88,14 +110,17 @@ export default function AddBook() {
 
                 <div className="flex justify-center">
                   {' '}
-                  <button className="bg-green-600 text-white border border-green-600 mt-8 mb-3 w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
-                    <span className="mx-2"> Add Book</span>{' '}
+                  <button
+                    className="bg-green-600 text-white border border-green-600 mt-8 mb-3 w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
+                    type="submit"
+                  >
+                    <span className="mx-2">update Book</span>{' '}
                   </button>
                 </div>
               </form>
             </div>
             <div>
-              <img src={book} />
+              <img src={editbookImage} />
             </div>
           </div>
         </div>{' '}

@@ -4,13 +4,41 @@ const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => '/books',
+      providesTags: ['postBook', 'updateBook', 'deleteBook'],
     }),
     recentBook: builder.query({
       query: () => `/books/recent`,
+      providesTags: ['postBook', 'deleteBook'],
     }),
     singleBook: builder.query({
       query: (id) => `/books/${id}`,
+      providesTags: ['updateBook', 'deleteBook'],
     }),
+    addBook: builder.mutation({
+      query: (data) => ({
+        url: `/books/add-book`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['postBook'],
+    }),
+    updateBook: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/books/edit/${id}`,
+        method: 'PATCH',
+        body: data,
+      }),
+      invalidatesTags: ['updateBook'],
+    }),
+    deleteBook: builder.mutation({
+      query: (id) => ({
+        url: `/books/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['deleteBook'],
+    }),
+
+    //wishlist
     getWishlist: builder.query({
       query: (id) => `/wishlist/${id}`,
       providesTags: ['delete', 'post'],
@@ -78,4 +106,7 @@ export const {
   useGetReadinglistQuery,
   useAddToReadingListMutation,
   useRemoveFromReadingListMutation,
+  useAddBookMutation,
+  useUpdateBookMutation,
+  useDeleteBookMutation,
 } = productApi;
