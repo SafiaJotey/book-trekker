@@ -2,8 +2,13 @@ import { IBook } from '@/types/globalTypes';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import ratingCount from '../helper/ratingCount';
 
-export default function Review({ book }: { book: IBook }) {
-  const finalrating = ratingCount(book);
+export default function Review({ book }: { book: IBook |number}) {
+ let finalrating
+ if(typeof(book)==='number'){
+  finalrating=book
+ }else{
+  finalrating = ratingCount(book);
+ }
 
   const maxRating = 5;
   const stars = [];

@@ -52,6 +52,7 @@ export interface IUser {
 }
 
 export interface IReview {
+  _id?:string
   reviewer?: string;
   rating?: number;
   comment?: string;
@@ -66,6 +67,17 @@ export interface IReadinglist {
   book?: ISingleBook;
   user?: IUser;
 }
+export interface ICompletelist {
+  _id: string;
+  book?: ISingleBook;
+  user?: IUser;
+}
+export type AddReviewModalProps = {
+  open: boolean;
+  onClose: () => void;
+  onAddReview: (data: IReview) => void;
+};
+
 export interface IAddBookInput {
   title: string;
   author: string;

@@ -12,6 +12,10 @@ export const api = createApi({
     'readingDelete',
     'updateBook',
     'deleteBook',
+    'postreview',
+    'updateComplete',
+    'completedgDelete',
+    'completedPost',
   ],
   endpoints: () => ({}),
 });

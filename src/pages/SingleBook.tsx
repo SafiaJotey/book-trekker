@@ -1,13 +1,20 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { MdRateReview } from 'react-icons/md';
 // import { BsFillHeartFill } from 'react-icons/bs';
 import Review from '@/components/Review';
+import AddReviewModal from '@/components/ui/AddModalReview';
+import ReviewCard from '@/components/ui/ReviewCard';
 import {
+  useAddReviewMutation,
   useDeleteBookMutation,
+  useGetReviewsQuery,
   useSingleBookQuery,
 } from '@/redux/feature/books/bookApi';
 import { useGetUserQuery } from '@/redux/feature/user/userApi';
 import { useAppSelector } from '@/redux/hooks';
+import { IReview } from '@/types/globalTypes';
+import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { BiSolidEditAlt } from 'react-icons/bi';
 import { MdDelete } from 'react-icons/md';
@@ -18,11 +25,32 @@ export default function SingleBook() {
   const { data: book } = useSingleBookQuery(id);
   const { user } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+  const { data: reviews } = useGetReviewsQuery(id);
 
   const { data: currentUser } = useGetUserQuery(user?.email);
+  const [addReview] = useAddReviewMutation();
   const [deleteBook] = useDeleteBookMutation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleAddReview = (data: IReview) => {
+    const options = {
+      data: data,
+      id: id,
+    };
+    addReview(options);
+    toast.success('Review Added. Thanks for your feedback!');
+  };
   const handleEditRoute = () => {
     if (currentUser?.data?._id === book?.data?.user) {
+      toast.success('Book Edited');
       navigate(`/books/edit/${id}`);
     } else {
       toast.error(' Forbidden! You can only edit book that have added');
@@ -31,7 +59,7 @@ export default function SingleBook() {
   const handleDelete = () => {
     if (currentUser?.data?._id === book?.data?.user) {
       deleteBook(id);
-      toast.error('Book Deleted');
+      toast.success('Book Deleted');
       navigate('/allBooks');
     } else {
       toast.error(' Forbidden! You can only Delete book that have added');
@@ -92,6 +120,18 @@ export default function SingleBook() {
               </p>
             </div>
             <div className="flex justify-start mt-5">
+              <button className="bg-review text-white border border-review w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
+                <MdRateReview className="text-lg font-bold "></MdRateReview>
+                <span className="mx-2" onClick={handleOpenModal}>
+                  {' '}
+                  Add Review
+                </span>{' '}
+              </button>
+              <AddReviewModal
+                open={isModalOpen}
+                onClose={handleCloseModal}
+                onAddReview={handleAddReview}
+              />
               <button className="bg-main text-white border border-main w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
                 <BiSolidEditAlt className="text-lg font-bold"></BiSolidEditAlt>
                 <span className="mx-2" onClick={handleEditRoute}>
@@ -107,6 +147,22 @@ export default function SingleBook() {
                 </span>{' '}
               </button>
             </div>
+          </div>
+        </div>
+
+        <div>
+          <h6 className="text-main font-bold mt-10 mb-3 text-2xl">Reviews</h6>
+          <div className=" my-4">
+            {reviews?.data?.reviews.map((review: IReview) => {
+              return (
+                <div className="bg-white rounded-lg shadow-md p-4 my-1">
+                  <ReviewCard
+                    key={review?._id}
+                    reviewData={review}
+                  ></ReviewCard>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

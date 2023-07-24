@@ -14,6 +14,10 @@ const productApi = api.injectEndpoints({
       query: (id) => `/books/${id}`,
       providesTags: ['updateBook', 'deleteBook'],
     }),
+    getReviews: builder.query({
+      query: (id) => `/books/${id}`,
+      providesTags: ['postreview'],
+    }),
     addBook: builder.mutation({
       query: (data) => ({
         url: `/books/add-book`,
@@ -21,6 +25,14 @@ const productApi = api.injectEndpoints({
         body: data,
       }),
       invalidatesTags: ['postBook'],
+    }),
+    addReview: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/books/${id}`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['postreview'],
     }),
     updateBook: builder.mutation({
       query: ({ data, id }) => ({
@@ -30,6 +42,7 @@ const productApi = api.injectEndpoints({
       }),
       invalidatesTags: ['updateBook'],
     }),
+
     deleteBook: builder.mutation({
       query: (id) => ({
         url: `/books/${id}`,
@@ -80,6 +93,27 @@ const productApi = api.injectEndpoints({
       invalidatesTags: ['readingDelete'],
     }),
 
+    //completed
+    getCompleteList: builder.query({
+      query: (id) => `/completed/${id}`,
+      providesTags: ['completedgDelete', 'completedPost'],
+    }),
+    addToCompletedList: builder.mutation({
+      query: (data) => ({
+        url: `/completed/add-to-completedlist`,
+        method: 'POST',
+        body: data,
+      }),
+      invalidatesTags: ['completedPost'],
+    }),
+    removeFromCompletedList: builder.mutation({
+      query: (id) => ({
+        url: `/completed/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['completedgDelete'],
+    }),
+
     postComment: builder.mutation({
       query: ({ id, data }) => ({
         url: `/comment/${id}`,
@@ -109,4 +143,9 @@ export const {
   useAddBookMutation,
   useUpdateBookMutation,
   useDeleteBookMutation,
+  useAddReviewMutation,
+  useGetReviewsQuery,
+useGetCompleteListQuery,
+useAddToCompletedListMutation,
+useRemoveFromCompletedListMutation
 } = productApi;

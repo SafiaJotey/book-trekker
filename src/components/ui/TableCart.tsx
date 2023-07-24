@@ -1,20 +1,29 @@
 import {
+  useAddToCompletedListMutation,
   useAddToReadingListMutation,
   useAddToWishlistMutation,
+  useGetCompleteListQuery,
   useGetReadinglistQuery,
   useGetWishlistQuery,
+  useRemoveFromCompletedListMutation,
   useRemoveFromReadingListMutation,
   useRemoveFromWishlistMutation,
 } from '@/redux/feature/books/bookApi';
 import { useGetUserQuery } from '@/redux/feature/user/userApi';
 import { useAppSelector } from '@/redux/hooks';
-import { IBook, IReadinglist, IWishlist } from '@/types/globalTypes';
+import {
+  IBook,
+  ICompletelist,
+  IReadinglist,
+  IWishlist,
+} from '@/types/globalTypes';
 import { toast } from 'react-hot-toast';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { BsFillHeartFill } from 'react-icons/bs';
 import { MdBookmarkAdded } from 'react-icons/md';
-import { TiTickOutline } from 'react-icons/ti';
+
+import { TiTick, TiTickOutline } from 'react-icons/ti';
 export default function TableCart({ book }: { book: IBook }) {
   const { user } = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
@@ -32,12 +41,21 @@ export default function TableCart({ book }: { book: IBook }) {
   const [removeFromReadingList] = useRemoveFromReadingListMutation();
 
   const [addToReadingList] = useAddToReadingListMutation();
+  const { data: completedlist } = useGetCompleteListQuery(data?.data?._id, {
+    refetchOnMountOrArgChange: true,
+    pollingInterval: 30000,
+  });
+
+  const [removeFromCompletedList] = useRemoveFromCompletedListMutation();
+
+  const [addToCompletedList] = useAddToCompletedListMutation();
 
   const handleAddreadingList = () => {
     const options = { userId: data?.data?._id, bookId: book?._id };
 
     addToReadingList(options);
     handleRemoveFromWishList();
+    handleRemoveFCompleted();
 
     toast.success('Added To Readinglist.');
   };
@@ -55,6 +73,7 @@ export default function TableCart({ book }: { book: IBook }) {
 
     addToWishlist(options);
     handleRemoveFromAddreadingList();
+    handleRemoveFCompleted();
     toast.success('Added To Wishlist.');
   };
   const handleRemoveFromWishList = () => {
@@ -66,6 +85,29 @@ export default function TableCart({ book }: { book: IBook }) {
       }
     });
   };
+
+  const handleCompleted = () => {
+    if (user.email) {
+      const options = { userId: data?.data?._id, bookId: book?._id };
+
+      addToCompletedList(options);
+      handleRemoveFromAddreadingList();
+      handleRemoveFromWishList();
+      toast.success('Completed.');
+    } else {
+      toast.error('Please Login First');
+    }
+  };
+  const handleRemoveFCompleted = () => {
+    completedlist?.data?.forEach((list: ICompletelist) => {
+      if (list?.book?._id === book?._id) {
+        removeFromCompletedList(list?._id);
+
+        toast.error('Removed From CompletedList');
+      }
+    });
+  };
+
   return (
     <div className="flex justify-center items-center border p-3 my-1 rounded-md">
       <div className="w-2/12 ">
@@ -109,7 +151,22 @@ export default function TableCart({ book }: { book: IBook }) {
             className="text-xl mx-1 text-main"
           ></BiBookAdd>
         )}
-        <TiTickOutline className="text-xl mx-1 text-main"></TiTickOutline>
+        {completedlist?.data?.find(
+          (list: ICompletelist) => list?.book?._id === book?._id
+        ) && (
+          <TiTick
+            onClick={handleRemoveFCompleted}
+            className="text-xl mx-1 text-review"
+          ></TiTick>
+        )}
+        {!completedlist?.data?.find(
+          (list: ICompletelist) => list?.book?._id === book?._id
+        ) && (
+          <TiTickOutline
+            onClick={handleCompleted}
+            className="text-xl mx-1 text-review"
+          ></TiTickOutline>
+        )}
       </div>
     </div>
   );

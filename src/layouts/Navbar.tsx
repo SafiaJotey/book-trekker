@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { BiBookReader } from 'react-icons/bi';
 import { TbUserHeart } from 'react-icons/tb';
+import { TiTick } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/Book_trekker_logo.png';
 
@@ -61,6 +62,16 @@ export default function Navbar() {
                     to="/readinglist"
                   >
                     <BiBookReader></BiBookReader>
+                  </Link>
+                </a>
+              </li>
+              <li className=" mx-3">
+                <a>
+                  <Link
+                    className="text-white font-bold text-xl"
+                    to="/completelist"
+                  >
+                    <TiTick></TiTick>
                   </Link>
                 </a>
               </li>

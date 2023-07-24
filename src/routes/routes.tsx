@@ -1,6 +1,7 @@
 import App from '@/App';
 import AddBook from '@/pages/AddBook';
 import AllBooks from '@/pages/AllBooks';
+import CompleteList from '@/pages/CompleteList';
 import EditBook from '@/pages/EditBook';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
@@ -63,6 +64,15 @@ const routes = createBrowserRouter([
           <PrivateRoute>
             {' '}
             <Reading />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/completelist',
+        element: (
+          <PrivateRoute>
+            {' '}
+            <CompleteList />
           </PrivateRoute>
         ),
       },
