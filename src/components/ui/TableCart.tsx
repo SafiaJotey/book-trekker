@@ -109,16 +109,16 @@ export default function TableCart({ book }: { book: IBook }) {
   };
 
   return (
-    <div className="flex justify-center items-center border p-3 my-1 rounded-md">
-      <div className="w-2/12 ">
+    <div className="flex justify-center items-center border md:p-3 my-1 rounded-md">
+      <div className="md:w-2/12 ">
         {' '}
-        <img src={book?.image} alt="" className="w-10" />
+        <img src={book?.image} alt="" className="md:w-10" />
       </div>{' '}
-      <h6 className="w-2/12 ">{book?.title}</h6>
-      <p className="w-2/12 ">{book?.author}</p>
-      <p className="w-2/12 ">{book?.genre}</p>
-      <p className="w-2/12">{book?.publication_date}</p>
-      <div className="w-2/12 p-3 flex justify-center items-center cursor-pointer">
+      <h6 className="md:w-2/12 ">{book?.title}</h6>
+      <p className="md:w-2/12 ">{book?.author}</p>
+      <p className="md:w-2/12 ">{book?.genre}</p>
+      <p className="md:w-2/12">{book?.publication_date}</p>
+      <div className="md:w-2/12 p-3 flex justify-center items-center cursor-pointer">
         {wishlist?.data?.find(
           (list: IWishlist) => list?.book?._id === book?._id
         ) && (

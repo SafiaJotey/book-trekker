@@ -1,12 +1,12 @@
-import { AiOutlineHeart } from 'react-icons/ai';
-// import { BsFillHeartFill } from 'react-icons/bs';
+
+import { BsEyeFill  } from 'react-icons/bs';
 import { IBook } from '@/types/globalTypes';
 import { Link } from 'react-router-dom';
 import Review from '../Review';
 export default function MiniCards({ book }: { book: IBook }) {
   return (
     <div>
-      <Link to={`/books/${book?._id}`}>
+      
         <div className="flex justify-center items-center border p-2 ">
           <div className="w-4/12">
             <img src={book.image} />
@@ -17,11 +17,13 @@ export default function MiniCards({ book }: { book: IBook }) {
             <div className="flex justify-between">
               {' '}
               <Review key={book?._id} book={book} />
-              <AiOutlineHeart></AiOutlineHeart>
+             
+         
+              <Link to={`/books/${book?._id}`}>  <BsEyeFill className="text-main text-xl mx-1 " /></Link>
             </div>
           </div>
         </div>
-      </Link>
+   
     </div>
   );
 }

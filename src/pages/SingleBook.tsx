@@ -72,11 +72,11 @@ export default function SingleBook() {
         author="Stephen King, On Writing: A Memoir of the Craft"
       />
 
-      <div className="container my-[100px] px-[100px]">
-        <div className="w-full border rounded-md flex p-2 ">
-          <img src={book?.data?.image} className="w-1/3" />
+      <div className="container my-[100px] md:px-[100px]">
+        <div className="w-full border rounded-md flex flex-col md:flex-row p-2 ">
+          <img src={book?.data?.image} className="md:w-1/3" />
 
-          <div className="w-2/3 p-5 ">
+          <div className="md:w-2/3 p-5 ">
             <div className="border-b-2 pb-3">
               {' '}
               <p className="text-xl ">{book?.data?.author}</p>
@@ -89,14 +89,19 @@ export default function SingleBook() {
                 <AiOutlineHeart size={25}></AiOutlineHeart>
               </div>
             </div>
-            <p className="p-2">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. At,
-              quaerat cupiditate. Recusandae, molestias, consequuntur sequi
-              explicabo quibusdam voluptatem dolore dolorum, officiis quo hic
-              pariatur temporibus nobis delectus facilis ea fugiat qui earum
-              impedit quaerat odit deserunt assumenda ipsa veniam? Molestiae
-              itaque blanditiis veniam fugiat atque facilis culpa delectus
-              aliquam laboriosam
+            <p className="p-2 text-justify">
+              In the enchanting world of "Arcane Chronicles," a realm where
+              magic and mystery intertwine, embark on an epic journey with young
+              sorcerer, Aria. Gifted with a long-lost power, she must navigate a
+              treacherous quest to restore balance to the warring factions of
+              light and darkness. As ancient prophecies unfold, Aria's fate
+              becomes entwined with a band of unlikely allies, facing perilous
+              trials and unearthing long-buried secrets. With every page turned,
+              discover the spellbinding depths of friendship, sacrifice, and the
+              unyielding strength of the human spirit. "Arcane Chronicles" will
+              ignite your imagination and leave you breathless as you delve into
+              a world where destiny lies in the hands of a young heroine, whose
+              courage will shape the very fabric of their extraordinary realm.
             </p>
             <div className="flex justify-start items-center ">
               <TiTick className="text-xl"></TiTick>
@@ -119,32 +124,32 @@ export default function SingleBook() {
                 Publication Data:&nbsp; &nbsp; {book?.data?.publication_date}
               </p>
             </div>
-            <div className="flex justify-start mt-5">
-              <button className="bg-review text-white border border-review w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-center justify-start mt-5">
+              <button
+                onClick={handleOpenModal}
+                className="bg-review text-white border border-review md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
+              >
                 <MdRateReview className="text-lg font-bold "></MdRateReview>
-                <span className="mx-2" onClick={handleOpenModal}>
-                  {' '}
-                  Add Review
-                </span>{' '}
+                <span className="mx-2"> Add Review</span>{' '}
               </button>
               <AddReviewModal
                 open={isModalOpen}
                 onClose={handleCloseModal}
                 onAddReview={handleAddReview}
               />
-              <button className="bg-main text-white border border-main w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
+              <button
+                onClick={handleEditRoute}
+                className="bg-main text-white border border-main md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
+              >
                 <BiSolidEditAlt className="text-lg font-bold"></BiSolidEditAlt>
-                <span className="mx-2" onClick={handleEditRoute}>
-                  {' '}
-                  Edit
-                </span>{' '}
+                <span className="mx-2"> Edit</span>{' '}
               </button>
-              <button className="bg-red-600 text-white border border-red-600 w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
+              <button
+                onClick={handleDelete}
+                className="bg-red-600 text-white border border-red-600 md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
+              >
                 <MdDelete className="text-lg font-bold"></MdDelete>
-                <span className="mx-2" onClick={handleDelete}>
-                  {' '}
-                  Delete
-                </span>{' '}
+                <span className="mx-2"> Delete</span>{' '}
               </button>
             </div>
           </div>

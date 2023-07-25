@@ -6,6 +6,7 @@ import { IAddBookInput } from '@/types/globalTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import book from '../assets/images/addBook.png';
+import Header from '@/components/ui/Header';
 export default function AddBook() {
   const { register, handleSubmit, reset } = useForm<IAddBookInput>();
   const [addBook] = useAddBookMutation();
@@ -22,17 +23,17 @@ export default function AddBook() {
     <div className=" ">
       <AdditionalPageCover
         title="Reading is an active, imaginative act; it takes work."
-        author="―Khaled Hosseinis"
+        author="Khaled Hosseinis"
       />
-      <div className="container py-[10px] px-[80px] my-5">
+      <div className="container py-[10px] md:px-[80px] my-5">
         <div className="flex  flex-col ">
           <div className="my-[20px]">
             {' '}
-            <h6 className="text-lg font-semibold  ">By The Authors</h6>
-            <h3 className="text-4xl font-bold ">Add A New Book</h3>
+            <Header header="Add A New Book" subHeader="By The Authors"></Header>
+            
           </div>{' '}
-          <div className="flex justify-between items-center">
-            <div className="bg-white w-1/2 p-[20px] rounded-md">
+          <div className="flex flex-col justify-center items-center md:justify-between md:items-center">
+            <div className="bg-white md:w-1/2 p-[20px] rounded-md">
               <form onSubmit={handleSubmit(onSubmit)}>
                 <label>book's Image *</label>
                 <input
@@ -88,7 +89,7 @@ export default function AddBook() {
 
                 <div className="flex justify-center">
                   {' '}
-                  <button className="bg-green-600 text-white border border-green-600 mt-8 mb-3 w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
+                  <button className="bg-green-600 text-white border border-green-600 mt-8 mb-3 md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
                     <span className="mx-2"> Add Book</span>{' '}
                   </button>
                 </div>

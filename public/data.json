@@ -1,401 +1,401 @@
- [
-    {
-      
-      "title": "To Kill a Mockingbird",
-      "author": "Harper Lee",
-      "genre": "Fiction",
-      "publication_date": "July 11, 1960",
-      "image": "https://i.ibb.co/BZtGTsp/20.png",
-      "reviews": [
-        {
-          "reviewer": "JohnDoe",
-          "rating": 5,
-          "comment": "A timeless classic!"
-        },
-        {
-          "reviewer": "JaneSmith",
-          "rating": 4,
-          "comment": "A must-read for everyone."
-        }
-      ]
-    },
-    {
-    
-      "title": "1984",
-      "author": "George Orwell",
-      "genre": "Adventure",
-      "publication_date": "June 8, 1949",
-      "image": "https://i.ibb.co/5KqXSNG/19.png",
-      "reviews": [
-        {
-          "reviewer": "SarahJohnson",
-          "rating": 5,
-          "comment": "A chilling dystopian masterpiece."
-        },
-        {
-          "reviewer": "DavidBrown",
-          "rating": 3,
-          "comment": "Thought-provoking but depressing."
-        }
-      ]
-    },
-    {
-    
-      "title": "The Great Gatsby",
-      "author": "F. Scott Fitzgerald",
-      "genre": "Classic Literature",
-      "publication_date": "April 10, 1925",
-      "image": "https://i.ibb.co/r5PtFbV/18.png",
-      "reviews": [
-        {
-          "reviewer": "EmilyTaylor",
-          "rating": 4,
-          "comment": "Beautifully written with memorable characters."
-        },
-        {
-          "reviewer": "MichaelClark",
-          "rating": 2,
-          "comment": "Overrated and pretentious."
-        }
-      ]
-    },
-    {
-    
-      "title": "Pride and Prejudice",
-      "author": "Jane Austen",
-      "genre": "Fiction",
-      "publication_date": "January 28, 1813",
-      "image": "https://i.ibb.co/NZXTbD5/7.png",
-      "reviews": [
-        {
-          "reviewer": "JenniferAdams",
-          "rating": 5,
-          "comment": "A delightful love story!"
-        },
-        {
-          "reviewer": "RobertSmith",
-          "rating": 4,
-          "comment": "Jane Austen's best work."
-        }
-      ]
-    },
-    {
-     
-      "title": "The Hobbit",
-      "author": "J.R.R. Tolkien",
-      "genre": "Fantasy",
-      "publication_date": "September 21, 1937",
-      "image": "https://i.ibb.co/mFk0vm5/16.png",
-      "reviews": [
-        {
-          "reviewer": "DanielWhite",
-          "rating": 5,
-          "comment": "An enchanting adventure!"
-        },
-        {
-          "reviewer": "AmyJohnson",
-          "rating": 4,
-          "comment": "A must-read for fantasy fans."
-        }
-      ]
-    },
-    {
-      "title": "The Catcher in the Rye",
-      "author": "J.D. Salinger",
-      "genre": "Mystery",
-      "publication_date": "July 16, 1951",
-      "image": "https://i.ibb.co/pZQQdMV/15.png",
-      "reviews": [
-        {
-          "reviewer": "EmmaWilson",
-          "rating": 5,
-          "comment": "A classic coming-of-age novel."
-        },
-        {
-          "reviewer": "JamesThompson",
-          "rating": 3,
-          "comment": "A bit overrated in my opinion."
-        }
-      ]
-    },
-    {
-     
-      "title": "Moby-Dick",
-      "author": "Herman Melville",
-      "genre": "Dystopian",
-      "publication_date": "October 18, 1851",
-      "image": "https://i.ibb.co/YLPx1Dj/14.png",
-      "reviews": [
-        {
-          "reviewer": "OliviaMartin",
-          "rating": 4,
-          "comment": "An epic tale of obsession and adventure."
-        },
-        {
-          "reviewer": "LiamDavis",
-          "rating": 5,
-          "comment": "Melville's masterpiece."
-        }
-      ]
-    },
-    {
-    
-      "title": "Jane Eyre",
-      "author": "Charlotte Bronte",
-      "genre": "Fiction",
-      "publication_date": "October 16, 1847",
-      "image": "https://i.ibb.co/d40Vmjr/13.png",
-      "reviews": [
-        {
-          "reviewer": "SophiaJohnson",
-          "rating": 5,
-          "comment": "A captivating and empowering story."
-        },
-        {
-          "reviewer": "NoahAnderson",
-          "rating": 4,
-          "comment": "Bronte's writing is exceptional."
-        }
-      ]
-    },
-    {
-     
-      "title": "The Lord of the Rings",
-      "author": "J.R.R. Tolkien",
-      "genre": "Fantasy",
-      "publication_date": "July 29, 1954",
-      "image": "https://i.ibb.co/hCMFM0D/12.png",
-      "reviews": [
-        {
-          "reviewer": "AvaWilson",
-          "rating": 5,
-          "comment": "An epic fantasy that will transport you."
-        },
-        {
-          "reviewer": "JacobThompson",
-          "rating": 5,
-          "comment": "Tolkien's magnum opus!"
-        }
-      ]
-    },
-    {
-      "id": 10,
-      "title": "To Kill a Mockingbird",
-      "author": "Harper Lee",
-      "genre": "Coming-of-age",
-      "publication_date": "July 11, 1960",
-      "image": "https://i.ibb.co/jvWrWf5/1.png",
-      "reviews": [
-        {
-          "reviewer": "JohnDoe",
-          "rating": 5,
-          "comment": "A timeless classic!"
-        },
-        {
-          "reviewer": "JaneSmith",
-          "rating": 4,
-          "comment": "A must-read for everyone."
-        }
-      ]
-    },
-    {
-   
-      "title": "1984",
-      "author": "George Orwell",
-      "genre": "Epic",
-      "publication_date": "June 8, 1949",
-      "image": "https://i.ibb.co/PzKGHB5/11.png",
-      "reviews": [
-        {
-          "reviewer": "SarahJohnson",
-          "rating": 5,
-          "comment": "A chilling dystopian masterpiece."
-        },
-        {
-          "reviewer": "DavidBrown",
-          "rating": 3,
-          "comment": "Thought-provoking but depressing."
-        }
-      ]
-    },
-    {
-      
-      "title": "The Great Gatsby",
-      "author": "F. Scott Fitzgerald",
-      "genre": "Gothic Literature",
-      "publication_date": "April 10, 1925",
-      "image": "https://i.ibb.co/SV45bvw/2.png",
-      "reviews": [
-        {
-          "reviewer": "EmilyTaylor",
-          "rating": 4,
-          "comment": "Beautifully written with memorable characters."
-        },
-        {
-          "reviewer": "MichaelClark",
-          "rating": 2,
-          "comment": "Overrated and pretentious."
-        }
-      ]
-    },
-    {
-    
-      "title": "Pride and Prejudice",
-      "author": "Jane Austen",
-      "genre": "Fiction",
-      "publication_date": "January 28, 1813",
-      "image": "https://i.ibb.co/HFrRTDk/3.png",
-      "reviews": [
-        {
-          "reviewer": "JenniferAdams",
-          "rating": 5,
-          "comment": "A delightful love story!"
-        },
-        {
-          "reviewer": "RobertSmith",
-          "rating": 4,
-          "comment": "Jane Austen's best work."
-        }
-      ]
-    },
-    {
-     
-      "title": "The Hobbit",
-      "author": "J.R.R. Tolkien",
-      "genre": "Romance genre",
-      "publication_date": "September 21, 1937",
-      "image": "https://i.ibb.co/pjHYnh8/4.png",
-      "reviews": [
-        {
-          "reviewer": "DanielWhite",
-          "rating": 5,
-          "comment": "An enchanting adventure!"
-        },
-        {
-          "reviewer": "AmyJohnson",
-          "rating": 4,
-          "comment": "A must-read for fantasy fans."
-        }
-      ]
-    },
-    {
-     
-      "title": "Harry Potter and the Sorcerer's Stone",
-      "author": "J.K. Rowling",
-      "genre": "Fantasy",
-      "publication_date": "June 26, 1997",
-      "image": "https://i.ibb.co/mFk0vm5/16.png",
-      "reviews": [
-        {
-          "reviewer": "EmilyWalker",
-          "rating": 5,
-          "comment": "The start of an incredible series!"
-        },
-        {
-          "reviewer": "MarkJohnson",
-          "rating": 4,
-          "comment": "A magical world full of wonder."
-        }
-      ]
-    },
-    {
-      
-      "title": "The Chronicles of Narnia",
-      "author": "C.S. Lewis",
-      "genre": "Fantasy",
-      "publication_date": "October 16, 1950",
-      "image": "https://i.ibb.co/7pNDSPP/5.png",
-      "reviews": [
-        {
-          "reviewer": "SophiaBrown",
-          "rating": 5,
-          "comment": "A captivating and imaginative series."
-        },
-        {
-          "reviewer": "BenjaminThomas",
-          "rating": 4,
-          "comment": "Lewis's world-building is exceptional."
-        }
-      ]
-    },
-    {
-     
-      "title": "The Alchemist",
-      "author": "Paulo Coelho",
-      "genre": "Fiction",
-      "publication_date": "1988",
-      "image": "https://i.ibb.co/pnJ52Hn/8.png",
-      "reviews": [
-        {
-          "reviewer": "OliviaWhite",
-          "rating": 5,
-          "comment": "A thought-provoking and inspiring tale."
-        },
-        {
-          "reviewer": "NoahGarcia",
-          "rating": 4,
-          "comment": "Coelho's writing is mesmerizing."
-        }
-      ]
-    },
-    {
-   
-      "title": "Frankenstein",
-      "author": "Mary Shelley",
-      "genre": "Fiction",
-      "publication_date": "January 1, 1818",
-      "image": "https://i.ibb.co/gTqXvd0/9.png",
-      "reviews": [
-        {
-          "reviewer": "AvaMiller",
-          "rating": 4,
-          "comment": "A haunting tale of creation and responsibility."
-        },
-        {
-          "reviewer": "JacobWilson",
-          "rating": 5,
-          "comment": "Shelley's masterpiece of gothic literature."
-        }
-      ]
-    },
-    {
-     
-      "title": "The Little Prince",
-      "author": "Antoine de Saint-Exupéry",
-      "genre": "Fiction",
-      "publication_date": "April 6, 1943",
-      "image": "https://i.ibb.co/7YKDJsP/10.png",
-      "reviews": [
-        {
-          "reviewer": "SophiaSmith",
-          "rating": 5,
-          "comment": "A timeless and poignant tale."
-        },
-        {
-          "reviewer": "BenjaminClark",
-          "rating": 4,
-          "comment": "A beautiful exploration of life's mysteries."
-        }
-      ]
-    },
-    {
-      
-      "title": "The Picture of Dorian Gray",
-      "author": "Oscar Wilde",
-      "genre": "Fiction",
-      "publication_date": "June 20, 1890",
-      "image": "https://i.ibb.co/NZXTbD5/7.png",
-      "reviews": [
-        {
-          "reviewer": "OliverAnderson",
-          "rating": 4,
-          "comment": "A captivating and morally complex novel."
-        },
-        {
-          "reviewer": "EmilyJones",
-          "rating": 5,
-          "comment": "Wilde's wit shines throughout the story."
-        }
-      ]
-    }
-  ]
+[
+  {
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Classic",
+    "publication_date": "July 11, 1960",
+    "image": "https://i.ibb.co/BZtGTsp/20.png",
+    "reviews": [
+      {
+        "reviewer": "EmilySmith",
+        "rating": 4,
+        "comment": "A powerful portrayal of racial injustice."
+      },
+      {
+        "reviewer": "MichaelJohnson",
+        "rating": 5,
+        "comment": "A timeless masterpiece."
+      }
+    ]
+  },
+
+  {
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "genre": "Fantasy",
+    "publication_date": "July 29, 1954",
+    "image": "https://i.ibb.co/5KqXSNG/19.png",
+    "reviews": [
+      {
+        "reviewer": "AlexWilliams",
+        "rating": 5,
+        "comment": "Epic and captivating!"
+      },
+      {
+        "reviewer": "SophieAdams",
+        "rating": 4,
+        "comment": "A magical journey."
+      }
+    ]
+  },
+
+  {
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "genre": "Romance",
+    "publication_date": "January 28, 1813",
+    "image": "https://i.ibb.co/r5PtFbV/18.png",
+    "reviews": [
+      {
+        "reviewer": "OliverWilson",
+        "rating": 5,
+        "comment": "A timeless love story."
+      },
+      {
+        "reviewer": "SophiaLee",
+        "rating": 4,
+        "comment": "Beautifully written."
+      }
+    ]
+  },
+
+  {
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Fiction",
+    "publication_date": "April 10, 1925",
+    "image": "https://i.ibb.co/NZXTbD5/7.png",
+    "reviews": [
+      {
+        "reviewer": "DanielMiller",
+        "rating": 4,
+        "comment": "A tragic tale of love and wealth."
+      },
+      {
+        "reviewer": "AvaWhite",
+        "rating": 3,
+        "comment": "Beautiful prose but not my favorite."
+      }
+    ]
+  },
+
+  {
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "genre": "Fantasy",
+    "publication_date": "June 26, 1997",
+    "image": "https://i.ibb.co/mFk0vm5/16.png",
+    "reviews": [
+      {
+        "reviewer": "EthanJohnson",
+        "rating": 5,
+        "comment": "The start of a magical journey."
+      },
+      {
+        "reviewer": "EmmaSmith",
+        "rating": 4,
+        "comment": "A must-read for all ages."
+      }
+    ]
+  },
+
+  {
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "genre": "Coming-of-age",
+    "publication_date": "July 16, 1951",
+    "image": "https://i.ibb.co/pZQQdMV/15.png",
+    "reviews": [
+      {
+        "reviewer": "WilliamDavis",
+        "rating": 3,
+        "comment": "An interesting glimpse into adolescence."
+      },
+      {
+        "reviewer": "OliviaBrown",
+        "rating": 5,
+        "comment": "A classic that resonates with young minds."
+      }
+    ]
+  },
+
+  {
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "genre": "Fantasy",
+    "publication_date": "September 21, 1937",
+    "image": "https://i.ibb.co/YLPx1Dj/14.png",
+    "reviews": [
+      {
+        "reviewer": "LiamWilson",
+        "rating": 5,
+        "comment": "A delightful and enchanting adventure."
+      },
+      {
+        "reviewer": "GraceAdams",
+        "rating": 4,
+        "comment": "A must-read for fantasy lovers."
+      }
+    ]
+  },
+
+  {
+    "title": "To Kill a Kingdom",
+    "author": "Alexandra Christo",
+    "genre": "Fantasy",
+    "publication_date": "March 6, 2018",
+    "image": "https://i.ibb.co/d40Vmjr/13.png",
+    "reviews": [
+      {
+        "reviewer": "AidenMiller",
+        "rating": 4,
+        "comment": "An enthralling dark fairy tale."
+      },
+      {
+        "reviewer": "SophiaClark",
+        "rating": 5,
+        "comment": "Captivating characters and world-building."
+      }
+    ]
+  },
+
+  {
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "genre": "Science Fiction",
+    "publication_date": "February 2, 1932",
+    "image": "https://i.ibb.co/hCMFM0D/12.png",
+    "reviews": [
+      {
+        "reviewer": "HenryMoore",
+        "rating": 5,
+        "comment": "A thought-provoking vision of the future."
+      },
+      {
+        "reviewer": "ZoeCollins",
+        "rating": 3,
+        "comment": "Interesting, but not my favorite dystopia."
+      }
+    ]
+  },
+
+  {
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "genre": "Mystery",
+    "publication_date": "March 18, 2003",
+    "image": "https://i.ibb.co/jvWrWf5/1.png",
+    "reviews": [
+      {
+        "reviewer": "BenjaminSmith",
+        "rating": 4,
+        "comment": "An intriguing and fast-paced thriller."
+      },
+      {
+        "reviewer": "SophieJohnson",
+        "rating": 3,
+        "comment": "Enjoyable, but some parts felt contrived."
+      }
+    ]
+  },
+
+  {
+    "title": "The Hunger Games",
+    "author": "Suzanne Collins",
+    "genre": "Science Fiction",
+    "publication_date": "September 14, 2008",
+    "image": "https://i.ibb.co/7YKDJsP/10.png",
+    "reviews": [
+      {
+        "reviewer": "LilyAdams",
+        "rating": 5,
+        "comment": "A thrilling and emotional ride."
+      },
+      {
+        "reviewer": "DanielWilson",
+        "rating": 4,
+        "comment": "Great world-building and suspense."
+      }
+    ]
+  },
+
+  {
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "genre": "Fantasy",
+    "publication_date": "1988",
+    "image": "https://i.ibb.co/gTqXvd0/9.png",
+    "reviews": [
+      {
+        "reviewer": "OliverBrown",
+        "rating": 5,
+        "comment": "A philosophical and inspiring journey."
+      },
+      {
+        "reviewer": "SophiaLee",
+        "rating": 3,
+        "comment": "Didn't resonate with me as much as I hoped."
+      }
+    ]
+  },
+
+  {
+    "title": "The Book Thief",
+    "author": "Markus Zusak",
+    "genre": "Historical Fiction",
+    "publication_date": "March 14, 2006",
+    "image": "https://i.ibb.co/pnJ52Hn/8.png",
+    "reviews": [
+      {
+        "reviewer": "EmmaWilliams",
+        "rating": 5,
+        "comment": "A heart-wrenching and beautifully written story."
+      },
+      {
+        "reviewer": "JacobClark",
+        "rating": 4,
+        "comment": "A unique perspective on World War II."
+      }
+    ]
+  },
+
+  {
+    "title": "The Handmaid's Tale",
+    "author": "Margaret Atwood",
+    "genre": "Dystopian",
+    "publication_date": "1985",
+    "image": "https://i.ibb.co/NZXTbD5/7.png",
+    "reviews": [
+      {
+        "reviewer": "OliviaSmith",
+        "rating": 5,
+        "comment": "A haunting and relevant dystopia."
+      },
+      {
+        "reviewer": "WilliamDavis",
+        "rating": 4,
+        "comment": "Disturbing, but incredibly well-written."
+      }
+    ]
+  },
+
+  {
+    "title": "The Night Circus",
+    "author": "Erin Morgenstern",
+    "genre": "Fantasy",
+    "publication_date": "September 13, 2011",
+    "image": "https://i.ibb.co/mFk0vm5/16.png.png",
+    "reviews": [
+      {
+        "reviewer": "GraceWilson",
+        "rating": 5,
+        "comment": "A mesmerizing and enchanting tale."
+      },
+      {
+        "reviewer": "AidenMiller",
+        "rating": 4,
+        "comment": "Imaginative and beautifully descriptive."
+      }
+    ]
+  },
+
+  {
+    "title": "The Picture of Dorian Gray",
+    "author": "Oscar Wilde",
+    "genre": "Gothic Fiction",
+    "publication_date": "June 20, 1890",
+    "image": "https://i.ibb.co/7pNDSPP/5.png",
+    "reviews": [
+      {
+        "reviewer": "EmmaClark",
+        "rating": 5,
+        "comment": "A dark and captivating tale of vanity."
+      },
+      {
+        "reviewer": "HenryWilson",
+        "rating": 3,
+        "comment": "Beautiful prose, but the story was unsettling."
+      }
+    ]
+  },
+
+  {
+    "title": "Fahrenheit 451",
+    "author": "Ray Bradbury",
+    "genre": "Dystopian",
+    "publication_date": "October 19, 1953",
+    "image": "https://i.ibb.co/pjHYnh8/4.png",
+    "reviews": [
+      {
+        "reviewer": "OliverJohnson",
+        "rating": 4,
+        "comment": "A cautionary tale about the dangers of censorship."
+      },
+      {
+        "reviewer": "SophiaAdams",
+        "rating": 3,
+        "comment": "Interesting concept, but the execution felt lacking."
+      }
+    ]
+  },
+
+  {
+    "title": "The Maze Runner",
+    "author": "James Dashner",
+    "genre": "Science Fiction",
+    "publication_date": "October 6, 2009",
+    "image": "https://i.ibb.co/HFrRTDk/3.png",
+    "reviews": [
+      {
+        "reviewer": "EthanWilson",
+        "rating": 4,
+        "comment": "A thrilling and suspenseful dystopian adventure."
+      },
+      {
+        "reviewer": "AvaSmith",
+        "rating": 3,
+        "comment": "Engaging plot, but the characters were somewhat flat."
+      }
+    ]
+  },
+
+  {
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "genre": "Science Fiction",
+    "publication_date": "August 1, 1965",
+    "image": "https://i.ibb.co/SV45bvw/2.png",
+    "reviews": [
+      {
+        "reviewer": "LilyClark",
+        "rating": 5,
+        "comment": "A sprawling and epic space opera."
+      },
+      {
+        "reviewer": "DanielBrown",
+        "rating": 4,
+        "comment": "Complex world-building and political intrigue."
+      }
+    ]
+  },
+
+  {
+    "title": "The Book of M",
+    "author": "Peng Shepherd",
+    "genre": "Science Fiction",
+    "publication_date": "June 5, 2018",
+    "image": "https://i.ibb.co/PzKGHB5/11.png",
+    "reviews": [
+      {
+        "reviewer": "OliviaMiller",
+        "rating": 4,
+        "comment": "A unique and imaginative post-apocalyptic tale."
+      },
+      {
+        "reviewer": "NoahJohnson",
+        "rating": 3,
+        "comment": "Intriguing concept, but the pacing was uneven."
+      }
+    ]
+  }
+]

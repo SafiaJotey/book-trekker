@@ -1,5 +1,6 @@
 import { loginUser } from '@/redux/feature/user/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import Spinner from '@/shared/Spinner';
 import { IFormLoginInput } from '@/types/globalTypes';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -31,62 +32,66 @@ export default function Login() {
     }
   }, [user.email, isLoading, navigate, from]);
   return (
-    <div className="container px-[250px]   h-screen  flex  justify-center items-center">
-      <div className="shadow-md w-full flex  justify-center items-center rounded-lg  ">
-        <div className="w-6/12 h-[560px] ">
-          <img className="h-full w-full" src={auth} />
-        </div>
-        <div className="w-6/12 px-12 flex flex-col items-center">
-          <div className=" w-full flex justify-end">
-            <Link to="/">
-              <BiSolidHome classname="bg-main text-5xl my-2"></BiSolidHome>
-            </Link>
+    <div className="container md:px-[250px]   h-screen  flex  justify-center items-center">
+      {!isLoading ? (
+        <div className="shadow-md  w-full flex flex-col md:flex-row justify-center items-center rounded-lg  ">
+          <div className="md:w-6/12 h-[560px] ">
+            <img className="h-full w-full" src={auth} />
           </div>
-          <h3 className="text-2xl text-main font-bold my-8">
-            Login To Explore more
-          </h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <label>Email</label>
-            <input
-              className="w-full p-2 border rounded-md my-1"
-              placeholder="Enter Your Email"
-              {...register('email', {
-                required: true,
+          <div className="md:w-6/12 px-12 flex flex-col items-center">
+            <div className=" w-full flex justify-end">
+              <Link to="/">
+                <BiSolidHome className="text-main text-3xl my-2"></BiSolidHome>
+              </Link>
+            </div>
+            <h3 className="text-2xl text-main font-bold my-8 text-center md:text-left">
+              Login To Explore more
+            </h3>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <label>Email</label>
+              <input
+                className="w-full p-2 border rounded-md my-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter Your Email"
+                {...register('email', {
+                  required: true,
 
-                pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/i,
-              })}
-            />
-            <br />
-            <label>Password</label>
-            <input
-              className="w-full p-2 border rounded-md my-1"
-              placeholder="Enter Your Password"
-              {...register('password', {
-                required: true,
-                pattern:
-                  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/i,
-              })}
-            />
-            <div className="flex justify-center">
-              {' '}
-              <button className="bg-green-600 text-white border border-green-600 mt-8 mb-3 w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
-                <IoMdLogIn className="text-lg font-bold"></IoMdLogIn>
-                <span className="mx-2"> Login</span>{' '}
-              </button>
-            </div>
-            <div className="flex justify-center">
-              <small>
-                New To The Website?{' '}
-                <span className=" underline decoration-solid">
-                  <Link className="text-blue-500 font-bold " to="/signup">
-                    Create an account
-                  </Link>
-                </span>
-              </small>
-            </div>
-          </form>
+                  pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/i,
+                })}
+              />
+              <br />
+              <label>Password</label>
+              <input
+                className="w-full p-2 border  rounded-md my-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter Your Password"
+                {...register('password', {
+                  required: true,
+                  pattern:
+                    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/i,
+                })}
+              />
+              <div className="flex justify-center">
+                {' '}
+                <button className="bg-green-600 text-white border border-green-600 mt-8 mb-3 w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
+                  <IoMdLogIn className="text-lg font-bold"></IoMdLogIn>
+                  <span className="mx-2"> Login</span>{' '}
+                </button>
+              </div>
+              <div className="flex justify-center">
+                <small>
+                  New To The Website?{' '}
+                  <span className=" underline decoration-solid">
+                    <Link className="text-blue-500 font-bold " to="/signup">
+                      Create an account
+                    </Link>
+                  </span>
+                </small>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      ) : (
+        <Spinner></Spinner>
+      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 import { YearDropdown } from '@/components/ui/DropDown';
+import Header from '@/components/ui/Header';
 import MiniCards from '@/components/ui/MiniCards';
 import {
   useGetBooksQuery,
@@ -20,7 +21,7 @@ import { TiTick } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import Card from '../components/ui/Card';
 export default function AllBooks() {
-  const { data} = useGetBooksQuery(undefined, {
+  const { data } = useGetBooksQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
@@ -153,33 +154,35 @@ export default function AllBooks() {
         title="Books were safer than other people anyway."
         author="Neil Gaiman, The Ocean at the End of the Lane"
       />
-      <div className="container py-[10px] px-[80px]">
+      <div className="container py-[10px] md:px-[80px]">
         {' '}
-        <div className="flex justify-between items-center">
-          <div>
-            {' '}
-            <h6 className="text-lg font-semibold  ">By The Authors</h6>
-            <h3 className="text-4xl font-bold ">Explore All The Books</h3>
-          </div>{' '}
+
+        //header part
+        <div className="flex flex-col justify-center md:flex-row md:justify-between items-center">
+          <Header
+            header="Explore All The Books"
+            subHeader="By The Authors"
+          ></Header>
+
           <Link
             to="/addBook"
-            className="bg-main p-2 px-5 rounded-full text-white "
+            className="bg-main p-2 px-5 rounded-full text-white my-2 "
           >
             {' '}
             Add New
           </Link>
         </div>
-        <div className="w-full flex justify-between items-start ">
+        <div className="w-full flex flex-col-reverse md:flex-row md:justify-between md:items-start ">
           {/* cards */}
-          <div className="flex justify-center flex-wrap items-center w-3/4">
+          <div className="flex justify-center flex-wrap items-center md:w-3/4">
             {filteredData?.map((book: IBook) => (
               <Card key={book._id} book={book}></Card>
             ))}
           </div>
           {/* search and filters */}
-          <div className="w-1/4 pl-3">
+          <div className="md:w-1/4 md:pl-3">
             <div className="p-3  border rounded-md  ">
-              {/* search field */}
+           
               <div className="flex justify-between items-center border ">
                 {' '}
                 <input
@@ -227,7 +230,7 @@ export default function AllBooks() {
                         Gothic Literature
                       </option>
                       <option value="Mystery">Mystery</option>
-                      <option value="Romance genre">Romance genre</option>
+                      <option value="Romance">Romance</option>
                     </select>
                   </div>
                 </div>
