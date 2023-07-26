@@ -52,7 +52,7 @@ export interface IUser {
 }
 
 export interface IReview {
-  _id?:string
+  _id?: string;
   reviewer?: string;
   rating?: number;
   comment?: string;
@@ -76,6 +76,10 @@ export type AddReviewModalProps = {
   open: boolean;
   onClose: () => void;
   onAddReview: (data: IReview) => void;
+};
+export type DeleteModalProps = {
+  onCancel: () => void;
+  onDelete: () => void;
 };
 
 export interface IAddBookInput {

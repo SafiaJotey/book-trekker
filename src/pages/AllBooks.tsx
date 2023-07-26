@@ -180,10 +180,10 @@ export default function AllBooks() {
           {/* search and filters */}
           <div className="md:w-1/4 md:pl-3">
             <div className="p-3  border rounded-md  ">
-              <div className="flex justify-between items-center border ">
+              <div className="flex justify-between items-center  border-1 rounded-md ">
                 {' '}
                 <input
-                  className="p-3 w-10/12 border-none"
+                  className="p-3 w-10/12 "
                   placeholder="Search..."
                   type="text"
                   value={searchTerm}
@@ -202,12 +202,12 @@ export default function AllBooks() {
                 <div>
                   <div className="flex justify-start items-center  mt-[10px] border-b my-2 ">
                     <TiTick className="text-2xl"></TiTick>
-                    <p className="text-xl font-semibold px-3 "> Genre</p>
+                    <p className="text-lg font-semibold px-3 "> Genre</p>
                   </div>
                   <div className="flex  flex-wrap items-center">
                     <select
                       name="genre"
-                      className="border w-full py-1"
+                      className="border w-full p-2  border-1 rounded-md"
                       value={selectedGenreValue}
                       onChange={(e) =>
                         dispatch(updateGenreSelectedValue(e.target.value))
@@ -235,7 +235,7 @@ export default function AllBooks() {
                 <div>
                   <div className="flex justify-start items-center  border-b my-2 ">
                     <TiTick className="text-xl"></TiTick>
-                    <p className="text-xl font-semibold px-3 my-1">
+                    <p className="text-lg font-semibold px-3 my-1">
                       {' '}
                       publication year
                     </p>
@@ -243,7 +243,7 @@ export default function AllBooks() {
                   <div className="flex flex-wrap items-center">
                     <select
                       name="year"
-                      className="border w-full py-1"
+                      className="border w-full p-2  border-1 rounded-md"
                       value={selectedPublishYearValue}
                       onChange={(e) =>
                         dispatch(updatePublishYearSelectedValue(e.target.value))

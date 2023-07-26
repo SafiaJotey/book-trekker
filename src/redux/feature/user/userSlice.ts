@@ -41,7 +41,7 @@ export const createUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async ({ email, password }: ICredential) => {
-    const data = await signInWithEmailAndPassword(auth, email, password);
+    const data = await signInWithEmailAndPassword(auth, email, password)
 
     return data.user.email;
   }
@@ -68,6 +68,7 @@ const userSlice = createSlice({
       .addCase(createUser.fulfilled, (state, action) => {
         state.user.email = action.payload;
         state.isLoading = false;
+        state.isError = true;
       })
       .addCase(createUser.rejected, (state, action) => {
         state.user.email = null;
@@ -81,8 +82,10 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.user.email = action.payload;
         state.isLoading = false;
+        state.user.email = action.payload;
+   
+        state.isError = false;
         state.error = null;
       })
       .addCase(loginUser.rejected, (state, action) => {

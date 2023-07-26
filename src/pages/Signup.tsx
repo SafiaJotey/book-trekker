@@ -13,7 +13,11 @@ export default function Signup() {
   const [createNewUser] = useCreateNewUserMutation();
 
   const dispatch = useAppDispatch();
-  const { register, handleSubmit } = useForm<IFormSignupInput>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormSignupInput>();
   const onSubmit: SubmitHandler<IFormSignupInput> = (data) => {
     dispatch(createUser({ email: data.email, password: data.password }));
     const options = {
@@ -52,10 +56,11 @@ export default function Signup() {
               placeholder="Enter Your First Name"
               {...register('firstName', {
                 required: true,
-                maxLength: 20,
-                pattern: /^[A-Za-z]+$/i,
               })}
             />
+            {errors.firstName && errors.firstName.type === 'required' && (
+              <small className="text-red-600"> This field is required</small>
+            )}
             <br />
             <label>Last Name</label>
             <input
@@ -63,10 +68,11 @@ export default function Signup() {
               placeholder="Enter Your Last Name"
               {...register('lastName', {
                 required: true,
-                maxLength: 20,
-                pattern: /^[A-Za-z]+$/i,
               })}
             />
+            {errors.lastName && errors.lastName.type === 'required' && (
+              <small className="text-red-600"> This field is required</small>
+            )}
             <br />
             <label>Email</label>
             <input
@@ -78,6 +84,14 @@ export default function Signup() {
                 pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/i,
               })}
             />
+            {errors.email &&
+              (errors.email.type === 'pattern' ? (
+                <small className="text-red-600">
+                  Please enter an valid email
+                </small>
+              ) : (
+                <small className="text-red-600"> This field is required</small>
+              ))}
             <br />
             <label>Password</label>
             <input
@@ -89,6 +103,15 @@ export default function Signup() {
                   /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/i,
               })}
             />
+            {errors.password &&
+              (errors.password.type === 'pattern' ? (
+                <small className="text-red-600">
+                  your password should have 7 to 15 charecter,one digit, one
+                  special character( ! @ # $ % ^ & *)
+                </small>
+              ) : (
+                <small className="text-red-600"> This field is required</small>
+              ))}
             <div className="flex justify-center">
               {' '}
               <button className="bg-green-600 text-white border border-green-600 mt-8 mb-3 w-[200px] py-2 rounded-sm m-1 flex justify-center items-center">
