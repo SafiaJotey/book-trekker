@@ -156,8 +156,6 @@ export default function AllBooks() {
       />
       <div className="container py-[10px] md:px-[80px]">
         {' '}
-
-        //header part
         <div className="flex flex-col justify-center md:flex-row md:justify-between items-center">
           <Header
             header="Explore All The Books"
@@ -182,7 +180,6 @@ export default function AllBooks() {
           {/* search and filters */}
           <div className="md:w-1/4 md:pl-3">
             <div className="p-3  border rounded-md  ">
-           
               <div className="flex justify-between items-center border ">
                 {' '}
                 <input
