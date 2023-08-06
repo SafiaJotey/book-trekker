@@ -3,6 +3,7 @@ import AddBook from '@/pages/AddBook';
 import AllBooks from '@/pages/AllBooks';
 import CompleteList from '@/pages/CompleteList';
 import EditBook from '@/pages/EditBook';
+import Genra from '@/pages/Genra';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
@@ -27,6 +28,10 @@ const routes = createBrowserRouter([
         element: <AllBooks />,
       },
       {
+        path: '/books/:genre',
+        element: <Genra />,
+      },
+      {
         path: '/books/:id',
         element: (
           <PrivateRoute>
@@ -34,6 +39,7 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       {
         path: '/addBook',
         element: (

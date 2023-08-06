@@ -8,10 +8,10 @@ export default function RecentlyAdded() {
   const { data } = useRecentBookQuery(undefined);
   console.log(data);
   return (
-    <div className="container mx-auto p-5 md:p-[100px]">
+    <div className="container mx-auto p-5 md:px-[100px] md:pb-20 md:pt-10">
       <div className="flex flex-col justify-center md:flex-row md:justify-between items-center">
         <Header
-          header="  Explore Recently Added 10 Books"
+          header="  Explore Recently Added  Books"
           subHeader="Recently Added"
         ></Header>
         <Link

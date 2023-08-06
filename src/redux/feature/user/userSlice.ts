@@ -12,7 +12,7 @@ interface IUserState {
   };
   isLoading: boolean;
   isError: boolean;
-  error: string | null;
+  error: string | null | undefined;
 }
 
 interface ICredential {
@@ -41,7 +41,7 @@ export const createUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async ({ email, password }: ICredential) => {
-    const data = await signInWithEmailAndPassword(auth, email, password)
+    const data = await signInWithEmailAndPassword(auth, email, password);
 
     return data.user.email;
   }
@@ -74,7 +74,7 @@ const userSlice = createSlice({
         state.user.email = null;
         state.isLoading = false;
         state.isError = true;
-        state.error = action.error.message!;
+        state.error = action.error.message;
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -84,7 +84,7 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user.email = action.payload;
-   
+
         state.isError = false;
         state.error = null;
       })
@@ -92,7 +92,7 @@ const userSlice = createSlice({
         state.user.email = null;
         state.isLoading = false;
         state.isError = true;
-        state.error = action.error.message!;
+        state.error = action.error.message;
       });
   },
 });

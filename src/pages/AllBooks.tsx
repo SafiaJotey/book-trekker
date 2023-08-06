@@ -1,5 +1,5 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
-import { YearDropdown } from '@/components/ui/DropDown';
+
 import Header from '@/components/ui/Header';
 import MiniCards from '@/components/ui/MiniCards';
 import {
@@ -8,7 +8,6 @@ import {
 } from '@/redux/feature/books/bookApi';
 import {
   updateGenreSelectedValue,
-  updatePublishYearSelectedValue,
   updateSearchTerm,
 } from '@/redux/feature/books/books.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
@@ -232,32 +231,7 @@ export default function AllBooks() {
                   </div>
                 </div>
 
-                <div>
-                  <div className="flex justify-start items-center  border-b my-2 ">
-                    <TiTick className="text-xl"></TiTick>
-                    <p className="text-lg font-semibold px-3 my-1">
-                      {' '}
-                      publication year
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center">
-                    <select
-                      name="year"
-                      className="border w-full p-2  border-1 rounded-md"
-                      value={selectedPublishYearValue}
-                      onChange={(e) =>
-                        dispatch(updatePublishYearSelectedValue(e.target.value))
-                      }
-                    >
-                      <option value="">select a year</option>
-                      {YearDropdown().map((year) => (
-                        <option key={year} value={year}>
-                          {year}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
+                <div></div>
               </div>
               {/* recently added books */}
               <div>

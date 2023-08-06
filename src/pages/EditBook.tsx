@@ -8,13 +8,14 @@ import { useAppSelector } from '@/redux/hooks';
 import { IAddBookInput } from '@/types/globalTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { useNavigate, useParams } from 'react-router-dom';
+
 import editbookImage from '../assets/images/addBook.png';
+import { useParams } from 'react-router-dom';
 export default function EditBook() {
   const { id } = useParams();
   const { data: book } = useSingleBookQuery(id);
   const { user } = useAppSelector((state) => state.user);
-  const navigate = useNavigate();
+
 
   const { data: currentUser } = useGetUserQuery(user?.email);
   const [updateBook] = useUpdateBookMutation();

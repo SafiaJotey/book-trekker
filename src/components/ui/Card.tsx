@@ -122,26 +122,26 @@ export default function Card({ book }: { book: IBook }) {
   };
 
   return (
-    <div className="md:px-2 my-1 md:my-3  w-full p-3 md:w-1/3  ">
+    <div className="md:px-2 my-1 md:my-3  w-full p-3 md:w-1/4  ">
       <div className="shadow-md rounded-md md:p-3 bg-white">
         <Link to={`/books/${book?._id}`}>
-          <div className="h-[400px] w-full p-2 md:p-0">
+          <div className="h-[280px] w-full p-2 md:p-0">
             {' '}
-            <img src={book?.image} className="h-[400px] w-full" />
+            <img src={book?.image} className="h-[280px] w-full" />
           </div>
         </Link>
 
-        <div className="h-32  p-2 md:p-0">
+        <div className="  p-2 md:p-0">
           {' '}
           <Link to={`/books/${book?._id}`}>
-            <h6 className="text-lg font-semibold  h-10">{book.title}</h6>
+            <h6 className="text-lg font-semibold  h-8 mb-5 ">{book.title}</h6>
           </Link>
-          <p className=" font-semibold  h-6 ">{book?.author}</p>
-          <div className="flex justify-between">
+          <p className=" font-semibold  h-8 ">{book?.author}</p>
+          <div className="flex justify-between h-12">
             <i className="text-base"> {book?.genre}</i>
             <i className="text-base"> {book?.publication_date}</i>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between ">
             <Review key={book?._id} book={book} />
 
             <div className="flex justify-end items-center text-base ">

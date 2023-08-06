@@ -67,6 +67,10 @@ export interface IReadinglist {
   book?: ISingleBook;
   user?: IUser;
 }
+export interface ICategory {
+  image: string;
+  genra: string;
+}
 export interface ICompletelist {
   _id: string;
   book?: ISingleBook;

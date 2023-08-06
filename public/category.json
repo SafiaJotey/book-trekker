@@ -1,0 +1,46 @@
+[
+  {
+    "image": "../src/assets/images/classic.webp",
+    "genre": "Classic Literature"
+  },
+  {
+    "image": "../src/assets/images/come.webp",
+    "genre": "Coming-of-age"
+  },
+  {
+    "image": "../src/assets/images/dystopian.webp",
+    "genre": "Dystopian"
+  },
+  {
+    "image": "../src/assets/images/Epic.webp",
+    "genre": "Epic"
+  },
+  {
+    "image": "../src/assets/image/Fantcy.webp",
+    "genre": "Fantasy"
+  },
+  {
+    "image": "../src/assets/images/fiction.webp",
+    "genre": "Fiction"
+  },
+  {
+    "image": "../src/assets/images/Gothic.webp",
+    "genre": "Gothic Literature"
+  },
+  {
+    "image": "../src/assets/images/mysetry.webp",
+    "genre": "Mystery"
+  },
+  {
+    "image": "../src/assets/images/romance.webp",
+    "genre": "Romance"
+  },
+  {
+    "image": "../src/assets/images/classic.webp",
+    "genre": "Classic Literature"
+  },
+  {
+    "image": "../src/assets/images/adventure.webp",
+    "genre": "Adventure"
+  }
+]

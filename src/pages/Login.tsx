@@ -40,7 +40,7 @@ export default function Login() {
         toast.success('Successfully Logged in.');
       }, 1000);
     }
-  }, [user.email, isLoading, navigate, from, isError]);
+  }, [user.email, isLoading, navigate, from, isError,error]);
 
   return (
     <div className="container md:px-[250px]   h-screen  flex  justify-center items-center">
