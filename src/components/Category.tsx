@@ -5,47 +5,47 @@ import Header from './ui/Header';
 export default function Category() {
   const category = [
     {
-      image: '../src/assets/images/classic.webp',
+      image: 'https://i.ibb.co/rQdbJ8b/ezgif-com-webp-to-jpg-6.jpg',
       genra: 'Classic Literature',
     },
     {
-      image: '../src/assets/images/come.webp',
+      image: ' https://i.ibb.co/WWPY1bb/ezgif-com-webp-to-jpg-3.jpg',
       genra: 'Coming-of-age',
     },
     {
-      image: '../src/assets/images/dystopian.webp',
+      image: ' https://i.ibb.co/3zd6XGj/ezgif-com-webp-to-jpg-4.jpg',
       genra: 'Dystopian',
     },
     {
-      image: '../src/assets/images/Epic.webp',
+      image: ' https://i.ibb.co/CVDNtDS/ezgif-com-webp-to-jpg-2.jpg',
       genra: 'Epic',
     },
     {
-      image: '../src/assets/images/Fantcy.webp',
+      image: '  https://i.ibb.co/yntRMXm/ezgif-com-webp-to-jpg-1.jpg',
       genra: 'Fantasy',
     },
     {
-      image: '../src/assets/images/fiction.webp',
+      image: 'https://i.ibb.co/yswDSVG/ezgif-com-webp-to-jpg-5.jpg',
       genra: 'Fiction',
     },
     {
-      image: '../src/assets/images/Gothic.webp',
+      image: 'https://i.ibb.co/pWgL09h/ezgif-com-webp-to-jpg-7.jpg',
       genra: 'Gothic Literature',
     },
     {
-      image: '../src/assets/images/mysetry.webp',
+      image: 'https://i.ibb.co/XyyTJxM/ezgif-com-webp-to-jpg-8.jpg',
       genra: 'Mystery',
     },
     {
-      image: '../src/assets/images/romance.webp',
+      image: ' https://i.ibb.co/zNvdCZF/ezgif-com-webp-to-jpg-9.jpg',
       genra: 'Romance',
     },
     {
-      image: '../src/assets/images/classic.webp',
+      image: ' https://i.ibb.co/z490J3m/ezgif-com-webp-to-jpg-10.jpg',
       genra: 'Classic Literature',
     },
     {
-      image: '../src/assets/images/adventure.webp',
+      image: ' https://i.ibb.co/xDZRTv6/ezgif-com-webp-to-jpg-11.jpg',
       genra: 'Adventure',
     },
   ];

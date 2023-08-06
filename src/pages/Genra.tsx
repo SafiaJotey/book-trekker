@@ -8,7 +8,7 @@ import Card from '../components/ui/Card';
 
 export default function Genra() {
   const { genre } = useParams();
-  console.log(genre);
+
   const { data } = useGetBooksQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,

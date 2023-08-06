@@ -69,7 +69,7 @@ export default function TableCart({ book }: { book: IBook }) {
   };
   const handleAddWishList = () => {
     const options = { userId: data?.data?._id, bookId: book?._id };
-    console.log(options);
+   
 
     addToWishlist(options);
     handleRemoveFromAddreadingList();

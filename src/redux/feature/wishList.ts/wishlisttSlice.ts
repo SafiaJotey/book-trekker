@@ -13,16 +13,13 @@ const wishlistslice = createSlice({
   reducers: {
     addToWishListOrRemove: (state, action: PayloadAction<IBook>) => {
       const exist = state.books.find((book) => book._id === action.payload._id);
-      console.log(exist);
 
       if (exist) {
         state.books = state.books.filter(
           (book) => book._id !== action.payload._id
         );
-        console.log(state.books);
       } else {
         state.books.push(action.payload);
-        console.log(state.books);
       }
     },
   },

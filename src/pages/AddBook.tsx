@@ -21,7 +21,7 @@ export default function AddBook() {
   const { data: currentUser } = useGetUserQuery(user?.email);
   const onSubmit: SubmitHandler<IAddBookInput> = (data) => {
     data.user = currentUser.data?._id;
-    console.log(data);
+
     addBook(data);
     reset();
     toast.success(' Book Added ');

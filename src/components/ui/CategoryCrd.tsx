@@ -1,7 +1,9 @@
 import { ICategory } from '@/types/globalTypes';
 import { Link } from 'react-router-dom';
-
-export default function CategoryCrd({ item }: ICategory) {
+interface FAQAccordionProps {
+  item: ICategory;
+}
+export default function CategoryCrd({ item }: FAQAccordionProps) {
   const { image, genra } = item;
   return (
     <div className=" my-1 md:my-0 md:w-1/3  static  cursor-pointer ">

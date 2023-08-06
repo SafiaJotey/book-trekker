@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import { IFaq } from '@/types/globalTypes';
+import { useState } from 'react';
+interface FAQAccordionProps {
+  faqs: IFaq[];
+}
 
-const FAQAccordion = ({ faqs }) => {
-  const [activeIndex, setActiveIndex] = useState(null);
-
-  const toggleAccordion = (index) => {
+const FAQAccordion: React.FC<FAQAccordionProps> = ({ faqs }) => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const toggleAccordion = (index: number) => {
     setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
   };
+
 
   return (
     <div className="w-full">

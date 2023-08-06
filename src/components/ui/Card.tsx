@@ -80,8 +80,6 @@ export default function Card({ book }: { book: IBook }) {
   const handleAddWishList = () => {
     if (user.email) {
       const options = { userId: data?.data?._id, bookId: book?._id };
-      console.log(options);
-
       addToWishlist(options);
       handleRemoveFromAddreadingList();
       handleRemoveFCompleted();
@@ -125,9 +123,9 @@ export default function Card({ book }: { book: IBook }) {
     <div className="md:px-2 my-1 md:my-3  w-full p-3 md:w-1/4  ">
       <div className="shadow-md rounded-md md:p-3 bg-white">
         <Link to={`/books/${book?._id}`}>
-          <div className="h-[280px] w-full p-2 md:p-0">
+          <div className="h-[380px] md:h-[280px] w-full p-2 md:p-0">
             {' '}
-            <img src={book?.image} className="h-[280px] w-full" />
+            <img src={book?.image} className="h-[380px] md:h-[280px] w-full" />
           </div>
         </Link>
 

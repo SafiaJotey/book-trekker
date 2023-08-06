@@ -1,9 +1,10 @@
+import { IFaq } from '@/types/globalTypes';
 import app from '../assets/images/faq.jpg';
 import FAQAccordion from './ui/FAQAccordion';
 import Header from './ui/Header';
 
 export default function Faq() {
-  const faqs = [
+  const faqs:IFaq[]= [
     {
       question: 'How can I create an account on the book reading website?',
       answer:

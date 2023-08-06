@@ -28,10 +28,10 @@ export default function Login() {
   const onSubmit: SubmitHandler<IFormLoginInput> = (data: IFormLoginInput) => {
     dispatch(loginUser({ email: data.email, password: data.password }));
   };
-  console.log(isError, isLoading);
+
   useEffect(() => {
     if (isError) {
-      console.log(error);
+  
       toast.error('Something went wrong');
     }
     if (user.email && !isLoading) {

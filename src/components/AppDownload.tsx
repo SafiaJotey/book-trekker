@@ -4,7 +4,7 @@ import gPlay from '../assets/images/gPlay.webp';
 
 export default function AppDownload() {
   return (
-    <div className="md:h-[340px] bg-main flex justify-center items-center mt-[50px]">
+    <div className="md:h-[340px] bg-main flex justify-center items-center my-[100px]">
       <div className="container md:px-[100px]  flex flex-col md:flex-row justify-between items-center">
         <img src={appImage} />
         <div className="md:py-[30px]">
