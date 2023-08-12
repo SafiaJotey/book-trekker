@@ -11,7 +11,7 @@ import {
   updateSearchTerm,
 } from '@/redux/feature/books/books.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { IBook, IGetBook } from '@/types/globalTypes';
+import { IGetBook } from '@/types/globalTypes';
 import { ChangeEvent } from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';

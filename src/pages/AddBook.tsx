@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 // import { useNavigate } from 'react-router-dom';
 import { useAddBookMutation } from '@/redux/feature/books/bookApi';
 import { IAddBookForm } from '@/types/globalTypes';
+import { useNavigate } from 'react-router-dom';
 import book from '../assets/images/app.jpg';
 
 export default function AddBook() {
@@ -17,9 +18,9 @@ export default function AddBook() {
     reset,
     formState: { errors },
   } = useForm<IAddBookForm>();
-  const [addBook, { error }] = useAddBookMutation();
+  const [addBook] = useAddBookMutation();
   const { user } = useAppSelector((state) => state.user);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { data: currentUser } = useGetUserQuery(user?.email);
 
   const onSubmit = async (data: IAddBookForm) => {
@@ -38,7 +39,8 @@ export default function AddBook() {
       addBook(formData);
 
       toast.success('Book Added');
-      // navigate('/allBooks');
+      reset();
+      navigate('/allBooks');
     } catch (error) {
       toast.error('wrong');
     }

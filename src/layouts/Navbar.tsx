@@ -1,4 +1,5 @@
 import { auth } from '@/lib/firebase';
+import { useGetUserQuery } from '@/redux/feature/user/userApi';
 import { setUser } from '@/redux/feature/user/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { signOut } from 'firebase/auth';
@@ -6,13 +7,16 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { BiBookReader } from 'react-icons/bi';
+import { MdOutlineWavingHand } from 'react-icons/md';
 import { TbUserHeart } from 'react-icons/tb';
 import { TiTick } from 'react-icons/ti';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/images/Book_trekker_logo.png';
 
 export default function Navbar() {
   const { user } = useAppSelector((state) => state.user);
+  const { data } = useGetUserQuery(user?.email);
+  const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
@@ -21,6 +25,7 @@ export default function Navbar() {
       // Sign-out successful.
       dispatch(setUser(null));
       toast.success('successfully logged out');
+      navigate('/');
     });
   };
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +39,7 @@ export default function Navbar() {
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <div className="w-20 ">
-            <Link className="text-white" to="/home">
+            <Link className="text-white" to="/">
               {' '}
               <img src={logo} />
             </Link>
@@ -125,11 +130,22 @@ export default function Navbar() {
                 </li>
               )}
               {user.email && (
-                <li className=" mx-3 cursor-pointer " onClick={handleLogout}>
-                  <a className="text-white  text-xl">
-                    <AiOutlineLogout></AiOutlineLogout>
-                  </a>
-                </li>
+                <>
+                  <li className=" mx-3 cursor-pointer " onClick={handleLogout}>
+                    <a className="text-white  text-xl">
+                      <AiOutlineLogout></AiOutlineLogout>
+                    </a>
+                  </li>
+                  <li className="flex justify-center items-center font-bold py-1 px-2 rounded-sm">
+                    <MdOutlineWavingHand className="text-base text-white mx-1 "></MdOutlineWavingHand>
+                    <span className="text-base text-white mr-2 ">Hi</span>
+                    <a className="text-white  ">
+                      {' '}
+                      {data?.data?.firstName.charAt(0).toUpperCase() +
+                        data?.data?.firstName.slice(1)}
+                    </a>
+                  </li>
+                </>
               )}
             </ul>
           </div>
@@ -200,12 +216,20 @@ export default function Navbar() {
                 </li>
               )}
               {user.email && (
-                <li
-                  className=" mx-3 my-1 cursor-pointer "
-                  onClick={handleLogout}
-                >
-                  <a className="text-white  ">Logout</a>
-                </li>
+                <>
+                  <li
+                    className=" mx-3 my-1 cursor-pointer "
+                    onClick={handleLogout}
+                  >
+                    <a className="text-white  ">{data?.data?.firstName}</a>
+                  </li>
+                  <li
+                    className=" mx-3 my-1 cursor-pointer "
+                    onClick={handleLogout}
+                  >
+                    <a className="text-white  ">Logout</a>
+                  </li>
+                </>
               )}
             </ul>
           </div>

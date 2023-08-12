@@ -5,21 +5,20 @@ import {
 } from '@/redux/feature/books/bookApi';
 import { useGetUserQuery } from '@/redux/feature/user/userApi';
 import { useAppSelector } from '@/redux/hooks';
-import { IAddBookInput } from '@/types/globalTypes';
+import { IAddBookForm } from '@/types/globalTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import editbookImage from '../assets/images/addBook.png';
 import { useParams } from 'react-router-dom';
+import editbookImage from '../assets/images/addBook.png';
 export default function EditBook() {
   const { id } = useParams();
   const { data: book } = useSingleBookQuery(id);
   const { user } = useAppSelector((state) => state.user);
 
-
   const { data: currentUser } = useGetUserQuery(user?.email);
   const [updateBook] = useUpdateBookMutation();
-  const { register, handleSubmit } = useForm<IAddBookInput>({
+  const { register, handleSubmit } = useForm<IAddBookForm>({
     defaultValues: {
       title: book?.data?.title,
       author: book?.data?.author,
@@ -29,7 +28,7 @@ export default function EditBook() {
     },
   });
 
-  const onSubmit: SubmitHandler<Partial<IAddBookInput>> = (data) => {
+  const onSubmit: SubmitHandler<Partial<IAddBookForm>> = (data) => {
     if (currentUser?.data?._id === book?.data?.user) {
       data.user = currentUser.data?._id;
 
