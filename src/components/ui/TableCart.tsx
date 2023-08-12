@@ -12,8 +12,8 @@ import {
 import { useGetUserQuery } from '@/redux/feature/user/userApi';
 import { useAppSelector } from '@/redux/hooks';
 import {
-  IBook,
   ICompletelist,
+  IGetBook,
   IReadinglist,
   IWishlist,
 } from '@/types/globalTypes';
@@ -24,7 +24,7 @@ import { BsFillHeartFill } from 'react-icons/bs';
 import { MdBookmarkAdded } from 'react-icons/md';
 
 import { TiTick, TiTickOutline } from 'react-icons/ti';
-export default function TableCart({ book }: { book: IBook }) {
+export default function TableCart({ book }: { book: IGetBook }) {
   const { user } = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
   const { data: wishlist } = useGetWishlistQuery(data?.data?._id, {
@@ -35,6 +35,7 @@ export default function TableCart({ book }: { book: IBook }) {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
+
   const [removeFromWishlist] = useRemoveFromWishlistMutation();
 
   const [addToWishlist] = useAddToWishlistMutation();
@@ -69,7 +70,6 @@ export default function TableCart({ book }: { book: IBook }) {
   };
   const handleAddWishList = () => {
     const options = { userId: data?.data?._id, bookId: book?._id };
-   
 
     addToWishlist(options);
     handleRemoveFromAddreadingList();
@@ -109,15 +109,23 @@ export default function TableCart({ book }: { book: IBook }) {
   };
 
   return (
-    <div className="flex justify-center items-center border md:p-3 my-1 rounded-md">
-      <div className="md:w-2/12 ">
+    <div className="flex flex-col md:flex-row justify-center items-center border md:p-1 my-1 rounded-md">
+      <div className="w-full md:w-2/12 ">
         {' '}
-        <img src={book?.image} alt="" className="md:w-10" />
+        <img
+          src={`${import.meta.env.VITE_BASE_FOR_FILE}${book?.image?.filename}`}
+          alt=""
+          className="w-full m-2 md:w-10 md:my-0"
+        />
       </div>{' '}
-      <h6 className="md:w-2/12 ">{book?.title}</h6>
-      <p className="md:w-2/12 ">{book?.author}</p>
-      <p className="md:w-2/12 ">{book?.genre}</p>
-      <p className="md:w-2/12">{book?.publication_date}</p>
+      <h6 className="text-2xl text-center font-semibold md:font-normal md:text-base md:w-2/12 ">
+        {book?.title}
+      </h6>
+      <p className=" text-xl md:text-base  md:w-2/12 ">{book?.author}</p>
+      <p className=" text-lg md:text-base md:w-2/12 ">{book?.genre}</p>
+      <p className=" text-lg md:text-base md:w-2/12">
+        {book?.publication_date}
+      </p>
       <div className="md:w-2/12 p-3 flex justify-center items-center cursor-pointer">
         {wishlist?.data?.find(
           (list: IWishlist) => list?.book?._id === book?._id

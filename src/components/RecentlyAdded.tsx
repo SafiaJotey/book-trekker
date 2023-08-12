@@ -1,5 +1,5 @@
 import { useRecentBookQuery } from '@/redux/feature/books/bookApi';
-import { IBook } from '@/types/globalTypes';
+import { IGetBook } from '@/types/globalTypes';
 import { Link } from 'react-router-dom';
 import Card from './ui/Card';
 import Header from './ui/Header';
@@ -23,7 +23,7 @@ export default function RecentlyAdded() {
         </Link>
       </div>
       <div className="flex flex-col md:flex-row justify-start flex-wrap items-center w-full">
-        {data?.data?.map((book: IBook) => (
+        {data?.data?.map((book: IGetBook) => (
           <Card key={book._id} book={book}></Card>
         ))}
       </div>

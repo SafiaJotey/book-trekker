@@ -11,7 +11,7 @@ import {
   updateSearchTerm,
 } from '@/redux/feature/books/books.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { IBook } from '@/types/globalTypes';
+import { IBook, IGetBook } from '@/types/globalTypes';
 import { ChangeEvent } from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
@@ -24,6 +24,7 @@ export default function AllBooks() {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
+
   const { data: recentBook } = useRecentBookQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
@@ -47,7 +48,7 @@ export default function AllBooks() {
     searchTerm !== ''
   ) {
     filteredData = data?.data?.filter(
-      (item: IBook) =>
+      (item: IGetBook) =>
         item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.genre.toLowerCase().includes(searchTerm.toLowerCase())
@@ -60,14 +61,14 @@ export default function AllBooks() {
   ) {
     filteredData = data?.data
       ?.filter(
-        (item: IBook) =>
+        (item: IGetBook) =>
           item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
       )
-      .filter((item: IBook) =>
+      .filter((item: IGetBook) =>
         item.publication_date.includes(selectedPublishYearValue)
       )
       .filter(
-        (item: IBook) =>
+        (item: IGetBook) =>
           item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.genre.toLowerCase().includes(searchTerm.toLowerCase())
@@ -80,11 +81,11 @@ export default function AllBooks() {
   ) {
     filteredData = data?.data
       ?.filter(
-        (item: IBook) =>
+        (item: IGetBook) =>
           item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
       )
       .filter(
-        (item: IBook) =>
+        (item: IGetBook) =>
           item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.genre.toLowerCase().includes(searchTerm.toLowerCase())
@@ -96,11 +97,11 @@ export default function AllBooks() {
     searchTerm !== ''
   ) {
     filteredData = data?.data
-      ?.filter((item: IBook) =>
+      ?.filter((item: IGetBook) =>
         item.publication_date.includes(selectedPublishYearValue)
       )
       .filter(
-        (item: IBook) =>
+        (item: IGetBook) =>
           item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.genre.toLowerCase().includes(searchTerm.toLowerCase())
@@ -113,10 +114,10 @@ export default function AllBooks() {
   ) {
     filteredData = data?.data
       ?.filter(
-        (item: IBook) =>
+        (item: IGetBook) =>
           item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
       )
-      .filter((item: IBook) =>
+      .filter((item: IGetBook) =>
         item.publication_date.includes(selectedPublishYearValue)
       );
   }
@@ -126,7 +127,7 @@ export default function AllBooks() {
     searchTerm === ''
   ) {
     filteredData = data?.data?.filter(
-      (item: IBook) =>
+      (item: IGetBook) =>
         item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
     );
   }
@@ -135,7 +136,7 @@ export default function AllBooks() {
     selectedPublishYearValue !== '' &&
     searchTerm === ''
   ) {
-    filteredData = data?.data?.filter((item: IBook) =>
+    filteredData = data?.data?.filter((item: IGetBook) =>
       item.publication_date.includes(selectedPublishYearValue)
     );
   }
@@ -172,7 +173,7 @@ export default function AllBooks() {
         <div className="w-full flex flex-col-reverse md:flex-row md:justify-between md:items-start ">
           {/* cards */}
           <div className="flex justify-center flex-wrap items-center md:w-3/4">
-            {filteredData?.map((book: IBook) => (
+            {filteredData?.map((book: IGetBook) => (
               <Card key={book._id} book={book}></Card>
             ))}
           </div>
@@ -243,7 +244,7 @@ export default function AllBooks() {
                 </div>
                 {/* mini cards */}
                 <div className="flex flex-col justify-start flex-wrap items-center w-full">
-                  {recentBook?.data?.slice(0, 3).map((book: IBook) => (
+                  {recentBook?.data?.slice(0, 3).map((book: IGetBook) => (
                     <MiniCards key={book._id} book={book}></MiniCards>
                   ))}
                 </div>

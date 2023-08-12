@@ -4,7 +4,7 @@ const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => '/books',
-      providesTags: ['postBook', 'updateBook', 'deleteBook'],
+      providesTags: ['postBook', 'updateBook', 'deleteBook', 'postreview'],
     }),
     recentBook: builder.query({
       query: () => `/books/recent`,
@@ -12,7 +12,7 @@ const productApi = api.injectEndpoints({
     }),
     singleBook: builder.query({
       query: (id) => `/books/${id}`,
-      providesTags: ['updateBook', 'deleteBook'],
+      providesTags: ['updateBook', 'deleteBook', 'postreview'],
     }),
     getReviews: builder.query({
       query: (id) => `/books/${id}`,
@@ -145,7 +145,7 @@ export const {
   useDeleteBookMutation,
   useAddReviewMutation,
   useGetReviewsQuery,
-useGetCompleteListQuery,
-useAddToCompletedListMutation,
-useRemoveFromCompletedListMutation
+  useGetCompleteListQuery,
+  useAddToCompletedListMutation,
+  useRemoveFromCompletedListMutation,
 } = productApi;

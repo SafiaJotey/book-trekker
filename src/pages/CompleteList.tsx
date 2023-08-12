@@ -6,9 +6,9 @@ import { useGetUserQuery } from '@/redux/feature/user/userApi';
 
 import { useAppSelector } from '@/redux/hooks';
 import Spinner from '@/shared/Spinner';
-import { IBook } from '@/types/globalTypes';
+import {  IList } from '@/types/globalTypes';
 
-export default function WishList() {
+export default function CompleteList() {
   const { user, isLoading } = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
 
@@ -16,7 +16,7 @@ export default function WishList() {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
-
+  console.log(completelist?.data);
   return (
     <>
       {!isLoading ? (
@@ -31,7 +31,7 @@ export default function WishList() {
                 header="Explore Recently Added CompleteList"
                 subHeader="My Complete List"
               ></Header>
-              <div className="flex justify-center items-center border p-3 mb-1  mt-10 rounded-md  text-main ">
+              <div className="hidden md:flex justify-center items-center border p-3 mb-1  mt-10 rounded-md  text-main ">
                 <h5 className="font-bold md:w-2/12  ">Book</h5>
 
                 <h5 className="font-bold md:w-2/12">Title</h5>
@@ -41,8 +41,11 @@ export default function WishList() {
 
                 <h5 className="font-bold md:w-2/12 text-center">Action</h5>
               </div>
-              {completelist?.data?.map((bookList: IBook) => (
-                <TableCart key={bookList._id} book={bookList?.book}></TableCart>
+              {completelist?.data?.map((bookList: IList) => (
+                <TableCart
+                  key={bookList?._id}
+                  book={bookList?.book}
+                ></TableCart>
               ))}
             </div>{' '}
           </div>

@@ -1,6 +1,6 @@
-import { IBook, IReview} from '@/types/globalTypes';
+import { IGetBook, IReview } from '@/types/globalTypes';
 
-export default function ratingCount(book: IBook) {
+export default function ratingCount(book: IGetBook) {
   let totalRating = 0;
   let finalRating = 0;
 

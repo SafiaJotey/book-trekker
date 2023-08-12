@@ -2,7 +2,7 @@ import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 
 import Header from '@/components/ui/Header';
 import { useGetBooksQuery } from '@/redux/feature/books/bookApi';
-import { IBook } from '@/types/globalTypes';
+import { IBook, IGetBook } from '@/types/globalTypes';
 import { Link, useParams } from 'react-router-dom';
 import Card from '../components/ui/Card';
 
@@ -41,7 +41,7 @@ export default function Genra() {
         <div className="w-full flex flex-col-reverse md:flex-row md:justify-between md:items-start ">
           {/* cards */}
           <div className="flex justify-start flex-wrap items-center w-full">
-            {filteredData?.map((book: IBook) => (
+            {filteredData?.map((book: IGetBook) => (
               <Card key={book._id} book={book}></Card>
             ))}
           </div>

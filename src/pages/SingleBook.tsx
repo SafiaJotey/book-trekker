@@ -22,6 +22,7 @@ import {
   useSingleBookQuery,
 } from '@/redux/feature/books/bookApi';
 import { ICompletelist, IReadinglist, IWishlist } from '@/types/globalTypes';
+import { FaReadme } from 'react-icons/fa';
 
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
@@ -41,6 +42,7 @@ export default function SingleBook() {
   const { id } = useParams();
   const { data: book } = useSingleBookQuery(id);
 
+  console.log(book?.data);
   const { user } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const { data: reviews } = useGetReviewsQuery(id);
@@ -187,7 +189,10 @@ export default function SingleBook() {
 
       <div className="container my-[100px] md:px-[100px]">
         <div className="w-full border rounded-md flex flex-col md:flex-row p-2 ">
-          <img src={book?.data?.image} className="md:w-1/3" />
+          <img
+            src={`${import.meta.env.VITE_BASE_FOR_FILE}${book?.data?.image?.filename}`}
+            className="md:w-1/3"
+          />
 
           <div className="md:w-2/3 p-5 ">
             <div className="border-b-2 pb-3">
@@ -288,9 +293,22 @@ export default function SingleBook() {
               </p>
             </div>
             <div className="flex flex-col md:flex-row md:items-center md:justify-center justify-start mt-5">
+              <a
+                href={`${import.meta.env.VITE_BASE_FOR_FILE}${book?.bookPdf?.filename}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button
+                  onClick={handleDeleteOpenModal}
+                  className="bg-green-600 text-white border border-green-600 w-full md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
+                >
+                  <FaReadme className="mx-2 "></FaReadme>
+                  <span className="mx-2"> Read Now</span>{' '}
+                </button>
+              </a>
               <button
                 onClick={handleOpenModal}
-                className="bg-review text-white border border-review md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
+                className="bg-review text-white border border-review w-full md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
               >
                 <MdRateReview className="text-lg font-bold "></MdRateReview>
                 <span className="mx-2"> Add Review</span>{' '}
@@ -302,14 +320,14 @@ export default function SingleBook() {
               />
               <button
                 onClick={handleEditRoute}
-                className="bg-main text-white border border-main md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
+                className="bg-main text-white border border-main w-full md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
               >
                 <BiSolidEditAlt className="text-lg font-bold"></BiSolidEditAlt>
                 <span className="mx-2"> Edit</span>{' '}
               </button>
               <button
                 onClick={handleDeleteOpenModal}
-                className="bg-red-600 text-white border border-red-600 md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
+                className="bg-red-600 text-white border border-red-600 w-full md:w-[200px] py-2 rounded-sm m-1 flex justify-center items-center"
               >
                 <MdDelete className="text-lg font-bold"></MdDelete>
                 <span className="mx-2"> Delete</span>{' '}

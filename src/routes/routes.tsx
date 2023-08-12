@@ -28,16 +28,16 @@ const routes = createBrowserRouter([
         element: <AllBooks />,
       },
       {
-        path: '/books/:genre',
-        element: <Genra />,
-      },
-      {
         path: '/books/:id',
         element: (
           <PrivateRoute>
             <SingleBook />
           </PrivateRoute>
         ),
+      },
+      {
+        path: '/books/category/:genre',
+        element: <Genra />,
       },
 
       {

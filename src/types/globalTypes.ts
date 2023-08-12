@@ -67,13 +67,24 @@ export interface IReadinglist {
   book?: ISingleBook;
   user?: IUser;
 }
-export interface IFaq{
-  question: string,
-  answer:string}
-  export interface ICategory {
+export interface IFaq {
+  question: string;
+  answer: string;
+}
+export interface ICategory {
   image: string;
   genra: string;
 }
+export type IFile = {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  destination: string;
+  filename: string;
+  path: string;
+  size: number;
+};
 export interface ICompletelist {
   _id: string;
   book?: ISingleBook;
@@ -89,11 +100,50 @@ export type DeleteModalProps = {
   onDelete: () => void;
 };
 
-export interface IAddBookInput {
+export interface IAddBookForm {
+  image: string;
   title: string;
   author: string;
   genre: string;
   publication_date: string;
-  image: string;
-  user?: string;
+  bookPdf: string;
+  user: string;
+}
+export interface IGetBook {
+  image: {
+    fieldname: string;
+    originalname: string;
+    encoding: string;
+    mimetype: string;
+    destination: string;
+    filename: string;
+    path: string;
+    size: number;
+  };
+  title: string;
+  author: string;
+  genre: string;
+  publication_date: string;
+  bookPdf: {
+    fieldname: string;
+    originalname: string;
+    encoding: string;
+    mimetype: string;
+    destination: string;
+    filename: string;
+    path: string;
+    size: number;
+  };
+  reviews?: {
+    reviewer: string;
+    rating: number;
+    comment: string;
+  }[];
+  _id: string;
+  user: string;
+}
+export interface IList {
+  book: IGetBook;
+  user: string;
+  _id: string;
 }

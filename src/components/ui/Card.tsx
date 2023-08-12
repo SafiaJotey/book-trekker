@@ -1,8 +1,8 @@
 import { useGetUserQuery } from '@/redux/feature/user/userApi';
 import { useAppSelector } from '@/redux/hooks';
 import {
-  IBook,
   ICompletelist,
+  IGetBook,
   IReadinglist,
   IWishlist,
 } from '@/types/globalTypes';
@@ -10,6 +10,7 @@ import { toast } from 'react-hot-toast';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { BsFillHeartFill } from 'react-icons/bs';
+import { FaReadme } from 'react-icons/fa';
 import { MdBookmarkAdded } from 'react-icons/md';
 import { TiTick, TiTickOutline } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
@@ -26,7 +27,7 @@ import {
 } from '../../redux/feature/books/bookApi';
 import Review from '../Review';
 
-export default function Card({ book }: { book: IBook }) {
+export default function Card({ book }: { book: IGetBook }) {
   const { user } = useAppSelector((state) => state.user);
 
   const { data } = useGetUserQuery(user?.email);
@@ -120,24 +121,29 @@ export default function Card({ book }: { book: IBook }) {
   };
 
   return (
-    <div className="md:px-2 my-1 md:my-3  w-full p-3 md:w-1/4  ">
-      <div className="shadow-md rounded-md md:p-3 bg-white">
+    <div className="md:px-1 my-1 md:my-3  w-full p-3 md:w-1/4  ">
+      <div className="shadow-md rounded-md md:p-1 bg-white">
         <Link to={`/books/${book?._id}`}>
-          <div className="h-[380px] md:h-[280px] w-full p-2 md:p-0">
+          <div className="h-[350px] md:h-[270px] w-full p-2 md:p-0">
             {' '}
-            <img src={book?.image} className="h-[380px] md:h-[280px] w-full" />
+            <img
+              src={`${import.meta.env.VITE_BASE_FOR_FILE}${
+                book?.image?.filename
+              }`}
+              className="h-[350px] md:h-[270px] w-full"
+            />
           </div>
         </Link>
 
-        <div className="  p-2 md:p-0">
+        <div className="  p-2 md:p-1">
           {' '}
           <Link to={`/books/${book?._id}`}>
-            <h6 className="text-lg font-semibold  h-8 mb-5 ">{book.title}</h6>
+            <h6 className="text-base font-semibold  h-6 mb-5 ">{book.title}</h6>
           </Link>
-          <p className=" font-semibold  h-8 ">{book?.author}</p>
+          <p className=" font-semibold text-base h-6 ">{book?.author}</p>
           <div className="flex justify-between h-12">
-            <i className="text-base"> {book?.genre}</i>
-            <i className="text-base"> {book?.publication_date}</i>
+            <i className="text-sm"> {book?.genre}</i>
+            <i className="text-sm"> {book?.publication_date}</i>
           </div>
           <div className="flex justify-between ">
             <Review key={book?._id} book={book} />
@@ -193,6 +199,17 @@ export default function Card({ book }: { book: IBook }) {
               )}
             </div>
           </div>
+          <a
+            href={`${import.meta.env.VITE_BASE_FOR_FILE}${
+              book?.bookPdf?.filename
+            }`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="flex justify-center items-center text-white bg-main p-1  my-1 w-full rounded-sm text-sm">
+              <FaReadme className="mx-2 "></FaReadme> Start Reading
+            </button>
+          </a>
         </div>
       </div>
     </div>
