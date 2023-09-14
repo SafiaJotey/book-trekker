@@ -1,13 +1,31 @@
-import appImage from '../assets/images/app.png';
+import { RecentVarient, bannerVarient } from '@/animates/home';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import aStore from '../assets/images/aStore.webp';
+import appImage from '../assets/images/app.png';
 import gPlay from '../assets/images/gPlay.webp';
 
 export default function AppDownload() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   return (
-    <div className="md:h-[340px] bg-main flex justify-center items-center my-[100px]">
+    <motion.div
+      ref={ref}
+      className="md:h-[340px] bg-main flex justify-center items-center my-[100px]"
+    >
       <div className="container md:px-[100px]  flex flex-col md:flex-row justify-between items-center">
-        <img src={appImage} />
-        <div className="md:py-[30px]">
+        <motion.img
+          variants={bannerVarient}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          src={appImage}
+        />
+        <motion.div
+          variants={RecentVarient}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="md:py-[30px]"
+        >
           <h6 className="text-white text-lg font-semibold">
             Introducing your ereader mobile app!
           </h6>
@@ -24,8 +42,8 @@ export default function AppDownload() {
             <img src={aStore} alt="" className="m-2" />
             <img src={gPlay} alt="" className="m-2" />
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }

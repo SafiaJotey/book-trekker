@@ -1,7 +1,10 @@
+import { RecentVarient, bannerVarient } from '@/animates/home';
 import { auth } from '@/lib/firebase';
 import { setUser } from '@/redux/feature/user/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { signOut } from 'firebase/auth';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import {
   FaFacebookF,
@@ -14,6 +17,8 @@ import { TiLocation } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import logo from '../assets/images/Book_trekker_logo.png';
 export default function Footer() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   const { user } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
@@ -27,22 +32,38 @@ export default function Footer() {
   };
 
   return (
-    <div>
+    <motion.div ref={ref}>
       <div className="mx-auto px-[50px] bg-[#151b30]">
         <div className=" text-white flex  flex-col md:flex-row p-5">
           <div className="md:w-4/12 p-5">
             <div className="flex md:justify-start justify-center">
               {' '}
-              <img src={logo} alt="" />
+              <motion.img
+                variants={bannerVarient}
+                initial="hidden"
+                animate={isInView ? 'visible' : 'hidden'}
+                src={logo}
+                alt=""
+              />
             </div>
 
-            <p className=" text-center md:text-justify my-2">
+            <motion.p
+              variants={RecentVarient}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className=" text-center md:text-justify my-2"
+            >
               Welcome to Book Treeker, your ultimate destination for avid
               readers to immerse themselves in a vast collection of books and
               explore captivating stories from various genres, all at your
               fingertips.
-            </p>
-            <div className="flex justify-center md:justify-start items-center my-5">
+            </motion.p>
+            <motion.div
+              variants={RecentVarient}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="flex justify-center md:justify-start items-center my-5"
+            >
               <h3>
                 <FaFacebookF className="text-xl mx-2"></FaFacebookF>
               </h3>
@@ -55,10 +76,15 @@ export default function Footer() {
               <h3 className="text-xl mx-2">
                 <FaPinterest></FaPinterest>
               </h3>
-            </div>
+            </motion.div>
             <div></div>
           </div>
-          <div className="md:w-4/12 flex justify-between items-start">
+          <motion.div
+            variants={RecentVarient}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            className="md:w-4/12 flex justify-between items-start"
+          >
             <div className="w-1/2 p-5">
               <h3 className="font-bold">Important Links</h3>
               <ul className="flex flex-col items-start">
@@ -162,8 +188,13 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-          </div>
-          <div className="md:w-4/12 md:p-5">
+          </motion.div>
+          <motion.div
+            variants={RecentVarient}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            className="md:w-4/12 md:p-5"
+          >
             <h3 className="mb-2 font-bold">Subscribe</h3>
             <div className="my-5">
               <input
@@ -193,14 +224,19 @@ export default function Footer() {
               </div>
             </div>
             <div></div>
-          </div>
+          </motion.div>
         </div>
       </div>
       <div className="bg-[#1e263b] text-white flex justify-center py-5">
-        <p className="py-5  text-center md:text-left">
+        <motion.p
+          variants={bannerVarient}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="py-5  text-center md:text-left"
+        >
           © 2023 BookTrekker By Safia Ahmed. All Rights Reserved
-        </p>
+        </motion.p>
       </div>
-    </div>
+    </motion.div>
   );
 }

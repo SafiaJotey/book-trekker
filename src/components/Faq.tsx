@@ -1,10 +1,15 @@
+import { RecentVarient, bannerVarient } from '@/animates/home';
 import { IFaq } from '@/types/globalTypes';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import app from '../assets/images/faq.jpg';
 import FAQAccordion from './ui/FAQAccordion';
 import Header from './ui/Header';
 
 export default function Faq() {
-  const faqs:IFaq[]= [
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const faqs: IFaq[] = [
     {
       question: 'How can I create an account on the book reading website?',
       answer:
@@ -40,19 +45,31 @@ export default function Faq() {
   ];
 
   return (
-    <div className="container md:px-[100px]  py-10 bg-white">
+    <div ref={ref} className="container md:px-[100px]  py-10 bg-white">
       <div className="flex flex-col justify-center md:flex-row md:justify-between items-center">
         <Header
+          isInView={isInView}
           header="Frequently Asked Question"
           subHeader="By The Readers"
         ></Header>
       </div>
       <div className="flex  flex-col-reverse md:flex-row justify-center my-8">
-        <div className="md:w-1/2">
+        <motion.div
+          variants={bannerVarient}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="md:w-1/2"
+        >
           <FAQAccordion faqs={faqs}></FAQAccordion>
-        </div>
+        </motion.div>
         <div className="md:w-1/2">
-          <img src={app} alt="" />
+          <motion.img
+            variants={RecentVarient}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            src={app}
+            alt=""
+          />
         </div>
       </div>
     </div>

@@ -1,8 +1,14 @@
+import { bannerVarient } from '@/animates/home';
 import { ICategory } from '@/types/globalTypes';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import CategoryCrd from './ui/CategoryCrd';
 import Header from './ui/Header';
 
 export default function Category() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   const category = [
     {
       image: 'https://i.ibb.co/rQdbJ8b/ezgif-com-webp-to-jpg-6.jpg',
@@ -52,19 +58,25 @@ export default function Category() {
 
   return (
     <div className="container p-5 md:p-[100px]">
-      <div className="">
+      <motion.div ref={ref} className="">
         <Header
+          isInView={isInView}
           header="  Explore The genra"
           subHeader="genra Of books"
         ></Header>
         <div className="flex justify-center items-center my-10">
-          <div className="flex  flex-col md:flex-row justify-center items-center flex-wrap px-8">
+          <motion.div
+            variants={bannerVarient}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            className="flex  flex-col md:flex-row justify-center items-center flex-wrap px-8"
+          >
             {category.map((item: ICategory) => (
               <CategoryCrd key={item.genra} item={item}></CategoryCrd>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

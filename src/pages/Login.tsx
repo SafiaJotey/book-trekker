@@ -1,6 +1,8 @@
+import { RecentVarient, headerVarient } from '@/animates/home';
 import { loginUser } from '@/redux/feature/user/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IFormLoginInput } from '@/types/globalTypes';
+import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
@@ -31,29 +33,41 @@ export default function Login() {
 
   useEffect(() => {
     if (isError) {
-  
       toast.error('Something went wrong');
     }
     if (user.email && !isLoading) {
+      localStorage.setItem('userEmail', user.email);
+
       navigate(from);
       setTimeout(() => {
         toast.success('Successfully Logged in.');
       }, 1000);
     }
-  }, [user.email, isLoading, navigate, from, isError,error]);
+  }, [user.email, isLoading, navigate, from, isError, error]);
 
   return (
-    <div className="container md:px-[250px]   h-screen  flex  justify-center items-center">
+    <div className="container md:px-[250px] my-[80px] md:my-0 h-screen  flex  justify-center items-center">
       {/* {!isLoading ? (
        
       ) : (
         <Spinner></Spinner>
       )} */}
-      <div className="shadow-md  w-full flex flex-col md:flex-row justify-center items-center rounded-lg  ">
+      <div className="shadow-md p-2 w-full flex flex-col md:flex-row justify-center items-center rounded-lg  ">
         <div className="md:w-6/12 h-[560px] ">
-          <img className="h-full w-full" src={auth} />
+          <motion.img
+            variants={RecentVarient}
+            initial="hidden"
+            animate="visible"
+            className="h-full w-full rounded-md "
+            src={auth}
+          />
         </div>
-        <div className="md:w-6/12 px-12 flex flex-col items-center">
+        <motion.div
+          variants={headerVarient}
+          initial="hidden"
+          animate="visible"
+          className="md:w-6/12 px-12 flex flex-col items-center"
+        >
           <div className=" w-full flex justify-end">
             <Link to="/">
               <BiSolidHome className="text-main text-3xl my-2"></BiSolidHome>
@@ -125,7 +139,7 @@ export default function Login() {
               </small>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

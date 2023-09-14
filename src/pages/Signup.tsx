@@ -1,6 +1,8 @@
+import { RecentVarient, headerVarient } from '@/animates/home';
 import { useCreateNewUserMutation } from '@/redux/feature/user/userApi';
 import { createUser } from '@/redux/feature/user/userSlice';
 import { useAppDispatch } from '@/redux/hooks';
+import { motion } from 'framer-motion';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Toaster, toast } from 'react-hot-toast';
 import { BiSolidHome, BiSolidUser } from 'react-icons/bi';
@@ -35,12 +37,23 @@ export default function Signup() {
     }, 1000);
   };
   return (
-    <div className="container md:px-[250px]   h-screen  flex  justify-center items-center">
-      <div className="shadow-md  w-full flex flex-col md:flex-row justify-center items-center rounded-lg  ">
+    <div className="container md:px-[250px]  my-[140px] md:my-0   h-screen  flex  justify-center items-center">
+      <div className="shadow-md p-2 w-full flex flex-col md:flex-row justify-center items-center rounded-lg  ">
         <div className="md:w-6/12 h-[560px]  ">
-          <img className="h-full w-full" src={auth} />
+          <motion.img
+            variants={RecentVarient}
+            initial="hidden"
+            animate="visible"
+            className="h-full w-full rounded-md "
+            src={auth}
+          />
         </div>
-        <div className="md:w-6/12 px-12 flex flex-col items-center">
+        <motion.div
+          variants={headerVarient}
+          initial="hidden"
+          animate="visible"
+          className="md:w-6/12 px-12 flex flex-col items-center"
+        >
           <div className=" w-full flex justify-end">
             <Link to="/">
               <BiSolidHome className="text-main text-3xl my-2"></BiSolidHome>
@@ -49,7 +62,7 @@ export default function Signup() {
           <h3 className="text-2xl text-main font-bold my-8 text-center md:text-left">
             Create A New Account
           </h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form className="pb-3" onSubmit={handleSubmit(onSubmit)}>
             <label>First Name *</label>
             <input
               className="w-full p-2 border rounded-md my-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -130,7 +143,7 @@ export default function Signup() {
               </small>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
       <Toaster />
     </div>

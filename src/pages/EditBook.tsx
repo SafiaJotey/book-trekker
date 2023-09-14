@@ -9,9 +9,13 @@ import { IAddBookForm } from '@/types/globalTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import editbookImage from '../assets/images/addBook.png';
 export default function EditBook() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   const { id } = useParams();
   const { data: book } = useSingleBookQuery(id);
   const { user } = useAppSelector((state) => state.user);
@@ -46,6 +50,7 @@ export default function EditBook() {
   return (
     <div className=" ">
       <AdditionalPageCover
+        isInView={isInView}
         title="Reading is an active, imaginative act; it takes work."
         author="―Khaled Hosseinis"
       />

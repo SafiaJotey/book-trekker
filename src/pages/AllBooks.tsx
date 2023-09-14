@@ -1,5 +1,6 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 
+import { RecentVarient, bannerVarient } from '@/animates/home';
 import Header from '@/components/ui/Header';
 import MiniCards from '@/components/ui/MiniCards';
 import {
@@ -12,7 +13,8 @@ import {
 } from '@/redux/feature/books/books.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IGetBook } from '@/types/globalTypes';
-import { ChangeEvent } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { ChangeEvent, useRef } from 'react';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { FiInstagram } from 'react-icons/fi';
@@ -20,6 +22,8 @@ import { TiTick } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
 import Card from '../components/ui/Card';
 export default function AllBooks() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   const { data } = useGetBooksQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
@@ -149,8 +153,9 @@ export default function AllBooks() {
   }
 
   return (
-    <div className=" ">
+    <motion.div ref={ref} className=" ">
       <AdditionalPageCover
+        isInView={isInView}
         title="Books were safer than other people anyway."
         author="Neil Gaiman, The Ocean at the End of the Lane"
       />
@@ -158,6 +163,7 @@ export default function AllBooks() {
         {' '}
         <div className="flex flex-col justify-center md:flex-row md:justify-between items-center">
           <Header
+            isInView={isInView}
             header="Explore All The Books"
             subHeader="By The Authors"
           ></Header>
@@ -172,14 +178,24 @@ export default function AllBooks() {
         </div>
         <div className="w-full flex flex-col-reverse md:flex-row md:justify-between md:items-start ">
           {/* cards */}
-          <div className="flex justify-center flex-wrap items-center md:w-3/4">
+          <motion.div
+            variants={bannerVarient}
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            className="flex justify-center flex-wrap items-center md:w-3/4"
+          >
             {filteredData?.map((book: IGetBook) => (
               <Card key={book._id} book={book}></Card>
             ))}
-          </div>
+          </motion.div>
           {/* search and filters */}
           <div className="md:w-1/4 md:pl-3">
-            <div className="p-3  border rounded-md  ">
+            <motion.div
+              variants={RecentVarient}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              className="p-3  border rounded-md  "
+            >
               <div className="flex justify-between items-center  border-1 rounded-md ">
                 {' '}
                 <input
@@ -272,10 +288,10 @@ export default function AllBooks() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

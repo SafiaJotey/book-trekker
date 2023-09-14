@@ -1,3 +1,4 @@
+import { RecentVarient } from '@/animates/home';
 import {
   useAddToCompletedListMutation,
   useAddToReadingListMutation,
@@ -22,9 +23,9 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BiBookAdd } from 'react-icons/bi';
 import { BsFillHeartFill } from 'react-icons/bs';
 import { MdBookmarkAdded } from 'react-icons/md';
-
+import {motion} from "framer-motion"
 import { TiTick, TiTickOutline } from 'react-icons/ti';
-export default function TableCart({ book }: { book: IGetBook }) {
+export default function TableCart({ book,isInView }: { book: IGetBook ,isInView:boolean}) {
   const { user } = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
   const { data: wishlist } = useGetWishlistQuery(data?.data?._id, {
@@ -109,7 +110,12 @@ export default function TableCart({ book }: { book: IGetBook }) {
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center border md:p-1 my-1 rounded-md">
+    <motion.div
+    variants={RecentVarient}
+    initial="hidden"
+    animate={isInView ? 'visible' : 'hidden'}
+    
+    className="flex flex-col md:flex-row justify-center items-center border md:p-1 my-1 rounded-md">
       <div className="w-full md:w-2/12 ">
         {' '}
         <img
@@ -176,6 +182,6 @@ export default function TableCart({ book }: { book: IGetBook }) {
           ></TiTickOutline>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

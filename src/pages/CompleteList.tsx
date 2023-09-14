@@ -6,12 +6,15 @@ import { useGetUserQuery } from '@/redux/feature/user/userApi';
 
 import { useAppSelector } from '@/redux/hooks';
 import Spinner from '@/shared/Spinner';
-import {  IList } from '@/types/globalTypes';
+import { IList } from '@/types/globalTypes';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function CompleteList() {
   const { user, isLoading } = useAppSelector((state) => state.user);
   const { data } = useGetUserQuery(user?.email);
-
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   const { data: completelist } = useGetCompleteListQuery(data?.data?._id, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
@@ -20,14 +23,16 @@ export default function CompleteList() {
   return (
     <>
       {!isLoading ? (
-        <div>
+        <motion.div ref={ref}>
           <AdditionalPageCover
+            isInView={isInView}
             title="The whole world opened to me when I learned to read."
             author="Mary McLeod Bethune"
           ></AdditionalPageCover>
           <div className="container mx-auto md:px-[100px] my-20">
             <div>
               <Header
+                isInView={isInView}
                 header="Explore Recently Added CompleteList"
                 subHeader="My Complete List"
               ></Header>
@@ -43,13 +48,14 @@ export default function CompleteList() {
               </div>
               {completelist?.data?.map((bookList: IList) => (
                 <TableCart
+                  isInView={isInView}
                   key={bookList?._id}
                   book={bookList?.book}
                 ></TableCart>
               ))}
             </div>{' '}
           </div>
-        </div>
+        </motion.div>
       ) : (
         <Spinner />
       )}

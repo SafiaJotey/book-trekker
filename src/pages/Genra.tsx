@@ -3,12 +3,15 @@ import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
 import Header from '@/components/ui/Header';
 import { useGetBooksQuery } from '@/redux/feature/books/bookApi';
 import { IBook, IGetBook } from '@/types/globalTypes';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Card from '../components/ui/Card';
 
 export default function Genra() {
   const { genre } = useParams();
-
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   const { data } = useGetBooksQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
@@ -19,6 +22,7 @@ export default function Genra() {
   return (
     <div className=" ">
       <AdditionalPageCover
+        isInView={isInView}
         title="Books were safer than other people anyway."
         author="Neil Gaiman, The Ocean at the End of the Lane"
       />
@@ -26,6 +30,7 @@ export default function Genra() {
         {' '}
         <div className="flex flex-col justify-center md:flex-row md:justify-between items-center">
           <Header
+            isInView={isInView}
             header={`Explore  The Books Of Genre-${genre}`}
             subHeader="Genre Of Book"
           ></Header>

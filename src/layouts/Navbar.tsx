@@ -1,8 +1,10 @@
+import { headerVarient } from '@/animates/home';
 import { auth } from '@/lib/firebase';
 import { useGetUserQuery } from '@/redux/feature/user/userApi';
 import { setUser } from '@/redux/feature/user/userSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { signOut } from 'firebase/auth';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiOutlineLogout } from 'react-icons/ai';
@@ -22,6 +24,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     signOut(auth).then(() => {
+      localStorage.removeItem('userEmail');
       // Sign-out successful.
       dispatch(setUser(null));
       toast.success('successfully logged out');
@@ -36,7 +39,12 @@ export default function Navbar() {
 
   return (
     <nav className=" bg-main py-1 md:fixed md:w-full z-50">
-      <div className="container mx-auto">
+      <motion.div
+        variants={headerVarient}
+        initial="hidden"
+        animate="visible"
+        className="container mx-auto"
+      >
         <div className="flex items-center justify-between">
           <div className="w-20 ">
             <Link className="text-white" to="/">
@@ -44,7 +52,12 @@ export default function Navbar() {
               <img src={logo} />
             </Link>
           </div>
-          <div className="md:hidden">
+          <motion.div
+            variants={headerVarient}
+            initial="hidden"
+            animate="visible"
+            className="md:hidden"
+          >
             <button
               className="text-white focus:outline-none"
               onClick={toggleNavbar}
@@ -73,7 +86,7 @@ export default function Navbar() {
                 )}
               </svg>
             </button>
-          </div>
+          </motion.div>
           <div className="hidden md:flex space-x-4">
             <ul className="flex  items-center">
               <li className=" mx-3">
@@ -87,6 +100,13 @@ export default function Navbar() {
                 <a>
                   <Link className="text-white" to="/allBooks">
                     All Books
+                  </Link>
+                </a>
+              </li>
+              <li className="my-1  mx-3">
+                <a>
+                  <Link className="text-white " to="/addBook">
+                    Add Book
                   </Link>
                 </a>
               </li>
@@ -169,6 +189,13 @@ export default function Navbar() {
               </li>
               <li className="my-1  mx-3">
                 <a>
+                  <Link className="text-white " to="/addBook">
+                    Add Book
+                  </Link>
+                </a>
+              </li>
+              <li className="my-1  mx-3">
+                <a>
                   <Link
                     className="text-white  flex justify-center items-center "
                     to="/wishlist"
@@ -217,11 +244,14 @@ export default function Navbar() {
               )}
               {user.email && (
                 <>
-                  <li
-                    className=" mx-3 my-1 cursor-pointer "
-                    onClick={handleLogout}
-                  >
-                    <a className="text-white  ">{data?.data?.firstName}</a>
+                  <li className="flex justify-center items-center font-bold py-1 px-2 rounded-sm">
+                    <MdOutlineWavingHand className="text-base text-white mx-1 "></MdOutlineWavingHand>
+                    <span className="text-base text-white mr-2 ">Hi</span>
+                    <a className="text-white  ">
+                      {' '}
+                      {data?.data?.firstName.charAt(0).toUpperCase() +
+                        data?.data?.firstName.slice(1)}
+                    </a>
                   </li>
                   <li
                     className=" mx-3 my-1 cursor-pointer "
@@ -234,7 +264,7 @@ export default function Navbar() {
             </ul>
           </div>
         )}
-      </div>
+      </motion.div>
     </nav>
   );
 }

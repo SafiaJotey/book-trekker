@@ -1,10 +1,21 @@
+import { RecentVarient } from '@/animates/home';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { BsSearchHeart } from 'react-icons/bs';
 import { GiBookCover } from 'react-icons/gi';
 import { HiUserGroup } from 'react-icons/hi';
 
 export default function Attraction() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   return (
-    <div className="container p-5 md:px-[100px] flex flex-col md:flex-row justify-around items-center my-10">
+    <motion.div
+      ref={ref}
+      variants={RecentVarient}
+      initial="hidden"
+      animate={isInView ? 'visible' : 'hidden'}
+      className="container p-5 md:px-[100px] flex flex-col md:flex-row justify-around items-center my-10"
+    >
       <div className="px-5 flex flex-col items-center justify-center text-center">
         <div className=" h-[200px] flex flex-col items-center justify-center p-3  text-center">
           <BsSearchHeart className=" text-4xl text-main my-2"></BsSearchHeart>
@@ -44,6 +55,6 @@ export default function Attraction() {
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

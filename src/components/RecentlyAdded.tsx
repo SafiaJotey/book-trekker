@@ -1,17 +1,26 @@
+import { RecentVarient } from '@/animates/home';
 import { useRecentBookQuery } from '@/redux/feature/books/bookApi';
 import { IGetBook } from '@/types/globalTypes';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Card from './ui/Card';
 import Header from './ui/Header';
 
 export default function RecentlyAdded() {
   const { data } = useRecentBookQuery(undefined);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   return (
-    <div className="container mx-auto p-5 md:px-[100px] md:pb-20 md:pt-10">
+    <motion.div
+      ref={ref}
+      className="container mx-auto p-5 md:px-[100px] md:pb-20 md:pt-10"
+    >
       <div className="flex flex-col justify-center md:flex-row md:justify-between items-center">
         <Header
-          header="  Explore Recently Added  Books"
+          isInView={isInView}
+          header="Explore Recently Added  Books"
           subHeader="Recently Added"
         ></Header>
         <Link
@@ -22,11 +31,16 @@ export default function RecentlyAdded() {
           Find More
         </Link>
       </div>
-      <div className="flex flex-col md:flex-row justify-start flex-wrap items-center w-full">
+      <motion.div
+        variants={RecentVarient}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+        className="flex flex-col md:flex-row justify-start flex-wrap items-center w-full"
+      >
         {data?.data?.map((book: IGetBook) => (
           <Card key={book._id} book={book}></Card>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
