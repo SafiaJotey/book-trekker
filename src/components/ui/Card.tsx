@@ -41,11 +41,10 @@ export default function Card({ book }: { book: IGetBook }) {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
-  const [removeFromWishlist] = useRemoveFromWishlistMutation();
 
+  const [removeFromWishlist] = useRemoveFromWishlistMutation();
   const [addToWishlist] = useAddToWishlistMutation();
   const [removeFromReadingList] = useRemoveFromReadingListMutation();
-
   const [addToReadingList] = useAddToReadingListMutation();
 
   const { data: completedlist } = useGetCompleteListQuery(data?.data?._id, {
@@ -54,21 +53,30 @@ export default function Card({ book }: { book: IGetBook }) {
   });
 
   const [removeFromCompletedList] = useRemoveFromCompletedListMutation();
-
   const [addToCompletedList] = useAddToCompletedListMutation();
+
+  // Helper flags for status checks
+  const isWishlisted = wishlist?.data?.some(
+    (list: IWishlist) => list?.book?._id === book?._id
+  );
+  const isReading = readinglist?.data?.some(
+    (list: IReadinglist) => list?.book?._id === book?._id
+  );
+  const isCompleted = completedlist?.data?.some(
+    (list: ICompletelist) => list?.book?._id === book?._id
+  );
 
   const handleAddreadingList = () => {
     if (user.email) {
       const options = { userId: data?.data?._id, bookId: book?._id };
-
       addToReadingList(options);
       handleRemoveFromWishList();
-
       toast.success('Added To Readinglist.');
     } else {
       toast.error('Please Login First');
     }
   };
+
   const handleRemoveFromAddreadingList = () => {
     readinglist?.data?.forEach((list: IReadinglist) => {
       if (list?.book?._id === book?._id) {
@@ -78,6 +86,7 @@ export default function Card({ book }: { book: IGetBook }) {
       }
     });
   };
+
   const handleAddWishList = () => {
     if (user.email) {
       const options = { userId: data?.data?._id, bookId: book?._id };
@@ -89,19 +98,19 @@ export default function Card({ book }: { book: IGetBook }) {
       toast.error('Please Login First');
     }
   };
+
   const handleRemoveFromWishList = () => {
     wishlist?.data?.forEach((list: IWishlist) => {
       if (list?.book?._id === book?._id) {
         removeFromWishlist(list?._id);
-
         toast.error('Removed From Wishlist');
       }
     });
   };
+
   const handleCompleted = () => {
     if (user.email) {
       const options = { userId: data?.data?._id, bookId: book?._id };
-
       addToCompletedList(options);
       handleRemoveFromAddreadingList();
       handleRemoveFromWishList();
@@ -110,104 +119,153 @@ export default function Card({ book }: { book: IGetBook }) {
       toast.error('Please Login First');
     }
   };
+
   const handleRemoveFCompleted = () => {
     completedlist?.data?.forEach((list: ICompletelist) => {
       if (list?.book?._id === book?._id) {
         removeFromCompletedList(list?._id);
-
         toast.error('Removed From CompletedList');
       }
     });
   };
 
   return (
-    <div className="md:px-1 my-1 md:my-3  w-full p-3 md:w-1/4  ">
-      <div className="shadow-md rounded-md md:p-1 bg-white">
-        <Link to={`/books/${book?._id}`}>
-          <div className="h-[350px] md:h-[270px] w-full p-2 md:p-0">
-            {' '}
-            <img
-              src={`${import.meta.env.VITE_BASE_FOR_FILE}${
-                book?.image?.filename
-              }`}
-              className="h-[350px] md:h-[270px] w-full"
-            />
-          </div>
+    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2.5">
+      <div className="group flex flex-col justify-between h-full bg-white rounded-2xl border border-slate-100 hover:border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden">
+        
+        {/* Book Cover Image with Zoom Effect */}
+        <Link to={`/books/${book?._id}`} className="relative block overflow-hidden bg-slate-50 aspect-[3/4]">
+          <img
+            src={`${import.meta.env.VITE_BASE_FOR_FILE}${book?.image?.filename}`}
+            alt={book?.title || 'Book cover'}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          {/* Subtle overlay gradient on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Genre Tag on image */}
+          {book?.genre && (
+            <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-slate-800 text-[11px] font-semibold px-2.5 py-1 rounded-full shadow-sm">
+              {book?.genre}
+            </span>
+          )}
         </Link>
 
-        <div className="  p-2 md:p-1">
-          {' '}
-          <Link to={`/books/${book?._id}`}>
-            <h6 className="text-base font-semibold  h-6 mb-5 ">{book.title}</h6>
-          </Link>
-          <p className=" font-semibold text-base h-6 ">{book?.author}</p>
-          <div className="flex justify-between h-12">
-            <i className="text-sm"> {book?.genre}</i>
-            <i className="text-sm"> {book?.publication_date}</i>
-          </div>
-          <div className="flex justify-between ">
-            <Review key={book?._id} book={book} />
+        {/* Card Content */}
+        <div className="p-4 flex flex-col flex-grow justify-between gap-3">
+          <div>
+            {/* Title */}
+            <Link to={`/books/${book?._id}`}>
+              <h3 
+                title={book?.title}
+                className="text-base font-bold text-slate-800 hover:text-main line-clamp-1 transition-colors"
+              >
+                {book?.title}
+              </h3>
+            </Link>
 
-            <div className="flex justify-end items-center text-base ">
-              {wishlist?.data?.find(
-                (list: IWishlist) => list?.book?._id === book?._id
-              ) && (
-                <BsFillHeartFill
+            {/* Author */}
+            <p 
+              title={book?.author}
+              className="text-xs font-medium text-slate-500 line-clamp-1 mt-0.5"
+            >
+              by {book?.author}
+            </p>
+
+            {/* Metadata (Publication Date) */}
+            <div className="flex items-center justify-between text-[11px] text-slate-400 mt-2 pb-2 border-b border-slate-100">
+              <span>Published</span>
+              <span className="font-medium text-slate-600">{book?.publication_date || 'N/A'}</span>
+            </div>
+          </div>
+
+          {/* Action Row: Review & Interactive Action Buttons */}
+          <div className="flex items-center justify-between pt-1">
+            <div className="flex-shrink-0">
+              <Review key={book?._id} book={book} />
+            </div>
+
+            {/* Action Buttons Toolbar */}
+            <div className="flex items-center gap-1.5">
+              {/* Wishlist Button */}
+              {isWishlisted ? (
+                <button
+                  type="button"
+                  title="Remove from Wishlist"
                   onClick={handleRemoveFromWishList}
-                  className="text-lg mx-1 text-red-600"
-                ></BsFillHeartFill>
-              )}
-              {!wishlist?.data?.find(
-                (list: IReadinglist) => list?.book?._id === book?._id
-              ) && (
-                <AiOutlineHeart
+                  className="p-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-colors"
+                >
+                  <BsFillHeartFill className="text-base" />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  title="Add to Wishlist"
                   onClick={handleAddWishList}
-                  className="text-xl mx-1 text-main"
-                ></AiOutlineHeart>
+                  className="p-1.5 rounded-lg bg-slate-50 text-slate-600 hover:text-main hover:bg-slate-100 transition-colors"
+                >
+                  <AiOutlineHeart className="text-base" />
+                </button>
               )}
-              {readinglist?.data?.find(
-                (list: IWishlist) => list?.book?._id === book?._id
-              ) && (
-                <MdBookmarkAdded
+
+              {/* Reading List Button */}
+              {isReading ? (
+                <button
+                  type="button"
+                  title="Remove from Reading List"
                   onClick={handleRemoveFromAddreadingList}
-                  className="text-lg mx-1 text-green-600"
-                ></MdBookmarkAdded>
-              )}
-              {!readinglist?.data?.find(
-                (list: IReadinglist) => list?.book?._id === book?._id
-              ) && (
-                <BiBookAdd
+                  className="p-1.5 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 transition-colors"
+                >
+                  <MdBookmarkAdded className="text-base" />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  title="Add to Reading List"
                   onClick={handleAddreadingList}
-                  className="text-xl mx-1 text-main"
-                ></BiBookAdd>
+                  className="p-1.5 rounded-lg bg-slate-50 text-slate-600 hover:text-main hover:bg-slate-100 transition-colors"
+                >
+                  <BiBookAdd className="text-base" />
+                </button>
               )}
-              {completedlist?.data?.find(
-                (list: ICompletelist) => list?.book?._id === book?._id
-              ) && (
-                <TiTick
+
+              {/* Completed Button */}
+              {isCompleted ? (
+                <button
+                  type="button"
+                  title="Mark as Incomplete"
                   onClick={handleRemoveFCompleted}
-                  className="text-xl mx-1 text-review"
-                ></TiTick>
-              )}
-              {!completedlist?.data?.find(
-                (list: ICompletelist) => list?.book?._id === book?._id
-              ) && (
-                <TiTickOutline
+                  className="p-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
+                >
+                  <TiTick className="text-base" />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  title="Mark as Completed"
                   onClick={handleCompleted}
-                  className="text-xl mx-1 text-review"
-                ></TiTickOutline>
+                  className="p-1.5 rounded-lg bg-slate-50 text-slate-600 hover:text-blue-500 hover:bg-slate-100 transition-colors"
+                >
+                  <TiTickOutline className="text-base" />
+                </button>
               )}
             </div>
           </div>
+
+          {/* CTA: Start Reading PDF Button */}
           <a
-            href={`${import.meta.env.VITE_BASE_FOR_FILE}${
-              book?.bookPdf?.filename
-            }`}
+            href={`${import.meta.env.VITE_BASE_FOR_FILE}${book?.bookPdf?.filename}`}
             target="_blank"
             rel="noopener noreferrer"
+            className="w-full mt-1 block"
           >
-            <button className="flex justify-center items-center text-white bg-main p-1  my-1 w-full rounded-sm text-sm">
-              <FaReadme className="mx-2 "></FaReadme> Start Reading
+            <button 
+              type="button"
+              className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-main text-white font-medium text-xs tracking-wide shadow-sm hover:opacity-90 hover:shadow active:scale-[0.98] transition-all cursor-pointer"
+            >
+              <FaReadme className="text-sm" />
+              <span>Start Reading</span>
             </button>
           </a>
         </div>
