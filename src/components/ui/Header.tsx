@@ -1,34 +1,32 @@
 import { headerSubtitle, headerTitle } from '@/animates/header';
 import { motion } from 'framer-motion';
 
-export default function Header({
-  isInView,
-  header,
-  subHeader,
-}: {
+interface HeaderProps {
   isInView: boolean;
   header: string;
   subHeader: string;
-}) {
+}
+
+export default function Header({ isInView, header, subHeader }: HeaderProps) {
   return (
-    <div>
-      {' '}
-      <motion.div
+    <div className="space-y-1">
+      <motion.p
         variants={headerSubtitle}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        className="text-lg font-semibold text-center md:text-left "
+        className="text-xs md:text-sm font-semibold tracking-wider uppercase text-main/80 text-center md:text-left"
       >
-        <i>{subHeader}</i>
-      </motion.div>
-      <motion.h3
+        {subHeader}
+      </motion.p>
+      
+      <motion.h2
         variants={headerTitle}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
-        className="text-4xl font-bold  text-main text-center md:text-left"
+        className="text-2xl md:text-4xl font-extrabold tracking-tight text-slate-800 text-center md:text-left"
       >
         {header}
-      </motion.h3>
+      </motion.h2>
     </div>
   );
 }

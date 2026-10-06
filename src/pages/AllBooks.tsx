@@ -1,8 +1,8 @@
 import AdditionalPageCover from '@/components/ui/AdditionalPageCover';
-
 import { RecentVarient, bannerVarient } from '@/animates/home';
 import Header from '@/components/ui/Header';
 import MiniCards from '@/components/ui/MiniCards';
+import Card from '../components/ui/Card';
 import {
   useGetBooksQuery,
   useRecentBookQuery,
@@ -13,18 +13,32 @@ import {
 } from '@/redux/feature/books/books.slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IGetBook } from '@/types/globalTypes';
-import { motion, useInView } from 'framer-motion';
-import { ChangeEvent, useRef } from 'react';
-import { BiSearchAlt2 } from 'react-icons/bi';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { ChangeEvent, useMemo, useRef } from 'react';
+import { BiSearchAlt2, BiPlus, BiBookOpen, BiFilterAlt } from 'react-icons/bi';
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { FiInstagram } from 'react-icons/fi';
-import { TiTick } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
-import Card from '../components/ui/Card';
+
+const GENRE_OPTIONS = [
+  'Fantasy',
+  'Fiction',
+  'Dystopian',
+  'Classic Literature',
+  'Adventure',
+  'Coming-of-age',
+  'Epic',
+  'Gothic Literature',
+  'Mystery',
+  'Romance',
+];
+
 export default function AllBooks() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const { data } = useGetBooksQuery(undefined, {
+  const dispatch = useAppDispatch();
+
+  const { data, isLoading } = useGetBooksQuery(undefined, {
     refetchOnMountOrArgChange: true,
     pollingInterval: 30000,
   });
@@ -39,257 +53,205 @@ export default function AllBooks() {
     (state) => state.book.publishYear
   );
   const searchTerm = useAppSelector((state) => state.book.searchTerm);
-  let filteredData;
 
-  const dispatch = useAppDispatch();
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(updateSearchTerm(e.target.value));
   };
 
-  if (
-    selectedGenreValue === '' &&
-    selectedPublishYearValue === '' &&
-    searchTerm !== ''
-  ) {
-    filteredData = data?.data?.filter(
-      (item: IGetBook) =>
-        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.genre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }
-  if (
-    selectedGenreValue !== '' &&
-    selectedPublishYearValue !== '' &&
-    searchTerm !== ''
-  ) {
-    filteredData = data?.data
-      ?.filter(
-        (item: IGetBook) =>
-          item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
-      )
-      .filter((item: IGetBook) =>
-        item.publication_date.includes(selectedPublishYearValue)
-      )
-      .filter(
-        (item: IGetBook) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.genre.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-  }
-  if (
-    selectedGenreValue !== '' &&
-    selectedPublishYearValue === '' &&
-    searchTerm !== ''
-  ) {
-    filteredData = data?.data
-      ?.filter(
-        (item: IGetBook) =>
-          item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
-      )
-      .filter(
-        (item: IGetBook) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.genre.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-  }
-  if (
-    selectedGenreValue === '' &&
-    selectedPublishYearValue !== '' &&
-    searchTerm !== ''
-  ) {
-    filteredData = data?.data
-      ?.filter((item: IGetBook) =>
-        item.publication_date.includes(selectedPublishYearValue)
-      )
-      .filter(
-        (item: IGetBook) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.genre.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-  }
-  if (
-    selectedGenreValue !== '' &&
-    selectedPublishYearValue !== '' &&
-    searchTerm === ''
-  ) {
-    filteredData = data?.data
-      ?.filter(
-        (item: IGetBook) =>
-          item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
-      )
-      .filter((item: IGetBook) =>
-        item.publication_date.includes(selectedPublishYearValue)
-      );
-  }
-  if (
-    selectedGenreValue !== '' &&
-    selectedPublishYearValue === '' &&
-    searchTerm === ''
-  ) {
-    filteredData = data?.data?.filter(
-      (item: IGetBook) =>
-        item.genre.toLowerCase() === selectedGenreValue.toLowerCase()
-    );
-  }
-  if (
-    selectedGenreValue === '' &&
-    selectedPublishYearValue !== '' &&
-    searchTerm === ''
-  ) {
-    filteredData = data?.data?.filter((item: IGetBook) =>
-      item.publication_date.includes(selectedPublishYearValue)
-    );
-  }
-  if (
-    selectedGenreValue === '' &&
-    searchTerm === '' &&
-    selectedPublishYearValue === ''
-  ) {
-    filteredData = data?.data;
-  }
+  // Clean, single-pass filtering using useMemo
+  const filteredData = useMemo(() => {
+    if (!data?.data) return [];
+
+    const search = searchTerm.trim().toLowerCase();
+    const genre = selectedGenreValue.trim().toLowerCase();
+    const year = selectedPublishYearValue.trim();
+
+    return data.data.filter((item: IGetBook) => {
+      const matchesSearch =
+        !search ||
+        item.title?.toLowerCase().includes(search) ||
+        item.author?.toLowerCase().includes(search) ||
+        item.genre?.toLowerCase().includes(search);
+
+      const matchesGenre = !genre || item.genre?.toLowerCase() === genre;
+
+      const matchesYear =
+        !year ||
+        Boolean(item.publication_date && item.publication_date.includes(year));
+
+      return matchesSearch && matchesGenre && matchesYear;
+    });
+  }, [data?.data, searchTerm, selectedGenreValue, selectedPublishYearValue]);
+
+  const hasActiveFilters =
+    Boolean(searchTerm) || Boolean(selectedGenreValue) || Boolean(selectedPublishYearValue);
 
   return (
-    <motion.div ref={ref} className=" ">
+    <motion.div ref={ref} className="min-h-screen bg-slate-50/50 pb-16">
+      {/* Hero Quote Header */}
       <AdditionalPageCover
         isInView={isInView}
         title="Books were safer than other people anyway."
         author="Neil Gaiman, The Ocean at the End of the Lane"
       />
-      <div className="container py-[10px] md:px-[80px]">
-        {' '}
-        <div className="flex flex-col justify-center md:flex-row md:justify-between items-center">
+
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 pt-8">
+        {/* Section Top Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-slate-200/60 pb-6">
           <Header
             isInView={isInView}
             header="Explore All The Books"
-            subHeader="By The Authors"
-          ></Header>
+            subHeader="Curated Collection"
+          />
 
           <Link
             to="/addBook"
-            className="bg-main p-2 px-5 rounded-full text-white my-2 "
+            className="inline-flex items-center gap-2 bg-main text-white px-6 py-2.5 rounded-full font-medium shadow-md shadow-main/20 hover:shadow-lg hover:brightness-105 active:scale-95 transition-all text-sm tracking-wide"
           >
-            {' '}
-            Add New
+            <BiPlus className="text-lg" />
+            Add New Book
           </Link>
         </div>
-        <div className="w-full flex flex-col-reverse md:flex-row md:justify-between md:items-start ">
-          {/* cards */}
-          <motion.div
-            variants={bannerVarient}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            className="flex justify-center flex-wrap items-center md:w-3/4"
-          >
-            {filteredData?.map((book: IGetBook) => (
-              <Card key={book._id} book={book}></Card>
-            ))}
-          </motion.div>
-          {/* search and filters */}
-          <div className="md:w-1/4 md:pl-3">
+
+        {/* Main Content Layout */}
+        <div className="flex flex-col-reverse lg:flex-row gap-8 items-start">
+          {/* Books Grid */}
+          <div className="w-full lg:w-3/4">
+            {isLoading ? (
+              <div className="flex justify-center items-center py-24 text-slate-400">
+                <span className="loading-spinner">Loading books...</span>
+              </div>
+            ) : filteredData.length > 0 ? (
+              <motion.div
+                variants={bannerVarient}
+                initial="hidden"
+                animate={isInView ? 'visible' : 'hidden'}
+                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+              >
+                {filteredData.map((book: IGetBook) => (
+                  <Card key={book._id} book={book} />
+                ))}
+              </motion.div>
+            ) : (
+              /* Polished Empty State */
+              <div className="flex flex-col items-center justify-center p-12 text-center bg-white rounded-2xl border border-dashed border-slate-200 my-8 shadow-sm">
+                <div className="p-4 bg-slate-100 rounded-full text-slate-400 mb-3 text-3xl">
+                  <BiBookOpen />
+                </div>
+                <h4 className="text-lg font-semibold text-slate-700">No books found</h4>
+                <p className="text-slate-500 text-sm max-w-sm mt-1">
+                  We couldn't find any books matching your query. Try searching for something else or clearing filters.
+                </p>
+                {hasActiveFilters && (
+                  <button
+                    onClick={() => {
+                      dispatch(updateSearchTerm(''));
+                      dispatch(updateGenreSelectedValue(''));
+                    }}
+                    className="mt-4 text-xs font-semibold uppercase tracking-wider text-main hover:underline"
+                  >
+                    Reset all filters
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Sidebar / Filters */}
+          <aside className="w-full lg:w-1/4 lg:sticky lg:top-6">
             <motion.div
               variants={RecentVarient}
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
-              className="p-3  border rounded-md  "
+              className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-6"
             >
-              <div className="flex justify-between items-center  border-1 rounded-md ">
-                {' '}
-                <input
-                  className="p-3 w-10/12 "
-                  placeholder="Search..."
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => handleSearch(e)}
-                />
-                <BiSearchAlt2 className="w-2/12 text-2xl"></BiSearchAlt2>
-              </div>
-              {/* filters */}
+              {/* Search Bar */}
               <div>
-                <div className="border-b-2 border-main mt-[20px] mb-5">
-                  {' '}
-                  <h3 className="text-xl font-bold my-4 text-center">
-                    Popular Category
-                  </h3>
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2 block">
+                  Search
+                </label>
+                <div className="relative flex items-center">
+                  <input
+                    className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-main/20 focus:border-main transition-all"
+                    placeholder="Title, author, or genre..."
+                    type="text"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                  />
+                  <BiSearchAlt2 className="absolute left-3.5 text-slate-400 text-lg pointer-events-none" />
                 </div>
-                <div>
-                  <div className="flex justify-start items-center  mt-[10px] border-b my-2 ">
-                    <TiTick className="text-2xl"></TiTick>
-                    <p className="text-lg font-semibold px-3 "> Genre</p>
-                  </div>
-                  <div className="flex  flex-wrap items-center">
-                    <select
-                      name="genre"
-                      className="border w-full p-2  border-1 rounded-md"
-                      value={selectedGenreValue}
-                      onChange={(e) =>
-                        dispatch(updateGenreSelectedValue(e.target.value))
-                      }
-                    >
-                      <option value="">Select a genre</option>
-                      <option value="Fantasy">Fantasy</option>
-                      <option value="Fiction">Fiction</option>
-                      <option value="Dystopian">Dystopian</option>
-                      <option value="Classic Literature">
-                        Classic Literature
-                      </option>
-                      <option value="Adventure">Adventure</option>
-                      <option value="Coming-of-age">Coming-of-age</option>
-                      <option value="Epic">Epic</option>
-                      <option value="Gothic Literature">
-                        Gothic Literature
-                      </option>
-                      <option value="Mystery">Mystery</option>
-                      <option value="Romance">Romance</option>
-                    </select>
-                  </div>
-                </div>
+              </div>
 
-                <div></div>
-              </div>
-              {/* recently added books */}
+              {/* Genre Filter */}
               <div>
-                <div className="border-b-2 border-main mt-[10px] mb-5">
-                  {' '}
-                  <h3 className="text-xl font-bold my-4 text-center">
-                    Recantly Added Books{' '}
+                <div className="flex items-center gap-2 mb-2">
+                  <BiFilterAlt className="text-main" />
+                  <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Category Filter
+                  </label>
+                </div>
+                <select
+                  name="genre"
+                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-main/20 focus:border-main transition-all cursor-pointer"
+                  value={selectedGenreValue}
+                  onChange={(e) =>
+                    dispatch(updateGenreSelectedValue(e.target.value))
+                  }
+                >
+                  <option value="">All Genres</option>
+                  {GENRE_OPTIONS.map((genre) => (
+                    <option key={genre} value={genre}>
+                      {genre}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Recently Added Books */}
+              {recentBook?.data && recentBook.data.length > 0 && (
+                <div>
+                  <div className="flex items-center justify-between pb-2 mb-3 border-b border-slate-100">
+                    <h3 className="text-sm font-bold text-slate-800">
+                      Recently Added
+                    </h3>
+                    <span className="text-[11px] font-medium text-slate-400 uppercase tracking-wide">
+                      Latest
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    {recentBook.data.slice(0, 3).map((book: IGetBook) => (
+                      <MiniCards key={book._id} book={book} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Social Follow */}
+              <div>
+                <div className="pb-2 mb-3 border-b border-slate-100">
+                  <h3 className="text-sm font-bold text-slate-800 text-center">
+                    Follow Us
                   </h3>
                 </div>
-                {/* mini cards */}
-                <div className="flex flex-col justify-start flex-wrap items-center w-full">
-                  {recentBook?.data?.slice(0, 3).map((book: IGetBook) => (
-                    <MiniCards key={book._id} book={book}></MiniCards>
+                <div className="flex justify-center items-center gap-3">
+                  {[
+                    { icon: FaFacebookF, href: '#' },
+                    { icon: FaTwitter, href: '#' },
+                    { icon: FaLinkedinIn, href: '#' },
+                    { icon: FiInstagram, href: '#' },
+                  ].map(({ icon: Icon, href }, idx) => (
+                    <a
+                      key={idx}
+                      href={href}
+                      className="p-2.5 rounded-full bg-slate-50 border border-slate-200/60 text-slate-600 hover:text-white hover:bg-main hover:border-main shadow-xs transition-all duration-200 hover:-translate-y-0.5"
+                    >
+                      <Icon className="text-sm" />
+                    </a>
                   ))}
-                </div>
-                {/* social */}
-                <div>
-                  <div className="border-b-2 border-main mt-[10px] mb-5">
-                    {' '}
-                    <h3 className="text-xl font-bold my-4 text-center">
-                      Follow Us{' '}
-                    </h3>
-                  </div>
-                  <div className="flex justify-center ">
-                    <span>
-                      <FaFacebookF className="text-main text-2xl mx-1"></FaFacebookF>
-                    </span>
-                    <span>
-                      <FaTwitter className="text-main text-2xl mx-1"></FaTwitter>
-                    </span>
-                    <span>
-                      <FaLinkedinIn className="text-main text-2xl mx-1"></FaLinkedinIn>
-                    </span>
-                    <span>
-                      <FiInstagram className="text-main text-2xl mx-1"></FiInstagram>
-                    </span>
-                  </div>
                 </div>
               </div>
             </motion.div>
-          </div>
+          </aside>
         </div>
       </div>
     </motion.div>
